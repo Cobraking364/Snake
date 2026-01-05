@@ -2,8 +2,8 @@ package src;
 public class Board {
     private int sizeX;
     private int sizeY;
-    private Snake snake;
-    private Fruit fruit;
+    private Snake snake = new Snake();
+    private Fruit fruit = new Fruit();
 
     Board(int x, int y){
         sizeX = x;
