@@ -1,9 +1,9 @@
 package src;
 import java.util.*;
 public class Snake {
-    LinkedList<Position> body = new LinkedList<Position>();
-    Direction dir;
-    boolean growing;
+    private LinkedList<Position> body = new LinkedList<Position>();
+    private Direction dir;
+    private boolean growing;
 
     Snake(){
         body.add(new Position(0, 0));

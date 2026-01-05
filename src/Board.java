@@ -1,9 +1,9 @@
 package src;
 public class Board {
-    int sizeX;
-    int sizeY;
-    Snake snake;
-    Fruit fruit;
+    private int sizeX;
+    private int sizeY;
+    private Snake snake;
+    private Fruit fruit;
 
     Board(int x, int y){
         sizeX = x;
