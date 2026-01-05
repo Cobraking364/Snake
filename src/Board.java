@@ -20,6 +20,9 @@ public class Board {
 
     public void update(){
         snake.move();
+        snake.getHead().setX((snake.getHead().getX()+sizeX)%sizeX);
+        snake.getHead().setY((snake.getHead().getY()+sizeY)%sizeY);
+
         for(int i = 0; i < snake.getBody().size()-2; i++){
             if(snake.getBody().get(i).equals(snake.getHead())){
                 gameOver();
