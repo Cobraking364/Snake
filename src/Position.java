@@ -14,4 +14,18 @@ class Position{
     public int getY(){
         return y;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+
+        if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+
+        final Position other = (Position) obj;
+        return (getX() == other.getX() && getY() == other.getY());
+    }
 }
