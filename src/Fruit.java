@@ -1,7 +1,34 @@
 package src;
+
 import java.util.*;
-public class Snake {
-    ArrayList<Position> bends = new ArrayList<Position>();
-    Position headPos = new Position(0, 0);
-    int len;
-}
+
+public class Fruit {
+    private Position position;
+
+    public void respawn(int sizeX, int sizeY, List<Position> snakeBody) {
+        List<Position> possiblePositions = new ArrayList<>();
+        for (int i = 0; i < sizeX; i++) {
+            for (int j = 0; j < sizeY; j++){
+                possiblePositions.add(new Position(i , j));
+            }
+        }
+        int listIndex = 0;
+        Collections.shuffle(possiblePositions);
+        while(isInList(possiblePositions.get(listIndex), snakeBody)) {
+            listIndex++;
+        }
+        position =  possiblePositions.get(listIndex);
+                
+        }
+
+        private boolean isInList(Position position, List<Position> list) {
+            for (Position position2 : list) {
+                if (position.equals(position2)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
+
