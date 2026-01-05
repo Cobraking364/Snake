@@ -24,20 +24,12 @@ public class GameView extends Application {
         Canvas canvas = new Canvas(750, 750);
         gc = canvas.getGraphicsContext2D();
         
-
         
-        backgroundDraw(15, 15, canvas);
-        LinkedList<Position> snake = new LinkedList<>();
-        Position position = new Position(10, 10);
-        snake.add(position);
-        drawSnake(snake, 15, 15, canvas);
-
-        Pane root = new Pane();
-        StackPane holder = new StackPane();
+        StackPane root = new StackPane();
         
-        holder.getChildren().add(canvas);
-        root.getChildren().add(holder);
-        holder.setStyle("-fx-background-color: limegreen");
+        
+        root.getChildren().add(canvas);
+        //holder.setStyle("-fx-background-color: limegreen");
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
