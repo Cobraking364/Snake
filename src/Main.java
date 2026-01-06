@@ -11,12 +11,13 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-
-    private static final int TILE_SIZE = 25;
+    private int canvasWidth = 600;
+    private int canvasHeight = 600;
+    private int tile_size;
     private GraphicsContext gc;
     private Board board;
-    int sizeX = 24;
-    int sizeY = 24;
+    int sizeX;
+    int sizeY;
 
     public static void main(String[] args) {
         launch(args);
@@ -29,10 +30,13 @@ public class Main extends Application {
         sizeX = 24;
         // sizeY = Integer.parseInt(parameters.get(1));
         sizeY = 24;
+
         board = new Board(sizeX, sizeY);
         Canvas canvas = new Canvas();
-        canvas.setWidth(600);
-        canvas.setHeight(600);
+        canvas.setWidth(canvasWidth);
+        canvas.setHeight(canvasHeight);
+        tile_size=canvasWidth/sizeX;
+
 
         gc = canvas.getGraphicsContext2D();
         StackPane root = new StackPane();
@@ -66,7 +70,7 @@ public class Main extends Application {
             for (int j = 0; j < height; j++) {
                 gc.setFill((i + j) % 2 == 0 ? Color.GREEN : Color.LIMEGREEN);
 
-                gc.fillRect(i * TILE_SIZE, j * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+                gc.fillRect(i * tile_size, j * tile_size, tile_size, tile_size);
             }
         }
     }
@@ -74,12 +78,12 @@ public class Main extends Application {
     public void drawSnake(LinkedList<Position> snake) {
         gc.setFill(Color.BLUE);
         for (Position position : snake) {
-            gc.fillRect(position.getX() * TILE_SIZE, position.getY() * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+            gc.fillRect(position.getX() * tile_size, position.getY() * tile_size, tile_size, tile_size);
         }
     }
 
     public void drawFruit(Position fruitPosition) {
         gc.setFill(Color.RED);
-        gc.fillRect(fruitPosition.getX() * TILE_SIZE, fruitPosition.getY() * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+        gc.fillRect(fruitPosition.getX() * tile_size, fruitPosition.getY() * tile_size, tile_size, tile_size);
     }
 }
