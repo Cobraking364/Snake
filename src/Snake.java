@@ -8,7 +8,7 @@ public class Snake{
     private int jumpLength = 2;
 
     Snake(Position pos){
-        body.add(new Position(pos.getX()-1, pos.getY()));
+        body.add(new Position(pos.getX()+1, pos.getY()));
         body.add(pos);
         dir = Direction.LEFT;
     }
