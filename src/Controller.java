@@ -18,18 +18,19 @@ public class Controller {
 
             @Override
             public void handle(KeyEvent event) {
+                boolean validInput = false;
                 switch (event.getCode()) {
                     case KeyCode.LEFT:
-                        board.getSnake().updateDir(Direction.LEFT);
+                        validInput = board.getSnake().updateDir(Direction.LEFT);
                         break;
                     case KeyCode.RIGHT:
-                        board.getSnake().updateDir(Direction.RIGHT);
+                        validInput = board.getSnake().updateDir(Direction.RIGHT);
                         break;
                     case KeyCode.UP:
-                        board.getSnake().updateDir(Direction.UP);
+                        validInput = board.getSnake().updateDir(Direction.UP);
                         break;
                     case KeyCode.DOWN:
-                        board.getSnake().updateDir(Direction.DOWN);
+                        validInput = board.getSnake().updateDir(Direction.DOWN);
                         break;
                     case KeyCode.SPACE:
                         board.getSnake().jump();
@@ -37,6 +38,9 @@ public class Controller {
                     default:
                         return;
 
+                }
+                if (!validInput) {
+                    return;
                 }
                 board.update();
                 view.update();

@@ -10,12 +10,4 @@ public class Grounded extends SnakeState{
         }
         return false;
     }
-    
-    @Override
-    public Direction changeDir(Snake snake, Direction newDir, Direction currentDir) {
-        if((newDir.getValue()+2)%4 != currentDir.getValue()){
-            return newDir;
-        }
-        return currentDir;
-    }
 }

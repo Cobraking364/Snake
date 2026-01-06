@@ -12,8 +12,8 @@ public class Airborne extends SnakeState{
     }
 
     @Override
-    public Direction changeDir(Snake snake, Direction newDir, Direction currentDir){
-        return currentDir;
+        public boolean canChangeDirection(Direction newDir, Direction currentDir) {
+        return newDir == currentDir;
     }
     
     private int jumpCheck = 1;

@@ -65,8 +65,13 @@ public class Snake{
         growing = true; 
     }
 
-    public void updateDir(Direction newDir){
-        dir = currentState.changeDir(this, newDir, dir);
+    public boolean updateDir(Direction newDir){
+        if (!canChanceDirection(newDir, dir)) {
+            return false;
+        }
+
+        dir = newDir;
+        return true;
     }
 
     public void jump(){
@@ -83,6 +88,10 @@ public class Snake{
 
     public boolean canEatFruit(){
         return currentState.canEatFruit();
+    }
+
+    public boolean canChanceDirection(Direction newDir, Direction currentDir) {
+        return currentState.canChangeDirection(newDir, currentDir);
     }
 
 }
