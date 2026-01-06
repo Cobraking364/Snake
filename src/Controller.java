@@ -31,6 +31,8 @@ public class Controller {
                     case KeyCode.DOWN:
                         board.getSnake().updateDir(Direction.DOWN);
                         break;
+                    case KeyCode.SPACE:
+                        board.getSnake().jump();
 
                     default:
                         return;

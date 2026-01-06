@@ -1,14 +1,29 @@
 package src;
 
-public interface Airborne extends SnakeState{
+public class Airborne extends SnakeState{
+    private int jumpLength;
+    Airborne(int jumpLength){
+        this.jumpLength = jumpLength;
+    }
+
     @Override
-    default boolean checkCollision(Snake snake) {
+    public boolean checkCollision(Snake snake) {
         return false;
     }
 
     @Override
-    default Direction changeDir(Snake snake, Direction newDir, Direction currentDir){
+    public Direction changeDir(Snake snake, Direction newDir, Direction currentDir){
         return currentDir;
     }
     
+    private int jumpCheck = 1;
+
+    @Override
+    public void jumpFinished(Snake snake){
+        if(jumpCheck == jumpLength){
+            snake.endJump();
+        }else{
+            jumpCheck++;
+        }
+    }
 }

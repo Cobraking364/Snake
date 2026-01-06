@@ -1,10 +1,11 @@
 package src;
 import java.util.*;
-public class Snake implements SnakeState{
+public class Snake{
     private LinkedList<Position> body = new LinkedList<Position>();
     private Direction dir;
     private boolean growing;
     private SnakeState currentState = new Grounded(){};
+    private int jumpLength = 2;
 
     Snake(Position pos){
         body.add(new Position(pos.getX()-1, pos.getY()));
@@ -20,7 +21,8 @@ public class Snake implements SnakeState{
         } else{
             growing = false;
         }
-        currentState = new Grounded() {};
+
+        currentState.jumpFinished(this);
     }
 
     private Position calcNextPos(){
@@ -68,7 +70,11 @@ public class Snake implements SnakeState{
     }
 
     public void jump(){
-        changeState(new Airborne(){});
+        changeState(new Airborne(jumpLength){});
+    }
+
+    public void endJump(){
+        changeState(new Grounded());
     }
 
     private void changeState(SnakeState newState){
