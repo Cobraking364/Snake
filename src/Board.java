@@ -4,8 +4,10 @@ public class Board {
     private int sizeY;
     private Snake snake;
     private Fruit fruit;
+    private boolean  isGameOver;
 
     Board(int x, int y){
+        isGameOver = false;
         sizeX = x;
         sizeY = y;
 
@@ -23,6 +25,10 @@ public class Board {
     }
 
     public void update(){
+        if (isGameOver) {
+            return;
+        }
+
         snake.move();
         snake.getHead().setX((snake.getHead().getX()+sizeX)%sizeX);
         snake.getHead().setY((snake.getHead().getY()+sizeY)%sizeY);
@@ -40,6 +46,7 @@ public class Board {
 
     private void gameOver(){
         System.out.println("GAME OVER");
+        isGameOver = true;
     }
 
     public Fruit getFruit() {
