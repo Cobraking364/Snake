@@ -1,11 +1,21 @@
 package src;
 
+import java.util.LinkedList;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+
+    private static final int TILE_SIZE = 25;
+    private GraphicsContext gc;
+    private Board board;
+    int sizeX = 24;
+    int sizeY = 24;
 
     public static void main(String[] args) {
         launch(args);
@@ -14,19 +24,16 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
 
-        int sizeX = 24;
-        int sizeY = 24;
+        board = new Board(sizeX, sizeY);
+        Canvas canvas = new Canvas();
+        canvas.setWidth(600);
+        canvas.setHeight(600);
 
-        Board board = new Board(sizeX, sizeY);
-        GameView view = new GameView();
-        view.setWidth(600);
-        view.setHeight(600);
-
+        gc = canvas.getGraphicsContext2D();
 
         StackPane root = new StackPane();
 
-        root.getChildren().add(view);
-        // holder.setStyle("-fx-background-color: limegreen");
+        root.getChildren().add(canvas);
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -38,11 +45,38 @@ public class Main extends Application {
 
         stage.setTitle("Snake");
         stage.show();
-        
-        view.drawBackground(sizeX, sizeY);
-        view.drawFruit(board.getFruit().getPosition());
-        view.drawSnake(board.getSnake().getBody());
 
+        update();
 
+    }
+
+    public void update() {
+        drawBackground(sizeX, sizeY);
+        drawFruit(board.getFruit().getPosition());
+        drawSnake(board.getSnake().getBody());
+    }
+
+    public void drawBackground(int width, int height) {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                gc.setFill((i + j) % 2 == 0 ? Color.GREEN : Color.LIMEGREEN);
+
+                gc.fillRect(i * TILE_SIZE, j * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+            }
+        }
+    }
+
+    public void drawSnake(LinkedList<Position> snake) {
+        gc.setFill(Color.BLUE);
+        for (Position position : snake) {
+            gc.fillRect(position.getX() * TILE_SIZE, position.getY() * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+        }
+    }
+
+    public void drawFruit(Position fruitPosition) {
+        gc.setFill(Color.RED);
+        gc.fillRect(fruitPosition.getX() * TILE_SIZE, fruitPosition.getY() * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+        // gc.fillRect(fruitx*TILE_SIZE, fruity*TILE_SIZE, canvas.getWidth()/x,
+        // canvas.getHeight()/y);
     }
 }
