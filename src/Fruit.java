@@ -5,6 +5,7 @@ import java.util.*;
 public class Fruit {
     private Position position;
 
+
     public void respawn(int sizeX, int sizeY, List<Position> snakeBody) {
         List<Position> possiblePositions = new ArrayList<>();
         for (int i = 0; i < sizeX; i++) {

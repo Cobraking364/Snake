@@ -2,12 +2,16 @@ package src;
 public class Board {
     private int sizeX;
     private int sizeY;
-    private Snake snake = new Snake();
-    private Fruit fruit = new Fruit();
+    private Snake snake;
+    private Fruit fruit;
 
     Board(int x, int y){
         sizeX = x;
         sizeY = y;
+
+        snake = new Snake();
+        fruit = new Fruit();
+        fruit.respawn(sizeX, sizeY, snake.getBody());
     }
 
     public int getSizeX(){
@@ -35,5 +39,13 @@ public class Board {
 
     private void gameOver(){
 
+    }
+
+    public Fruit getFruit() {
+        return fruit;
+    }
+
+    public Snake getSnake() {
+        return snake;
     }
 }
