@@ -5,9 +5,9 @@ public class Snake {
     private Direction dir;
     private boolean growing;
 
-    Snake(){
-        body.add(new Position(0, 0));
-        body.add(new Position(1, 0));
+    Snake(Position pos){
+        body.add(new Position(pos.getX()-1, pos.getY()));
+        body.add(pos);
         dir = Direction.LEFT;
     }
 
