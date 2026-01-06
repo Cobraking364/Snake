@@ -81,4 +81,8 @@ public class Snake{
         currentState = newState;
     }
 
+    public boolean canEatFruit(){
+        return currentState.canEatFruit();
+    }
+
 }

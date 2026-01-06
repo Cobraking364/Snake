@@ -36,9 +36,11 @@ public class Board {
         if(snake.checkCol()){
             gameOver();
         }
-        if(fruit.getPosition().equals(snake.getHead())){
-            snake.grow();
-            fruit.respawn(sizeX, sizeY, snake.getBody());
+        if(snake.canEatFruit()){
+            if(fruit.getPosition().equals(snake.getHead())){
+                snake.grow();
+                fruit.respawn(sizeX, sizeY, snake.getBody());
+            }
         }
     }
 

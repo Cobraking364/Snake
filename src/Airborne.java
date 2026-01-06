@@ -26,4 +26,9 @@ public class Airborne extends SnakeState{
             jumpCheck++;
         }
     }
+
+    @Override
+    public boolean canEatFruit(){
+        return false;
+    }
 }
