@@ -1,9 +1,10 @@
 package src;
 import java.util.*;
-public class Snake {
+public class Snake implements SnakeState{
     private LinkedList<Position> body = new LinkedList<Position>();
     private Direction dir;
     private boolean growing;
+    private SnakeState currentState = new Grounded(){};
 
     Snake(Position pos){
         body.add(new Position(pos.getX()-1, pos.getY()));
@@ -11,7 +12,7 @@ public class Snake {
         dir = Direction.LEFT;
     }
 
-    public boolean move(){
+    public void move(){
         Position nextPos = calcNextPos();
         body.add(nextPos);
         if(!growing){
@@ -19,7 +20,7 @@ public class Snake {
         } else{
             growing = false;
         }
-        return false;
+        currentState = new Grounded() {};
     }
 
     private Position calcNextPos(){
@@ -45,6 +46,11 @@ public class Snake {
         return nextPos;
     }
 
+
+    public boolean checkCol(){
+        return currentState.checkCollision(this);
+    }
+
     public Position getHead(){
         return body.get(body.size()-1);
     }
@@ -58,9 +64,15 @@ public class Snake {
     }
 
     public void updateDir(Direction newDir){
-        if((newDir.getValue()+2)%4 != dir.getValue()){
-            dir = newDir;
-        }
+        dir = currentState.changeDir(this, newDir, dir);
+    }
+
+    public void jump(){
+        changeState(new Airborne(){});
+    }
+
+    private void changeState(SnakeState newState){
+        currentState = newState;
     }
 
 }

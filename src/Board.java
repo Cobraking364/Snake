@@ -27,10 +27,8 @@ public class Board {
         snake.getHead().setX((snake.getHead().getX()+sizeX)%sizeX);
         snake.getHead().setY((snake.getHead().getY()+sizeY)%sizeY);
 
-        for(int i = 0; i < snake.getBody().size()-2; i++){
-            if(snake.getBody().get(i).equals(snake.getHead())){
-                gameOver();
-            }
+        if(snake.checkCol()){
+            gameOver();
         }
         if(fruit.getPosition().equals(snake.getHead())){
             snake.grow();
