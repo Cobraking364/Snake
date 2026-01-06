@@ -34,11 +34,12 @@ public class Board {
         }
         if(fruit.getPosition().equals(snake.getHead())){
             snake.grow();
+            fruit.respawn(sizeX, sizeY, snake.getBody());
         }
     }
 
     private void gameOver(){
-
+        System.out.println("GAME OVER");
     }
 
     public Fruit getFruit() {

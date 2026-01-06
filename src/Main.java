@@ -1,6 +1,7 @@
 package src;
 
 import java.util.LinkedList;
+import java.util.List;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -23,16 +24,18 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-
+        List<String> parameters = getParameters().getRaw();
+        // sizeX = Integer.parseInt(parameters.get(0));
+        sizeX = 24;
+        // sizeY = Integer.parseInt(parameters.get(1));
+        sizeY = 24;
         board = new Board(sizeX, sizeY);
         Canvas canvas = new Canvas();
         canvas.setWidth(600);
         canvas.setHeight(600);
 
         gc = canvas.getGraphicsContext2D();
-
         StackPane root = new StackPane();
-
         root.getChildren().add(canvas);
 
         Scene scene = new Scene(root);
@@ -46,9 +49,11 @@ public class Main extends Application {
         stage.setTitle("Snake");
         stage.show();
 
+        Controller controller = new Controller(this, scene, board);
         update();
-
     }
+
+
 
     public void update() {
         drawBackground(sizeX, sizeY);
@@ -76,7 +81,5 @@ public class Main extends Application {
     public void drawFruit(Position fruitPosition) {
         gc.setFill(Color.RED);
         gc.fillRect(fruitPosition.getX() * TILE_SIZE, fruitPosition.getY() * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-        // gc.fillRect(fruitx*TILE_SIZE, fruity*TILE_SIZE, canvas.getWidth()/x,
-        // canvas.getHeight()/y);
     }
 }
