@@ -50,7 +50,6 @@ public class Board {
         if(eatsFruit){
             fruit.respawn(sizeX, sizeY, snake.getBody());
         }
-
     }
 
     private void gameOver(){

@@ -4,6 +4,7 @@ public class Snake{
     private LinkedList<Position> body = new LinkedList<Position>();
     private Direction dir;
     private boolean growing;
+    private boolean turned;
     private SnakeState currentState = new Grounded();
 
     Snake(Position pos){
@@ -61,13 +62,14 @@ public class Snake{
         growing = true; 
     }
 
-    public boolean updateDir(Direction newDir){
+    public void updateDir(Direction newDir){
         if (!canChanceDirection(newDir, dir)) {
-            return false;
+            turned = false;
+            return;
         }
 
         dir = newDir;
-        return true;
+        turned = true;
     }
 
     private void changeState(SnakeState newState){
@@ -82,4 +84,7 @@ public class Snake{
         return currentState.canChangeDirection(newDir, currentDir);
     }
 
+    public boolean getTurned() {
+        return turned;
+    }
 }
