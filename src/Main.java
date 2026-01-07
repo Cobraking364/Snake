@@ -48,7 +48,7 @@ public class Main extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         // Selve vinduets indstillinger
-        // stage.setResizable(true);
+        stage.setResizable(false);
 
         // stage.setFullScreen(true);
         // stage.setFullScreenExitHint("press esc to exit");
