@@ -21,7 +21,7 @@ public class Airborne extends SnakeState{
     @Override
     public void jumpFinished(Snake snake){
         if(jumpCheck == jumpLength){
-            snake.endJump();
+            snake.changeState(new Grounded());
         }else{
             jumpCheck++;
         }
@@ -30,5 +30,9 @@ public class Airborne extends SnakeState{
     @Override
     public boolean canEatFruit(){
         return false;
+    }
+
+    public void jump(Snake snake){
+
     }
 }

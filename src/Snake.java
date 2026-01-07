@@ -4,13 +4,14 @@ public class Snake{
     private LinkedList<Position> body = new LinkedList<Position>();
     private Direction dir;
     private boolean growing;
-    private SnakeState currentState = new Grounded();
+    private SnakeState currentState;
     private int jumpLength = 2;
 
     Snake(Position pos){
         body.add(new Position(pos.getX()+1, pos.getY()));
         body.add(pos);
         dir = Direction.LEFT;
+        currentState = new Grounded();
     }
 
     public void move(Position nextPosition){
@@ -74,14 +75,14 @@ public class Snake{
     }
 
     public void jump(){
-        changeState(new Airborne(jumpLength){});
+        currentState.jump(this);
     }
 
-    public void endJump(){
-        changeState(new Grounded());
+    public int getJumpLength(){
+        return jumpLength;
     }
 
-    private void changeState(SnakeState newState){
+    public void changeState(SnakeState newState){
         currentState = newState;
     }
 

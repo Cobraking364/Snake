@@ -10,4 +10,9 @@ public class Grounded extends SnakeState{
         }
         return false;
     }
+
+    public void jump(Snake snake){
+        snake.changeState(new Airborne(snake.getJumpLength()));
+    }
+
 }
