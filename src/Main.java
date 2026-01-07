@@ -7,8 +7,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    private int canvasWidth = 600;
-    private int canvasHeight = 600;
+    private final int CANVAS_WIDTH = 600;
+    private final int CANVAS_HEIGHT= 600;
     private int tile_size;
     private GraphicsContext gc;
     private Board board;
@@ -40,17 +40,14 @@ public class Main extends Application {
         sizeY = Math.clamp(sizeY, 5, 100);
 
         board = new Board(sizeX, sizeY);
-
         SceneManager sceneManager = new SceneManager(stage);
-    
-        GameView gameView = new GameView(canvasWidth, canvasHeight);
+        GameView gameView = new GameView(CANVAS_WIDTH, CANVAS_HEIGHT, sizeX, sizeY);
         Scene gameViewScene = new Scene(gameView);
         GameController gameController = new GameController(gameView, gameViewScene, board, sceneManager);
-
+        
         sceneManager.changeScene(gameViewScene);
         stage.setResizable(false);
         stage.setTitle("Snake");
         stage.show();
     }
-    
 }

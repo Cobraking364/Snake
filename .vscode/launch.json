@@ -9,7 +9,7 @@
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}",
-            "args": "5 5"
+            "args": "100 4"
         }
     ]
 }   

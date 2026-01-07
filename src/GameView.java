@@ -5,26 +5,35 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 public class GameView extends StackPane{
     private Canvas canvas;
-    private int canvasWidth;
-    private int canvasHeight;
+    private int windowWidth;
+    private int windowHeight;
     private GraphicsContext gc;
+    private int tileSize;
 
-    public GameView(int canvasWidth, int canvasHeight) {
-        this.canvasHeight = canvasHeight;
-        this.canvasHeight = canvasHeight;
+    public GameView(int windowWidth, int windowHeight, int gameWidth, int gameHeight) {
+        this.windowHeight = windowHeight;
+        this.windowWidth = windowWidth;
+        tileSize = gameWidth > gameHeight ? windowWidth / gameWidth : windowHeight / gameHeight;;
         canvas = new Canvas();
         gc = canvas.getGraphicsContext2D();
-        canvas.setWidth(canvasWidth);
-        canvas.setHeight(canvasHeight);
+        canvas.setWidth(tileSize * gameWidth);
+        canvas.setHeight(tileSize * gameHeight);
+        Rectangle blackBackground = new Rectangle();
+        blackBackground.setFill(Color.BLACK);
+        blackBackground.setWidth(windowWidth);
+        blackBackground.setHeight(windowHeight);
+        getChildren().add(blackBackground);
         getChildren().add(canvas);
+
+
     }
 
 
     public void drawBackground(int width, int height) {
-        int tileSize = getTileSize(width, height);
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 gc.setFill((i + j) % 2 == 0 ? Color.GREEN : Color.LIMEGREEN);
@@ -34,22 +43,14 @@ public class GameView extends StackPane{
     }
 
     public void drawSnake(LinkedList<Position> snake, int width, int height) {
-        int tileSize = getTileSize(width, height);
         gc.setFill(Color.BLUE);
-
         for (Position position : snake) {
             gc.fillRect(position.getX() * tileSize, position.getY() * tileSize, tileSize, tileSize);
         }
     }
 
     public void drawFruit(Position fruitPosition, int width, int height) {
-        int tileSize = getTileSize(width, height);
-
         gc.setFill(Color.RED);
         gc.fillRect(fruitPosition.getX() * tileSize, fruitPosition.getY() * tileSize, tileSize, tileSize);
     }
-
-    public int getTileSize(int sizeX, int sizeY) {
-        return sizeX > sizeY ? canvasWidth / sizeX : canvasHeight / sizeY;
-    } 
 }
