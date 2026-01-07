@@ -4,7 +4,7 @@ public class Snake{
     private LinkedList<Position> body = new LinkedList<Position>();
     private Direction dir;
     private boolean growing;
-    private SnakeState currentState = new Grounded(){};
+    private SnakeState currentState = new Grounded();
     private int jumpLength = 2;
 
     Snake(Position pos){
