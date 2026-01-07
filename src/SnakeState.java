@@ -5,9 +5,6 @@ public class SnakeState {
         return false;
     }
 
-    public void jumpFinished(Snake snake) {
-    };
-
     public boolean canEatFruit() {
         return true;
     };

@@ -5,7 +5,6 @@ public class Snake{
     private Direction dir;
     private boolean growing;
     private SnakeState currentState = new Grounded();
-    private int jumpLength = 2;
 
     Snake(Position pos){
         body.add(new Position(pos.getX()+1, pos.getY()));
@@ -20,8 +19,6 @@ public class Snake{
         } else{
             growing = false;
         }
-
-        currentState.jumpFinished(this);
     }
 
     public Position getNextPosition(){
@@ -71,14 +68,6 @@ public class Snake{
 
         dir = newDir;
         return true;
-    }
-
-    public void jump(){
-        changeState(new Airborne(jumpLength){});
-    }
-
-    public void endJump(){
-        changeState(new Grounded());
     }
 
     private void changeState(SnakeState newState){

@@ -32,12 +32,9 @@ public class Controller {
                     case KeyCode.DOWN:
                         validInput = board.getSnake().updateDir(Direction.DOWN);
                         break;
-                    case KeyCode.SPACE:
-                        board.getSnake().jump();
 
                     default:
                         return;
-
                 }
                 if (!validInput) {
                     return;

@@ -1,7 +1,5 @@
 package src;
 
-import java.util.Objects;
-
 class Position{
     private int x;
     private int y;
@@ -37,10 +35,5 @@ class Position{
 
         final Position other = (Position) obj;
         return (getX() == other.getX() && getY() == other.getY());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getY(), getY());
     }
 }
