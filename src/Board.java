@@ -12,7 +12,7 @@ public class Board {
         sizeX = x;
         sizeY = y;
 
-        snake = new Snake(new Position(sizeX / 2, sizeY / 2));
+        snake = new Snake(new Position(sizeX / 2, sizeY / 2), new Grounded());
         fruit = new Fruit();
         fruit.respawn(sizeX, sizeY, snake.getBody());
     }
