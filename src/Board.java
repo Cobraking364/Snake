@@ -29,19 +29,26 @@ public class Board {
             return;
         }
 
-        snake.move();
-        snake.getHead().setX((snake.getHead().getX()+sizeX)%sizeX);
-        snake.getHead().setY((snake.getHead().getY()+sizeY)%sizeY);
+        Position nextPosition = snake.getNextPosition();
 
-        if(snake.checkCol()){
+        nextPosition.setX((nextPosition.getX()+sizeX)%sizeX);
+        nextPosition.setY((nextPosition.getY()+sizeY)%sizeY);
+
+        if(snake.checkCollision(nextPosition)){
             gameOver();
+            return;
         }
+        
         if(snake.canEatFruit()){
-            if(fruit.getPosition().equals(snake.getHead())){
+            if(fruit.getPosition().equals(nextPosition)){
                 snake.grow();
                 fruit.respawn(sizeX, sizeY, snake.getBody());
             }
         }
+        
+        snake.move(nextPosition);
+
+
     }
 
     private void gameOver(){

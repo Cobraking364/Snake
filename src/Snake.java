@@ -13,9 +13,8 @@ public class Snake{
         dir = Direction.LEFT;
     }
 
-    public void move(){
-        Position nextPos = calcNextPos();
-        body.add(nextPos);
+    public void move(Position nextPosition){
+        body.add(nextPosition);
         if(!growing){
             body.remove(0);
         } else{
@@ -25,8 +24,8 @@ public class Snake{
         currentState.jumpFinished(this);
     }
 
-    private Position calcNextPos(){
-        Position currentHeadPos = body.get(body.size()-1);
+    public Position getNextPosition(){
+        Position currentHeadPos = getHead();
         Position nextPos;
         switch(dir){
             case Direction.UP:
@@ -49,8 +48,8 @@ public class Snake{
     }
 
 
-    public boolean checkCol(){
-        return currentState.checkCollision(this);
+    public boolean checkCollision(Position position){
+        return currentState.checkCollision(this, position);
     }
 
     public Position getHead(){

@@ -1,7 +1,7 @@
 package src;
 
 public class SnakeState {
-    public boolean checkCollision(Snake snake) {
+    public boolean checkCollision(Snake snake, Position position) {
         return false;
     }
 

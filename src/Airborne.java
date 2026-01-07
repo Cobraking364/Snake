@@ -7,7 +7,7 @@ public class Airborne extends SnakeState{
     }
 
     @Override
-    public boolean checkCollision(Snake snake) {
+    public boolean checkCollision(Snake snake, Position position) {
         return false;
     }
 
