@@ -16,7 +16,7 @@
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}",
-            "args": "e e"
+            "args": "5 5"
         }
     ]
 }   

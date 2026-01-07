@@ -38,22 +38,24 @@ public class Board {
             gameOver();
             return;
         }
+
+        boolean eatsFruit = snake.canEatFruit() && fruit.getPosition().equals(nextPosition);
         
-        if(snake.canEatFruit()){
-            if(fruit.getPosition().equals(nextPosition)){
-                snake.grow();
-                fruit.respawn(sizeX, sizeY, snake.getBody());
-            }
+        if(eatsFruit){
+            snake.grow();
         }
-        
+
         snake.move(nextPosition);
 
+        if(eatsFruit){
+            fruit.respawn(sizeX, sizeY, snake.getBody());
+        }
 
     }
 
     private void gameOver(){
         System.out.println("GAME OVER");
-        isGameOver = true;
+        javafx.application.Platform.exit();
     }
 
     public Fruit getFruit() {
