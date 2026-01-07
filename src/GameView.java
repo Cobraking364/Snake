@@ -10,13 +10,10 @@ import javafx.scene.shape.Rectangle;
 public class GameView extends StackPane{
     private Canvas canvas;
     private int windowWidth;
-    private int windowHeight;
     private GraphicsContext gc;
     private int tileSize;
 
     public GameView(int windowWidth, int windowHeight, int gameWidth, int gameHeight) {
-        this.windowHeight = windowHeight;
-        this.windowWidth = windowWidth;
         tileSize = gameWidth > gameHeight ? windowWidth / gameWidth : windowHeight / gameHeight;;
         canvas = new Canvas();
         gc = canvas.getGraphicsContext2D();

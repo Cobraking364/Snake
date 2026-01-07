@@ -14,8 +14,12 @@ public class Fruit {
             }
         }
         int listIndex = 0;
+        int maxIndex = sizeX * sizeY - 1;
         Collections.shuffle(possiblePositions);
         while (isInList(possiblePositions.get(listIndex), snakeBody)) {
+            if (listIndex >= maxIndex) {
+                return;
+            }
             listIndex++;
         }
         position = possiblePositions.get(listIndex);

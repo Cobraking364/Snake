@@ -31,6 +31,9 @@ public class GameController {
                     case KeyCode.DOWN:
                         board.getSnake().updateDir(Direction.DOWN);
                         break;
+                    case KeyCode.SPACE:
+                        board.getSnake().jump();
+
                 }
 
                 if (board.getSnake().getTurned()) {

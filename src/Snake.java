@@ -4,12 +4,15 @@ public class Snake{
     private LinkedList<Position> body = new LinkedList<Position>();
     private Direction dir;
     private boolean growing;
+    private boolean turned;
     private SnakeState currentState;
     private int jumpLength = 2;
 
     Snake(Position pos){
         body.add(new Position(pos.getX()+1, pos.getY()));
         body.add(pos);
+        growing = false;
+        turned = false;
         dir = Direction.LEFT;
         currentState = new Grounded();
     }
@@ -65,13 +68,14 @@ public class Snake{
         growing = true; 
     }
 
-    public boolean updateDir(Direction newDir){
+    public void updateDir(Direction newDir){
         if (!canChanceDirection(newDir, dir)) {
-            return false;
+            turned = false;
+            return;
         }
 
         dir = newDir;
-        return true;
+        turned = true;
     }
 
     public void jump(){
@@ -92,6 +96,10 @@ public class Snake{
 
     public boolean canChanceDirection(Direction newDir, Direction currentDir) {
         return currentState.canChangeDirection(newDir, currentDir);
+    }
+
+    public boolean getTurned() {
+        return turned;
     }
 
 }
