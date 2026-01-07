@@ -1,6 +1,8 @@
 package src;
+
 import java.util.*;
-public class Snake{
+
+public class Snake {
     private LinkedList<Position> body = new LinkedList<Position>();
     private Direction dir;
     private boolean growing;
@@ -8,8 +10,8 @@ public class Snake{
     private SnakeState currentState;
     private int jumpLength = 2;
 
-    Snake(Position pos){
-        body.add(new Position(pos.getX()+1, pos.getY()));
+    Snake(Position pos) {
+        body.add(new Position(pos.getX() + 1, pos.getY()));
         body.add(pos);
         growing = false;
         turned = false;
@@ -17,58 +19,48 @@ public class Snake{
         currentState = new Grounded();
     }
 
-    public void move(Position nextPosition){
+    public void move(Position nextPosition) {
         body.add(nextPosition);
-        if(!growing){
+        if (!growing) {
             body.remove(0);
-        } else{
+        } else {
             growing = false;
         }
 
         currentState.jumpFinished(this);
     }
 
-    public Position getNextPosition(){
+    public Position getNextPosition() {
         Position currentHeadPos = getHead();
         Position nextPos;
-        switch(dir){
-            case Direction.UP:
-                nextPos = new Position(currentHeadPos.getX(), currentHeadPos.getY()-1);
-                break;
-            case Direction.LEFT:
-                nextPos = new Position(currentHeadPos.getX()-1, currentHeadPos.getY());
-                break;
-            case Direction.DOWN:
-                nextPos = new Position(currentHeadPos.getX(), currentHeadPos.getY()+1);
-                break;
-            case Direction.RIGHT:
-                nextPos = new Position(currentHeadPos.getX()+1, currentHeadPos.getY());
-                break;
-            default:
-                nextPos = new Position(0, 0);
-        }
+        nextPos = switch (dir) {
+            case Direction.UP -> new Position(currentHeadPos.getX(), currentHeadPos.getY() - 1);
+            case Direction.LEFT -> new Position(currentHeadPos.getX() - 1, currentHeadPos.getY());
+            case Direction.DOWN -> new Position(currentHeadPos.getX(), currentHeadPos.getY() + 1);
+            case Direction.RIGHT -> new Position(currentHeadPos.getX() + 1, currentHeadPos.getY());
+            default -> new Position(0, 0);
+        };
 
         return nextPos;
     }
 
-
-    public boolean checkCollision(Position position){
+    public boolean checkCollision(Position position) {
         return currentState.checkCollision(this, position);
     }
 
-    public Position getHead(){
-        return body.get(body.size()-1);
+    public Position getHead() {
+        return body.get(body.size() - 1);
     }
 
-    public LinkedList<Position> getBody(){
+    public LinkedList<Position> getBody() {
         return body;
     }
 
-    public void grow(){
-        growing = true; 
+    public void grow() {
+        growing = true;
     }
 
-    public void updateDir(Direction newDir){
+    public void updateDir(Direction newDir) {
         if (!canChanceDirection(newDir, dir)) {
             turned = false;
             return;
@@ -78,19 +70,19 @@ public class Snake{
         turned = true;
     }
 
-    public void jump(){
+    public void jump() {
         currentState.jump(this);
     }
 
-    public int getJumpLength(){
+    public int getJumpLength() {
         return jumpLength;
     }
 
-    public void changeState(SnakeState newState){
+    public void changeState(SnakeState newState) {
         currentState = newState;
     }
 
-    public boolean canEatFruit(){
+    public boolean canEatFruit() {
         return currentState.canEatFruit();
     }
 

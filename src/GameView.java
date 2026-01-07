@@ -8,8 +8,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class GameView extends StackPane{
-    private Canvas canvas;
     private int windowWidth;
+    private Canvas canvas;
     private GraphicsContext gc;
     private int tileSize;
 
@@ -41,9 +41,13 @@ public class GameView extends StackPane{
 
     public void drawSnake(LinkedList<Position> snake, int width, int height) {
         gc.setFill(Color.BLUE);
-        for (Position position : snake) {
+        for (int i = 0; i < snake.size() - 1; i++) {
+            Position position = snake.get(i);
             gc.fillRect(position.getX() * tileSize, position.getY() * tileSize, tileSize, tileSize);
         }
+        gc.setFill(Color.DARKBLUE);
+        Position head = snake.get(snake.size() - 1);
+        gc.fillRect(head.getX() * tileSize, head.getY() * tileSize, tileSize, tileSize);
     }
 
     public void drawFruit(Position fruitPosition, int width, int height) {

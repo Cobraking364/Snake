@@ -35,18 +35,13 @@ public class Main extends Application {
         sizeX = Math.clamp(sizeX, 5, 100);
         sizeY = Math.clamp(sizeY, 5, 100);
  
-        Board board = new Board(sizeX, sizeY);
-
         SceneManager sceneManager = new SceneManager(stage);
 
-        GameView gameView = new GameView(windowWidth, windowHeight, sizeY, sizeX);
-        Scene gameViewScene = new Scene(gameView);
-        
-        GameController gameController = new GameController(gameView, gameViewScene, board, sceneManager);
+        MainMenuView mainMenuView = new MainMenuView(windowWidth, windowHeight);
+        Scene mainMenuScene = new Scene(mainMenuView);
+        MainMenuController mainMenuController = new MainMenuController(mainMenuView, mainMenuScene, sceneManager);
 
-        
-
-        sceneManager.changeScene(gameViewScene);
+        sceneManager.changeScene(mainMenuScene);
 
         stage.setResizable(false);
         stage.setTitle("Snake");

@@ -1,6 +1,6 @@
 package src;
 
-public class Board {
+public class Board{
     private int sizeX;
     private int sizeY;
     private Snake snake;
@@ -53,8 +53,11 @@ public class Board {
     }
 
     private void gameOver() {
-        System.out.println("GAME OVER");
         isGameOver = true;
+    }
+
+    public boolean getIsGameOver() {
+        return isGameOver;
     }
 
     public Fruit getFruit() {

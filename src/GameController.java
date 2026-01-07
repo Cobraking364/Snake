@@ -6,12 +6,14 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 public class GameController {
+
     private GameView view;
     private Scene scene;
     private Board board;
 
     GameController(GameView view, Scene scene, Board board, SceneManager sceneManager) {
         this.view = view;
+        this.scene = scene;
         this.board = board;
         updateView();
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -41,7 +43,15 @@ public class GameController {
                     updateView();
                 }
 
-                
+                if (board.getIsGameOver()) {
+                    MainMenuView mainMenuView = new MainMenuView((int) view.getWidth(), (int) view.getHeight());
+                    Scene mainMenuScene = new Scene(mainMenuView);
+                    MainMenuController mainMenuController = new MainMenuController(mainMenuView, mainMenuScene,
+                            sceneManager);
+
+                    sceneManager.changeScene(mainMenuScene);
+                }
+
             }
 
         });
