@@ -34,7 +34,7 @@ public class Main extends Application {
         sizeY = 25;
         sizeX = Math.clamp(sizeX, 5, 100);
         sizeY = Math.clamp(sizeY, 5, 100);
-
+ 
         board = new Board(sizeX, sizeY);
         Canvas canvas = new Canvas();
         tile_size = sizeX > sizeY ? canvasWidth / sizeX : canvasHeight / sizeY;
