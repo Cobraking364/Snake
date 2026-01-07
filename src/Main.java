@@ -85,8 +85,8 @@ public class Main extends Application {
 
         }
 
-        for (Position position : snake) {
-            gc.setFill(layers.get(position) == 1 ? Color.BLUE : Color.LIGHTBLUE);
+        for (Position position : layers.keySet()) {
+            gc.setFill(layers.get(position) == 1 ? Color.BLUE : Color.CYAN);
             gc.fillRect(position.getX() * tile_size, position.getY() * tile_size, tile_size, tile_size);
         }
     }
