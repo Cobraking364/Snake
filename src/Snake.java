@@ -10,13 +10,13 @@ public class Snake {
     private SnakeState currentState;
     private int jumpLength = 2;
 
-    Snake(Position pos) {
-        body.add(new Position(pos.getX() + 1, pos.getY()));
+    Snake(Position pos, SnakeState initialState){
+        body.add(new Position(pos.getX()+1, pos.getY()));
         body.add(pos);
         growing = false;
         turned = false;
         dir = Direction.LEFT;
-        currentState = new Grounded();
+        currentState = initialState;
     }
 
     public void move(Position nextPosition) {
