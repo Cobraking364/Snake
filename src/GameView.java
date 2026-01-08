@@ -70,8 +70,4 @@ public class GameView extends StackPane {
         canvas.setWidth(tileSize * gameWidth);
         canvas.setHeight(tileSize * gameHeight);
     }
-
-    public void scaleCanvas() {
-        
-    }
 }
