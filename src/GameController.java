@@ -1,5 +1,6 @@
 package src;
 
+import javafx.beans.value.ChangeListener;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -16,6 +17,13 @@ public class GameController {
         this.scene = scene;
         this.board = board;
         updateView();
+
+        ChangeListener<Number> windowSizeListener = (observable, oldValue, newValue) ->
+            this.updateView();
+
+        scene.getWindow().widthProperty().addListener(windowSizeListener);
+        scene.getWindow().heightProperty().addListener(windowSizeListener);
+
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
             @Override
@@ -46,7 +54,7 @@ public class GameController {
                 if (board.getIsGameOver()) {
                     MainMenuView mainMenuView = new MainMenuView((int) view.getWidth(), (int) view.getHeight());
                     Scene mainMenuScene = new Scene(mainMenuView);
-                    MainMenuController mainMenuController = new MainMenuController(mainMenuView, mainMenuScene,
+                    MainMenuController mainMenuController = new MainMenuController(mainMenuView, mainMenuScene, board.getSizeX(), board.getSizeY(),
                             sceneManager);
 
                     sceneManager.changeScene(mainMenuScene);
@@ -58,6 +66,7 @@ public class GameController {
     }
 
     private void updateView() {
+        view.updateTileSize();
         view.drawBackground(board.getSizeX(), board.getSizeY());
         view.drawFruit(board.getFruit().getPosition(), board.getSizeX(), board.getSizeY());
         view.drawSnake(board.getSnake().getBody(), board.getSizeX(), board.getSizeY());

@@ -39,11 +39,11 @@ public class Main extends Application {
 
         MainMenuView mainMenuView = new MainMenuView(windowWidth, windowHeight);
         Scene mainMenuScene = new Scene(mainMenuView);
-        MainMenuController mainMenuController = new MainMenuController(mainMenuView, mainMenuScene, sceneManager);
+        MainMenuController mainMenuController = new MainMenuController(mainMenuView, mainMenuScene, sizeX, sizeY, sceneManager);
 
         sceneManager.changeScene(mainMenuScene);
 
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.setTitle("Snake");
         stage.show();
     }

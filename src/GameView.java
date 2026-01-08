@@ -10,25 +10,24 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class GameView extends StackPane {
-    private int windowWidth;
     private Canvas canvas;
     private GraphicsContext gc;
     private int tileSize;
+    private int gameWidth;
+    private int gameHeight;
 
-    public GameView(int windowWidth, int windowHeight, int gameWidth, int gameHeight) {
-        tileSize = gameWidth > gameHeight ? windowWidth / gameWidth : windowHeight / gameHeight;
-        ;
+    public GameView(int gameWidth, int gameHeight) {
+        this.gameWidth = gameWidth;
+        this.gameHeight = gameHeight;
         canvas = new Canvas();
         gc = canvas.getGraphicsContext2D();
-        canvas.setWidth(tileSize * gameWidth);
-        canvas.setHeight(tileSize * gameHeight);
+        updateTileSize();
         Rectangle blackBackground = new Rectangle();
         blackBackground.setFill(Color.BLACK);
-        blackBackground.setWidth(windowWidth);
-        blackBackground.setHeight(windowHeight);
+        blackBackground.heightProperty().bind(heightProperty());
+        blackBackground.widthProperty().bind(widthProperty());
         getChildren().add(blackBackground);
         getChildren().add(canvas);
-
     }
 
     public void drawBackground(int width, int height) {
@@ -64,5 +63,15 @@ public class GameView extends StackPane {
     public void drawFruit(Position fruitPosition, int width, int height) {
         gc.setFill(Color.RED);
         gc.fillRect(fruitPosition.getX() * tileSize, fruitPosition.getY() * tileSize, tileSize, tileSize);
+    }
+
+    public void updateTileSize() {
+        tileSize = Math.min(widthProperty().intValue() / gameWidth, heightProperty().intValue() / gameHeight);
+        canvas.setWidth(tileSize * gameWidth);
+        canvas.setHeight(tileSize * gameHeight);
+    }
+
+    public void scaleCanvas() {
+        
     }
 }
