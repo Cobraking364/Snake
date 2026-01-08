@@ -1,20 +1,37 @@
 package src;
 
+import java.lang.reflect.Array;
+import java.util.*;
+
 public class Board{
     private int sizeX;
     private int sizeY;
     private Snake snake;
-    private Fruit fruit;
+    private int amountOfFruits = 10;
+    private ArrayList<Fruit> fruits;
     private boolean isGameOver;
+    private OccupiedSpace occupiedSpace;
 
     Board(int x, int y) {
         isGameOver = false;
         sizeX = x;
         sizeY = y;
 
+        occupiedSpace = new OccupiedSpace();
         snake = new Snake(new Position(sizeX / 2, sizeY / 2), new Grounded());
-        fruit = new Fruit();
-        fruit.respawn(sizeX, sizeY, snake.getBody());
+
+        occupiedSpace.addOccupiedSpace(snake.getOccupiedSpace());
+
+        fruits = new ArrayList<Fruit>();
+        for (int i = 0; i < amountOfFruits; i++) {
+            Fruit tempFruit = new Fruit();
+            fruits.add(tempFruit);
+        }
+
+        for (Fruit fruit : fruits) {
+            fruit.respawn(sizeX, sizeY, occupiedSpace.getOccupiedSpaces());
+            occupiedSpace.addOccupiedSpace(fruit.getOccupiedSpace());
+        }
     }
 
     public int getSizeX() {
@@ -40,15 +57,17 @@ public class Board{
             return;
         }
 
-        boolean isEatingFruit = snake.canEatFruit() && fruit.getPosition().equals(nextPosition);
-        if (isEatingFruit) {
-            snake.grow();
+        for (Fruit fruit : fruits) {
+            boolean isEatingFruit = snake.canEatFruit() && fruit.getPosition().equals(nextPosition);
+            if (isEatingFruit) {
+                snake.grow();
+            }
+
+            if (isEatingFruit) {
+                fruit.respawn(sizeX, sizeY, snake.getBody());
+            }
         }
         snake.move(nextPosition);
-
-        if (isEatingFruit) {
-            fruit.respawn(sizeX, sizeY, snake.getBody());
-        }
 
     }
 
@@ -60,8 +79,8 @@ public class Board{
         return isGameOver;
     }
 
-    public Fruit getFruit() {
-        return fruit;
+    public ArrayList<Fruit> getFruits() {
+        return fruits;
     }
 
     public Snake getSnake() {

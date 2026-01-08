@@ -2,7 +2,7 @@ package src;
 
 import java.util.*;
 
-public class Snake {
+public class Snake implements ISpaceOccupier{
     private LinkedList<Position> body = new LinkedList<Position>();
     private Direction dir;
     private boolean growing;
@@ -54,6 +54,11 @@ public class Snake {
 
     public LinkedList<Position> getBody() {
         return body;
+    }
+
+    @Override
+    public LinkedList<Position> getOccupiedSpace(){
+        return getBody();
     }
 
     public void grow() {

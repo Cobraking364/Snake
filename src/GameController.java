@@ -67,7 +67,9 @@ public class GameController {
     private void updateView() {
         view.updateTileSize();
         view.drawBackground(board.getSizeX(), board.getSizeY());
-        view.drawFruit(board.getFruit().getPosition(), board.getSizeX(), board.getSizeY());
+        for (Fruit fruit : board.getFruits()) {
+            view.drawFruit(fruit.getPosition(), board.getSizeX(), board.getSizeY());
+        }
         view.drawSnake(board.getSnake().getBody(), board.getSizeX(), board.getSizeY());
     }
 }
