@@ -5,15 +5,14 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 
-public class MainMenuController {
-    private MainMenuView view;
-    private Scene scene;
+public class GameOverController {
+    private GameOverView view;
 
-    public MainMenuController(MainMenuView view, Scene scene, int gameWidth, int gameHeight, SceneManager sceneManager) {
+    public GameOverController(GameOverView view, int gameWidth, int gameHeight, SceneManager sceneManager) {
         this.view = view;
-        this.scene = scene;
+        
 
-        view.getStartButton().setOnAction(new EventHandler<ActionEvent>() {
+        view.getRestartButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 GameView gameView = new GameView(gameWidth, gameHeight);
@@ -22,6 +21,7 @@ public class MainMenuController {
                 sceneManager.changeScene(gameViewScene);
                 GameController gameController = new GameController(gameView, gameViewScene, board, sceneManager);
             }
+
         });
 
         view.getQuitButton().setOnAction(new EventHandler<ActionEvent>() {
@@ -30,6 +30,17 @@ public class MainMenuController {
                 Platform.exit();
             }
 
+        });
+
+        view.getMainMenuButton().setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent event){
+                
+                MainMenuView mainMenuView = new MainMenuView((int) view.getWidth(), (int) view.getHeight());
+                Scene mainMenuScene = new Scene(mainMenuView);
+                MainMenuController mainMenuController = new MainMenuController(mainMenuView , mainMenuScene, gameWidth, gameHeight, sceneManager);
+                sceneManager.changeScene(mainMenuScene);
+            }
         });
     }
 }

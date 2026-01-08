@@ -52,12 +52,11 @@ public class GameController {
                 }
 
                 if (board.getIsGameOver()) {
-                    MainMenuView mainMenuView = new MainMenuView((int) view.getWidth(), (int) view.getHeight());
-                    Scene mainMenuScene = new Scene(mainMenuView);
-                    MainMenuController mainMenuController = new MainMenuController(mainMenuView, mainMenuScene, board.getSizeX(), board.getSizeY(),
-                            sceneManager);
+                    GameOverView gameOverView = new GameOverView();
+                    GameOverController gameOverController = new GameOverController(gameOverView, board.getSizeX(), board.getSizeY(), sceneManager);
+                
 
-                    sceneManager.changeScene(mainMenuScene);
+                    view.getChildren().add(gameOverView);
                 }
 
             }
