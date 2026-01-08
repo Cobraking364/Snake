@@ -3,6 +3,7 @@ package src;
 import java.util.List;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -42,7 +43,8 @@ public class Main extends Application {
         MainMenuController mainMenuController = new MainMenuController(mainMenuView, mainMenuScene, sizeX, sizeY, sceneManager);
 
         sceneManager.changeScene(mainMenuScene);
-
+        Image icon  = new Image("src/Snake.png");
+        stage.getIcons().add(icon);
         stage.setResizable(true);
         stage.setTitle("Snake");
         stage.show();
