@@ -10,25 +10,27 @@ public class SettingsView extends StackPane{
     private final int BUTTON_SPACING = 25;
     private VBox container;
     private Button backButton;
+    private SettingsSliderModule soundSlider;
     private SettingsSliderModule widthSlider;
     private SettingsSliderModule heightSlider;
-    private SettingsSliderModule soundSlider;
+    private SettingsSliderModule snakeSpeedSlider;
     private SettingsSliderModule playerCountSlider;
     private SettingsSliderModule fruitCountSlider;
 
     public SettingsView(int windowWidth, int windowheight, Settings settings){        
+        soundSlider = new SettingsSliderModule("Sound volume", 0, 100, settings.getSoundVolume(), BUTTON_SPACING);
         widthSlider = new SettingsSliderModule("Game width", 5, 100, settings.getSizeX(), BUTTON_SPACING);
         heightSlider = new SettingsSliderModule("Game height", 5, 100, settings.getSizeY(), BUTTON_SPACING);
-        soundSlider = new SettingsSliderModule("Sound volume", 0, 100, settings.getSoundVolume(), BUTTON_SPACING);
-        playerCountSlider = new SettingsSliderModule("Player count", 1, 4, settings.getSoundVolume(), BUTTON_SPACING);
-        fruitCountSlider = new SettingsSliderModule("Fruit count", 1, 20, settings.getSoundVolume(), BUTTON_SPACING);
+        snakeSpeedSlider = new SettingsSliderModule("Snake speed", 4, 20, settings.getSnakeSpeed(), BUTTON_SPACING);
+        playerCountSlider = new SettingsSliderModule("Player count", 1, 4, settings.getPlayerCount(), BUTTON_SPACING);
+        fruitCountSlider = new SettingsSliderModule("Fruit count", 1, 20, settings.getFruitCount(), BUTTON_SPACING);
 
         backButton = new Button("Back");
 
         container = new VBox(BUTTON_SPACING);
         container.setPadding(new Insets(BUTTON_SPACING));
         container.setAlignment(Pos.CENTER);
-        container.getChildren().addAll(widthSlider, heightSlider, soundSlider, playerCountSlider, fruitCountSlider, backButton);
+        container.getChildren().addAll(soundSlider, widthSlider, heightSlider, snakeSpeedSlider, playerCountSlider, fruitCountSlider, backButton);
         
         getChildren().add(container);
         setPrefSize(windowWidth, windowheight);
@@ -53,6 +55,10 @@ public class SettingsView extends StackPane{
 
     public SettingsSliderModule getFruitCounterSlider() {
         return fruitCountSlider;
+    }
+
+    public SettingsSliderModule getSnakeSpeedSlider() {
+        return snakeSpeedSlider;
     }
 
     public Button getBackButton() {

@@ -37,10 +37,13 @@ public class SettingsController extends Controller {
             getSettings().setSoundVolume(newValue.intValue());
         });
         view.getPlayerCountSlider().getSliderProperty().addListener((ObservableValue, oldValue, newValue) -> {
-            getSettings().setSoundVolume(newValue.intValue());
+            getSettings().setPlayerCount(newValue.intValue());
         });
         view.getFruitCounterSlider().getSliderProperty().addListener((ObservableValue, oldValue, newValue) -> {
-            getSettings().setSoundVolume(newValue.intValue());
+            getSettings().setFruitCount(newValue.intValue());
+        });
+        view.getSnakeSpeedSlider().getSliderProperty().addListener((ObservableValue, oldValue, newValue) -> {
+            getSettings().setSnakeSpeed(newValue.intValue());
         });
     }
 

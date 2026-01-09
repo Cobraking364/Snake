@@ -4,13 +4,18 @@ public class Settings {
     private int sizeX;
     private int sizeY;
     private int soundVolume;
-    private int snakeSpeed = 8;
+    private int snakeSpeed;
     private int fruitCount;
     private int playerCount;
 
     public Settings(int sizeX, int sizeY){
         this.sizeX=sizeX;
         this.sizeY=sizeY;
+        this.soundVolume = 50;
+        this.snakeSpeed = 20;
+        this.fruitCount = 1;
+        this.playerCount = 1;
+        System.out.println("New settings");
     }
 
     public int getSizeX(){
@@ -29,9 +34,9 @@ public class Settings {
         this.sizeY = sizeY;
     }
     
-    public void setSnakeSpeed(int sizeY){
+    public void setSnakeSpeed(int snakeSpeed){
         
-        this.sizeY=sizeY;
+        this.snakeSpeed=snakeSpeed;
     }
 
     public void getSnakeSpeed(int value) {
