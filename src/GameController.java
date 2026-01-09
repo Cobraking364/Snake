@@ -1,5 +1,6 @@
 package src;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -16,16 +17,25 @@ public class GameController {
         this.view = view;
         this.scene = scene;
         this.board = board;
+
         updateView();
-
+        
         ChangeListener<Number> windowSizeListener = (observable, oldValue, newValue) ->
-            this.updateView();
-
+        Platform.runLater(this::updateView);
+        
         scene.getWindow().widthProperty().addListener(windowSizeListener);
         scene.getWindow().heightProperty().addListener(windowSizeListener);
+        
+        GameLoop gameLoop = new GameLoop() {
+            @Override
+            public void update(double deltaTime) {
+                board.update();
+                draw();
+            }
+        };
+        gameLoop.start();
 
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
             @Override
             public void handle(KeyEvent event) {
                 switch (event.getCode()) {
@@ -43,19 +53,12 @@ public class GameController {
                         break;
                     case KeyCode.SPACE:
                         board.getSnake().jump();
-
-                }
-
-                if (board.getSnake().getTurned()) {
-                    board.update();
-                    updateView();
                 }
 
                 if (board.getIsGameOver()) {
                     GameOverView gameOverView = new GameOverView();
                     GameOverController gameOverController = new GameOverController(gameOverView, board.getSizeX(), board.getSizeY(), sceneManager);
                 
-
                     view.getChildren().add(gameOverView);
                 }
 
@@ -64,8 +67,14 @@ public class GameController {
         });
     }
 
+
+
     private void updateView() {
         view.updateTileSize();
+        draw();
+    }
+
+    private void draw() {
         view.drawBackground(board.getSizeX(), board.getSizeY());
         view.drawFruit(board.getFruit().getPosition(), board.getSizeX(), board.getSizeY());
         view.drawSnake(board.getSnake().getBody(), board.getSizeX(), board.getSizeY());
