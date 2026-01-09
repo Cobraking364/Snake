@@ -41,4 +41,28 @@ public class Settings {
     public int getSnakeSpeed() {
         return snakeSpeed;
     }
+
+    public int getSoundVolume() {
+        return soundVolume;
+    }
+
+    public void setSoundVolume(int value) {
+        soundVolume = value;
+    }
+
+    public int getPlayerCount() {
+        return playerCount;
+    }
+
+    public void setPlayerCount(int value) {
+        playerCount = value;
+    }
+
+    public int getFruitCount() {
+        return fruitCount;
+    }
+
+    public void setFruitCount(int value) {
+        fruitCount = value;
+    }
 }
