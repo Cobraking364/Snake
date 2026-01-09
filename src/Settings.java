@@ -4,7 +4,7 @@ public class Settings {
     private int sizeX;
     private int sizeY;
     private int soundVolume;
-    private int snakeSpeed = 5;
+    private int snakeSpeed = 8;
     private int fruitCount;
     private int playerCount;
 

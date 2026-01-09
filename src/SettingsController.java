@@ -10,7 +10,7 @@ public class SettingsController extends Controller{
     private SettingsView view;
     private Scene scene;
     
-    public SettingsController(SettingsView view, Scene scene, int gameWidth, int gameHeight, Settings settings, SceneManager SceneManager){
+    public SettingsController(SettingsView view, Scene scene, Settings settings, SceneManager SceneManager){
         super(settings, SceneManager);
         this.view = view;
         this.scene = scene;
@@ -21,7 +21,7 @@ public class SettingsController extends Controller{
                 
                 MainMenuView mainMenuView = new MainMenuView((int) view.getWidth(), (int) view.getHeight());
                 Scene mainMenuScene = new Scene(mainMenuView);
-                MainMenuController mainMenuController = new MainMenuController(mainMenuView , mainMenuScene, gameWidth, gameHeight, getSettings(), getSceneManager());
+                MainMenuController mainMenuController = new MainMenuController(mainMenuView , mainMenuScene, getSettings(), getSceneManager());
                 getSceneManager().changeScene(mainMenuScene);
             }
         });

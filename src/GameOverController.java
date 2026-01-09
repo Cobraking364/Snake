@@ -8,15 +8,15 @@ import javafx.scene.Scene;
 public class GameOverController extends Controller {
     private GameOverView view;
 
-    public GameOverController(GameOverView view, int gameWidth, int gameHeight, Settings settings, SceneManager sceneManager) {
+    public GameOverController(GameOverView view, Settings settings, SceneManager sceneManager) {
         super(settings, sceneManager);
         this.view = view;
         view.getRestartButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                GameView gameView = new GameView(gameWidth, gameHeight);
+                GameView gameView = new GameView(settings.getSizeY(), settings.getSizeY());
                 Scene gameViewScene = new Scene(gameView);
-                Board board = new Board(gameWidth, gameHeight);
+                Board board = new Board(settings.getSizeX(), settings.getSizeY());
                 getSceneManager().changeScene(gameViewScene);
                 GameController gameController = new GameController(gameView, gameViewScene, board, getSettings(), getSceneManager());
             }
@@ -36,8 +36,7 @@ public class GameOverController extends Controller {
                 MainMenuView mainMenuView = new MainMenuView((int) view.getWidth(), (int) view.getHeight());
                 Scene mainMenuScene = new Scene(mainMenuView);
                 getSceneManager().changeScene(mainMenuScene);
-                MainMenuController mainMenuController = new MainMenuController(mainMenuView, mainMenuScene, gameWidth,
-                        gameHeight, getSettings(), getSceneManager());
+                MainMenuController mainMenuController = new MainMenuController(mainMenuView, mainMenuScene, getSettings(), getSceneManager());
             }
         });
     }

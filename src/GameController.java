@@ -42,8 +42,7 @@ public class GameController extends Controller {
                 if (board.getIsGameOver()) {
                     gameLoop.stop();
                     GameOverView gameOverView = new GameOverView();
-                    GameOverController gameOverController = new GameOverController(gameOverView, board.getSizeX(),
-                            board.getSizeY(), getSettings(), getSceneManager());
+                    GameOverController gameOverController = new GameOverController(gameOverView, getSettings(), getSceneManager());
 
                     view.getChildren().add(gameOverView);
                 }

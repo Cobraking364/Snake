@@ -9,7 +9,7 @@ public class MainMenuController extends Controller{
     private MainMenuView view;
     private Scene scene;
 
-    public MainMenuController(MainMenuView view, Scene scene, int gameWidth, int gameHeight, Settings settings, SceneManager sceneManager) {
+    public MainMenuController(MainMenuView view, Scene scene, Settings settings, SceneManager sceneManager) {
         super(settings, sceneManager);
         this.view = view;
         this.scene = scene;
@@ -17,9 +17,9 @@ public class MainMenuController extends Controller{
         view.getStartButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                GameView gameView = new GameView(gameWidth, gameHeight);
+                GameView gameView = new GameView(settings.getSizeX(), settings.getSizeY());
                 Scene gameViewScene = new Scene(gameView);
-                Board board = new Board(gameWidth, gameHeight);
+                Board board = new Board(settings.getSizeX(), settings.getSizeY());
                 getSceneManager().changeScene(gameViewScene);
                 GameController gameController = new GameController(gameView, gameViewScene, board, settings, sceneManager);
             }
@@ -39,7 +39,7 @@ public class MainMenuController extends Controller{
                 SettingsView settingsView = new SettingsView((int)view.getWidth(),(int)view.getHeight(), getSettings());
                 Scene settingsScene = new Scene(settingsView);
                 getSceneManager().changeScene(settingsScene);
-                SettingsController settingsController = new SettingsController(settingsView, settingsScene, gameWidth, gameHeight, settings, sceneManager);
+                SettingsController settingsController = new SettingsController(settingsView, settingsScene, settings, sceneManager);
             }
 
         });

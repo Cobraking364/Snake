@@ -41,7 +41,7 @@ public class Main extends Application {
         MainMenuView mainMenuView = new MainMenuView(windowWidth, windowHeight);
         Scene mainMenuScene = new Scene(mainMenuView);
         Settings settings = new Settings(sizeX, sizeY);
-        MainMenuController mainMenuController = new MainMenuController(mainMenuView, mainMenuScene, sizeX, sizeY, settings, sceneManager);
+        MainMenuController mainMenuController = new MainMenuController(mainMenuView, mainMenuScene, settings, sceneManager);
 
         sceneManager.changeScene(mainMenuScene);
         Image icon  = new Image("src/Snake.png");
