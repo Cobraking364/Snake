@@ -10,15 +10,16 @@ public class MainMenuView extends StackPane {
     private VBox buttonContainer;
     private Button startButton;
     private Button quitButton;
+    private Button settingsButton;
 
     MainMenuView(int width, int height) {
         startButton = new Button("Start");
         quitButton = new Button("Quit");
-        
+        settingsButton = new Button("Settings");
         
         buttonContainer = new VBox(BUTTON_SPACING);
         buttonContainer.setAlignment(Pos.CENTER);
-        buttonContainer.getChildren().addAll(startButton, quitButton);
+        buttonContainer.getChildren().addAll(startButton, settingsButton, quitButton);
         
         getChildren().add(buttonContainer);
         setPrefSize(width, height);
@@ -30,5 +31,9 @@ public class MainMenuView extends StackPane {
 
     public Button getQuitButton() {
         return quitButton;
+    }
+
+    public Button getSettingsButton() {
+        return settingsButton;
     }
 }
