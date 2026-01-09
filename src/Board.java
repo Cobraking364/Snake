@@ -64,6 +64,7 @@ public class Board{
             if (isEatingFruit) {
                 snake.grow();
                 indexOfEaten = i;
+                occupiedSpace.removeOccupiedSpace(nextPosition);
             }
         }
         occupiedSpace.removeOccupiedSpaces(snake.getOccupiedSpace());

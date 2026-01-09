@@ -30,9 +30,9 @@ public class Main extends Application {
     public void start(Stage stage) {
         List<String> parameters = getParameters().getRaw();
         // sizeX = Integer.parseInt(parameters.get(0))
-        sizeX = 12;
+        sizeX = 5;
         // sizeY = Integer.parseInt(parameters.get(1));
-        sizeY = 12;
+        sizeY = 5;
         sizeX = Math.clamp(sizeX, 5, 100);
         sizeY = Math.clamp(sizeY, 5, 100);
  
