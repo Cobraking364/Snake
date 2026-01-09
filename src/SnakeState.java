@@ -5,7 +5,7 @@ public abstract class SnakeState {
         return false;
     }
 
-    public void jumpFinished(Snake snake){
+    public void update(Snake snake){
 
     }
 

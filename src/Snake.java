@@ -27,7 +27,7 @@ public class Snake implements ISpaceOccupier{
             growing = false;
         }
 
-        currentState.jumpFinished(this);
+        currentState.update(this);
     }
 
     public Position getNextPosition() {

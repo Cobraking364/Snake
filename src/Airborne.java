@@ -19,7 +19,7 @@ public class Airborne extends SnakeState{
     private int jumpCheck = 1;
 
     @Override
-    public void jumpFinished(Snake snake){
+    public void update(Snake snake){
         if(jumpCheck == jumpLength){
             snake.changeState(new Grounded());
         }else{
@@ -33,6 +33,6 @@ public class Airborne extends SnakeState{
     }
 
     public void jump(Snake snake){
-
+        update(snake);
     }
 }
