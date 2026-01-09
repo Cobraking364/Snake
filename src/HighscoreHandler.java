@@ -1,9 +1,7 @@
 package src;
 
-import java.util.*;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.StandardOpenOption;
+import java.util.*;
 
 //Create new hashmap
 //Reads file to hashmap with bufferedreader
@@ -12,12 +10,15 @@ import java.nio.file.StandardOpenOption;
 
 public class HighscoreHandler {
     public void highscoreHandler(Board boardSize, int score) {
+         
         String board = boardSize + "";
-        writeFileToMap(board, score);
+        Map<String,String> map = writeFileToMap(board, score);
+        compareBoardToKey(map, board, score);
+        writeMapToFile(map);
 
     }
 
-    public void writeFileToMap(String board, int score) {
+    public Map<String,String> writeFileToMap(String board, int score) {
         Map<String, String> highscoreMap = new HashMap<>();
         try (InputStream highscoreFile = HighscoreHandler.class.getResourceAsStream("/highscore.txt");
                 BufferedReader writeToMap = new BufferedReader(new InputStreamReader(highscoreFile))) {
@@ -31,18 +32,33 @@ public class HighscoreHandler {
         } catch (IOException e) {
             System.out.println("couldn't read file");
         }
+        return highscoreMap;
     }
-
-    public void writeMapToFile(HashMap<String, String> newBoard) {
+    public Map<String,String> compareBoardToKey(Map<String,String> map, String board, int score){
+        boolean exists = false;
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            if (board.equals(entry.getKey())){
+                exists = true;
+            }
+        }
+        if (!exists) {
+            map.put(board, "0");
+        }
+        if (Integer. parseInt(map.get(board)) < score) {
+            map.put(board, score+"");
+        }
+        return map;
+    }
+    public void writeMapToFile(Map<String, String> map) {
         BufferedWriter writeToFile = null;
-       try (FileOutputStream name = new FileOutputStream("/highscore.txt", false)) {
+       try (FileOutputStream name = new FileOutputStream("/highscore.txt", false)) { //cleans file
        } catch (IOException e) {
             System.out.println("couldn't read file");
         }
 
 
         try { writeToFile = new BufferedWriter(new FileWriter("/highscore.txt"));
-            for (Map.Entry<String, String> entry : newBoard.entrySet()) {
+            for (Map.Entry<String, String> entry : map.entrySet()) {
                 writeToFile.write(entry.getKey() + " " + entry.getValue());
                 writeToFile.newLine();
             }
