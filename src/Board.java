@@ -57,17 +57,23 @@ public class Board{
             return;
         }
 
-        for (Fruit fruit : fruits) {
-            boolean isEatingFruit = snake.canEatFruit() && fruit.getPosition().equals(nextPosition);
+        int indexOfEaten = -1;
+
+        for (int i  = 0; i <fruits.size(); i++) {
+            boolean isEatingFruit = snake.canEatFruit() && fruits.get(i).getPosition().equals(nextPosition);
             if (isEatingFruit) {
                 snake.grow();
-            }
-
-            if (isEatingFruit) {
-                fruit.respawn(sizeX, sizeY, snake.getBody());
+                indexOfEaten = i;
             }
         }
+        occupiedSpace.removeOccupiedSpaces(snake.getOccupiedSpace());
         snake.move(nextPosition);
+        occupiedSpace.addOccupiedSpace(snake.getOccupiedSpace());
+
+        if (indexOfEaten != -1) {
+            fruits.get(indexOfEaten).respawn(sizeX, sizeY, occupiedSpace.getOccupiedSpaces());
+            occupiedSpace.addOccupiedSpace(fruits.get(indexOfEaten).getOccupiedSpace());
+        }
 
     }
 
