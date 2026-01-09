@@ -31,6 +31,8 @@ public class GameController {
                     case KeyCode.DOWN:
                         board.getSnake().updateDir(Direction.DOWN);
                         break;
+                    default:
+                        return;
                 }
 
                 if (board.getSnake().getTurned()) {
