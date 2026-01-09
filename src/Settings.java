@@ -3,7 +3,10 @@ package src;
 public class Settings {
     private int sizeX;
     private int sizeY;
-    private int sound;
+    private int soundVolume;
+    private int snakeSpeed = 5;
+    private int fruitCount;
+    private int playerCount;
 
     public Settings(int sizeX, int sizeY){
         this.sizeX=sizeX;
@@ -14,16 +17,28 @@ public class Settings {
         return sizeX;
     }
 
+    public void setSizeX(int sizeX){
+        this.sizeX=sizeX;
+    }
+    
     public int getSizeY(){
         return sizeY;
     }
 
-    public void setsizeX(int sizeX){
-        this.sizeX=sizeX;
-        
+    public void setSizeY(int sizeY) {
+        this.sizeY = sizeY;
     }
-    public void setsizeY(int sizeY){
+    
+    public void setSnakeSpeed(int sizeY){
         
         this.sizeY=sizeY;
+    }
+
+    public void getSnakeSpeed(int value) {
+        snakeSpeed = value;
+    }
+
+    public int getSnakeSpeed() {
+        return snakeSpeed;
     }
 }
