@@ -15,5 +15,4 @@ public class Grounded extends SnakeState{
         snake.changeState(new Airborne(snake.getJumpLength()));
     }
 
-
 }

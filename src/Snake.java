@@ -26,7 +26,6 @@ public class Snake implements ISpaceOccupier{
         } else {
             growing = false;
         }
-
         currentState.update(this);
     }
 
