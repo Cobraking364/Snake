@@ -4,6 +4,7 @@ import java.util.List;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -14,13 +15,13 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         // if (args.length != 2) {
-        //     throw new IllegalArgumentException("Must be excactly 2 parameters.");
+        // throw new IllegalArgumentException("Must be excactly 2 parameters.");
         // }
         // try {
-        //     Integer.parseInt(args[0]);
-        //     Integer.parseInt(args[1]);
+        // Integer.parseInt(args[0]);
+        // Integer.parseInt(args[1]);
         // } catch (NumberFormatException e) {cls
-        //     throw new IllegalArgumentException("Parameters must be integers.");
+        // throw new IllegalArgumentException("Parameters must be integers.");
         // }
 
         launch(args);
@@ -35,16 +36,21 @@ public class Main extends Application {
         sizeY = 12;
         sizeX = Math.clamp(sizeX, 5, 100);
         sizeY = Math.clamp(sizeY, 5, 100);
- 
+
         SceneManager sceneManager = new SceneManager(stage);
+
+        Font.loadFont(
+                getClass().getResource("/resources/PressStart2P-Regular.ttf").toExternalForm(),
+                16);
 
         MainMenuView mainMenuView = new MainMenuView(windowWidth, windowHeight);
         Scene mainMenuScene = new Scene(mainMenuView);
         Settings settings = new Settings(sizeX, sizeY);
-        MainMenuController mainMenuController = new MainMenuController(mainMenuView, mainMenuScene, settings, sceneManager);
+        MainMenuController mainMenuController = new MainMenuController(mainMenuView, mainMenuScene, settings,
+                sceneManager);
 
         sceneManager.changeScene(mainMenuScene);
-        Image icon  = new Image("src/Snake.png");
+        Image icon = new Image("src/Snake.png");
         stage.getIcons().add(icon);
         stage.setResizable(true);
         stage.setTitle("Snake");
