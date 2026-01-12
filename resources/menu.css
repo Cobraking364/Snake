@@ -1,0 +1,86 @@
+.root {
+    -fx-font-family: "Press Start 2P";
+    -fx-background-color: #0B3C5D;
+}
+
+.label {
+    -fx-font-size: 8px;
+    -fx-text-fill: #ffffff;
+}
+
+#title-label {
+    -fx-font-size: 64;
+    -fx-text-fill: #1E90FF;
+    -fx-effect: dropshadow(one-pass-box, #06283D, 0, 0, 0, 8);
+}
+
+.slider .track {
+    -fx-block-increment: 5;
+    -fx-background-color: #0B6E4F;
+    -fx-border-color: #073B3A;
+    -fx-border-width: 4;
+    -fx-background-radius: 0em;
+    -fx-padding: 0.25em;
+    -fx-background-insets: null; /* removes bottom line */
+}
+
+.slider .thumb {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 0;
+    -fx-pref-width: 16px;
+    -fx-pref-height: 16px;
+    -fx-border-color: #073B3A;
+    -fx-border-width: 4;
+    -fx-border-radius: 0;
+    -fx-border-insets: -1px;
+    -fx-effect: null; /* remove any default shadow */
+}
+
+
+.slider:focused .thumb {
+    -fx-background-insets: null; /* remove extra layers that create focus effect */
+    -fx-background-color: #21D375; /* same as normal thumb */
+    -fx-effect: null; /* remove inner glow/shadow */
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+
+.button {
+    -fx-background-color: #08a045;
+    -fx-font-size: 16px;
+    -fx-text-fill: ffffff;
+    -fx-padding: 12 16 8 16;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-effect: dropshadow(one-pass-box, #0B6E4F, 0, 0, 0, 8);
+    -fx-border-color:
+        #21D375 #00000000 #00000000 #21D375;
+    -fx-border-width: 2;
+}
+
+.button:hover {
+    -fx-background-color: #07883b;
+    -fx-effect: dropshadow(one-pass-box, #08523a, 0, 0, 0, 4);
+    -fx-border-color:
+        #1cb663 #00000000 #00000000 #1cb663;
+    -fx-translate-y: 4;
+}
+
+.button:focused {
+    -fx-effect: dropshadow(one-pass-box, #0B6E4F, 0, 0, 0, 4);
+    -fx-translate-y: 4;
+}
+
+.button:pressed {
+    -fx-background-color: #0B6E4F;
+    -fx-border-color: #0B6E4F;
+    -fx-effect: dropshadow(one-pass-box, #0B6E4F, 0, 0, 0, 0);
+    -fx-translate-y: 8;
+}
+
+
+.button:focus {
+    -fx-background-color: #3b08a0;
+    -fx-translate-y: 0;
+}
