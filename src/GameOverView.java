@@ -6,6 +6,7 @@ import javafx.animation.Interpolator;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -32,10 +33,12 @@ public class GameOverView extends StackPane {
         restartButton = new Button("Restart");
         quitButton = new Button("Quit");
         mainMenuButton = new Button("Mainmenu");
+        Label gameOverLabel = new Label("Game over");
 
+        gameOverLabel.setId("title-label");
         buttonContainer = new VBox(BUTTON_SPACING);
         buttonContainer.setAlignment(Pos.CENTER);
-        buttonContainer.getChildren().addAll(restartButton, mainMenuButton, quitButton);
+        buttonContainer.getChildren().addAll(gameOverLabel, restartButton, mainMenuButton, quitButton);
 
         getChildren().add(buttonContainer);
 
