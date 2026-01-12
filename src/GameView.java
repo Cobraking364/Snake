@@ -28,6 +28,8 @@ public class GameView extends StackPane {
         blackBackground.widthProperty().bind(widthProperty());
         getChildren().add(blackBackground);
         getChildren().add(canvas);
+        getStylesheets().add(getClass().getResource("/resources/menu.css").toExternalForm());
+
     }
 
     public void drawBackground(int width, int height) {
