@@ -13,7 +13,7 @@ public class GameController extends Controller {
     private Scene scene;
     private Board board;
     private Settings settings;
-    private InputBuffer inputBuffer;
+    private InputBuffer[] inputBuffers;
     private GameLoop gameLoop;
 
     GameController(GameView view, Scene scene, Board board, Settings settings, SceneManager sceneManager) {
@@ -21,7 +21,10 @@ public class GameController extends Controller {
         this.view = view;
         this.scene = scene;
         this.board = board;
-        inputBuffer = new InputBuffer(3);
+        inputBuffers = new InputBuffer[settings.getPlayerCount()];
+        for (int i = 0; i < inputBuffers.length; i++) {
+            inputBuffers[i] = new InputBuffer(3);
+        }
         updateView();
 
         ChangeListener<Number> windowSizeListener = (observable, oldValue, newValue) -> Platform
@@ -32,8 +35,11 @@ public class GameController extends Controller {
         gameLoop = new GameLoop(settings.getSnakeSpeed()) {
             @Override
             public void update(double deltaTime) {
-                if (inputBuffer.hasInput()) {
-                    handleInput(inputBuffer.getNext());
+                for (InputBuffer inputBuffer : inputBuffers) {
+                    if (inputBuffer.hasInput()) {
+                        handleInput(inputBuffer.getNext());
+                    }
+                    
                 }
 
                 board.update();
@@ -58,7 +64,14 @@ public class GameController extends Controller {
                     case KeyCode.UP:
                     case KeyCode.DOWN:
                     case KeyCode.SPACE:
-                        inputBuffer.addInput(event.getCode());
+                        inputBuffers[0].addInput(event.getCode());
+                        break;
+                    case KeyCode.A:
+                    case KeyCode.D:
+                    case KeyCode.W:
+                    case KeyCode.S:
+                    case KeyCode.Z:
+                        inputBuffers[1].addInput(event.getCode());
                 }
 
             }
@@ -97,7 +110,6 @@ public class GameController extends Controller {
                 break;
             case KeyCode.Z:
                 board.getSnakes().get(1).jump();
-
         }
     }
 
