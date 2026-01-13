@@ -7,15 +7,18 @@ public class Settings {
     private int snakeSpeed;
     private int fruitCount;
     private int playerCount;
+    private final int DEFAULT_SOUND_VOLUME = 50;
+    private final int DEFAULT_SNAKE_SPEED = 8;
+    private final int DEFAULT_FRUIT_COUNT = 1;
+    private final int DEFAULT_PLAYER_COUNT = 1;
 
     public Settings(int sizeX, int sizeY){
         this.sizeX=sizeX;
         this.sizeY=sizeY;
-        this.soundVolume = 50;
-        this.snakeSpeed = 20;
-        this.fruitCount = 1;
-        this.playerCount = 1;
-        System.out.println("New settings");
+        this.soundVolume = DEFAULT_SOUND_VOLUME;
+        this.snakeSpeed = DEFAULT_SNAKE_SPEED;
+        this.fruitCount = DEFAULT_FRUIT_COUNT;
+        this.playerCount = DEFAULT_PLAYER_COUNT;
     }
 
     public int getSizeX(){
