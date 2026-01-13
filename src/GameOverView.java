@@ -1,42 +1,47 @@
 package src;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.FillTransition;
+import javafx.animation.Interpolator;
 import javafx.geometry.Pos;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
+import javafx.util.Duration;
 
-public class GameOverView extends StackPane{
+public class GameOverView extends StackPane {
     private final int BUTTON_SPACING = 25;
     private VBox buttonContainer;
     private Button restartButton;
     private Button quitButton;
     private Button mainMenuButton;
-   
 
     GameOverView() {
         Rectangle blackBackground = new Rectangle();
-        blackBackground.setFill(Color.BLACK);
         blackBackground.heightProperty().bind(heightProperty());
         blackBackground.widthProperty().bind(widthProperty());
-        blackBackground.setOpacity(0.5);
+        fadeIn(blackBackground);
+        redToBlack(blackBackground);
+
         getChildren().add(blackBackground);
 
-        
         restartButton = new Button("Restart");
         quitButton = new Button("Quit");
         mainMenuButton = new Button("Mainmenu");
-        
+        Label gameOverLabel = new Label("Game over");
+
+        gameOverLabel.setId("title-label");
         buttonContainer = new VBox(BUTTON_SPACING);
         buttonContainer.setAlignment(Pos.CENTER);
-        buttonContainer.getChildren().addAll(restartButton, mainMenuButton, quitButton);
-        
+        buttonContainer.getChildren().addAll(gameOverLabel, restartButton, mainMenuButton, quitButton);
+
         getChildren().add(buttonContainer);
 
-        
     }
 
     public Button getRestartButton() {
@@ -49,5 +54,21 @@ public class GameOverView extends StackPane{
 
     public Button getMainMenuButton() {
         return mainMenuButton;
+    }
+
+    private void fadeIn(Node node) {
+        FadeTransition transition = new FadeTransition(Duration.seconds(2), node);
+        transition.setFromValue(0.4);
+        transition.setToValue(0.8);
+        transition.setInterpolator(Interpolator.EASE_OUT);
+        transition.play();
+    }
+
+    private void redToBlack(Shape shape) {
+        FillTransition transition = new FillTransition(Duration.seconds(2.5), shape);
+        transition.setFromValue(Color.RED);
+        transition.setToValue(Color.BLACK);
+        transition.setInterpolator(Interpolator.EASE_OUT);
+        transition.play();
     }
 }

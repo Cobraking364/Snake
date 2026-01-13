@@ -1,80 +1,98 @@
 package src;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-public class GameController {
+public class GameController extends Controller {
 
     private GameView view;
     private Scene scene;
     private Board board;
+    private Settings settings;
+    private InputBuffer inputBuffer;
+    private GameLoop gameLoop;
 
-    GameController(GameView view, Scene scene, Board board, SceneManager sceneManager) {
+    GameController(GameView view, Scene scene, Board board, Settings settings, SceneManager sceneManager) {
+        super(settings, sceneManager);
         this.view = view;
         this.scene = scene;
         this.board = board;
+        inputBuffer = new InputBuffer(3);
         updateView();
 
-        ChangeListener<Number> windowSizeListener = (observable, oldValue, newValue) ->
-            this.updateView();
+        ChangeListener<Number> windowSizeListener = (observable, oldValue, newValue) -> Platform
+                .runLater(this::updateView);
 
         scene.getWindow().widthProperty().addListener(windowSizeListener);
         scene.getWindow().heightProperty().addListener(windowSizeListener);
+        gameLoop = new GameLoop(settings.getSnakeSpeed()) {
+            @Override
+            public void update(double deltaTime) {
+                if (inputBuffer.hasInput()) {
+                    handleInput(inputBuffer.getNext());
+                }
+
+                board.update();
+                draw();
+
+                if (board.getIsGameOver()) {
+                    gameLoop.stop();
+                    GameOverView gameOverView = new GameOverView();
+                    GameOverController gameOverController = new GameOverController(gameOverView, getSettings(), getSceneManager());
+
+                    view.getChildren().add(gameOverView);
+                }
+            }
+        };
 
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
             @Override
             public void handle(KeyEvent event) {
                 switch (event.getCode()) {
                     case KeyCode.LEFT:
-                        board.getSnakes().get(0).updateDir(Direction.LEFT);
-                        break;
                     case KeyCode.RIGHT:
-                        board.getSnakes().get(0).updateDir(Direction.RIGHT);
-                        break;
                     case KeyCode.UP:
-                        board.getSnakes().get(0).updateDir(Direction.UP);
-                        break;
                     case KeyCode.DOWN:
-                        board.getSnakes().get(0).updateDir(Direction.DOWN);
-                        break;
-                    case KeyCode.W:
-                        board.getSnakes().get(1).updateDir(Direction.UP);
-                    case KeyCode.A:
-                        board.getSnakes().get(1).updateDir(Direction.LEFT);
                     case KeyCode.SPACE:
-                        board.getSnakes().get(0).jump();
-
-                }
-                boolean shouldUpdate = false;
-                for (Snake snake : board.getSnakes()) {
-                    if (snake.getTurned()) {
-                        shouldUpdate = true;
-                    }
-                }
-                if (shouldUpdate) {
-                    board.update();
-                    updateView();
-                }
-
-                if (board.getIsGameOver()) {
-                    GameOverView gameOverView = new GameOverView();
-                    GameOverController gameOverController = new GameOverController(gameOverView, board.getSizeX(), board.getSizeY(), sceneManager);
-                
-
-                    view.getChildren().add(gameOverView);
+                        inputBuffer.addInput(event.getCode());
                 }
 
             }
 
         });
+        gameLoop.start();
+    }
+
+    private void handleInput(KeyCode input) {
+        switch (input) {
+            case KeyCode.LEFT:
+                board.getSnakes().get(0).updateDirection(Direction.LEFT);
+                break;
+            case KeyCode.RIGHT:
+                board.getSnakes().get(0).updateDirection(Direction.RIGHT);
+                break;
+            case KeyCode.UP:
+                board.getSnakes().get(0).updateDirection(Direction.UP);
+                break;
+            case KeyCode.DOWN:
+                board.getSnakes().get(0).updateDirection(Direction.DOWN);
+                break;
+            case KeyCode.SPACE:
+                board.getSnakes().get(0).jump();
+
+        }
     }
 
     private void updateView() {
         view.updateTileSize();
+        draw();
+    }
+
+    private void draw() {
         view.drawBackground(board.getSizeX(), board.getSizeY());
         for (Fruit fruit : board.getFruits()) {
             view.drawFruit(fruit.getPosition(), board.getSizeX(), board.getSizeY());

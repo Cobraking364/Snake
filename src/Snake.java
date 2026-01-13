@@ -4,7 +4,8 @@ import java.util.*;
 
 public class Snake implements ISpaceOccupier{
     private LinkedList<Position> body = new LinkedList<Position>();
-    private Direction dir;
+    private Direction direction;
+    private Direction previousDirection;
     private boolean growing;
     private boolean turned;
     private SnakeState currentState;
@@ -15,12 +16,14 @@ public class Snake implements ISpaceOccupier{
         body.add(pos);
         growing = false;
         turned = false;
-        dir = Direction.LEFT;
+        direction = Direction.LEFT;
+        previousDirection = Direction.LEFT;
         currentState = initialState;
     }
 
     public void move(Position nextPosition) {
         body.add(nextPosition);
+        previousDirection = direction;
         if (!growing) {
             body.remove(0);
         } else {
@@ -32,7 +35,7 @@ public class Snake implements ISpaceOccupier{
     public Position getNextPosition() {
         Position currentHeadPos = getHead();
         Position nextPos;
-        nextPos = switch (dir) {
+        nextPos = switch (direction) {
             case Direction.UP -> new Position(currentHeadPos.getX(), currentHeadPos.getY() - 1);
             case Direction.LEFT -> new Position(currentHeadPos.getX() - 1, currentHeadPos.getY());
             case Direction.DOWN -> new Position(currentHeadPos.getX(), currentHeadPos.getY() + 1);
@@ -64,13 +67,14 @@ public class Snake implements ISpaceOccupier{
         growing = true;
     }
 
-    public void updateDir(Direction newDir) {
-        if (!canChanceDirection(newDir, dir)) {
+
+    public void updateDirection(Direction newDir) {
+        if (!canChanceDirection(newDir, previousDirection)) {
             turned = false;
             return;
         }
 
-        dir = newDir;
+        direction = newDir;
         turned = true;
     }
 
