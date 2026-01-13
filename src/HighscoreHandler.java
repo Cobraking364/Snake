@@ -29,14 +29,15 @@ public class HighscoreHandler {
 
     }
 
-//InputStream highscoreFile = HighscoreHandler.class.getResourceAsStream("/highscore.txt");
+    // InputStream highscoreFile =
+    // HighscoreHandler.class.getResourceAsStream("/highscore.txt");
     public static Map<String, String> loadMapFromFile() {
         Map<String, String> highscoreMap = new HashMap<>();
-        try (InputStream highscoreFile = HighscoreHandler.class.getResourceAsStream(getFileName());
-        BufferedReader reader = new BufferedReader(new InputStreamReader(highscoreFile))) {
-            if (highscoreFile == null) {
-                throw new RuntimeException("highscore.txt not found on classpath");
-            }
+        File highscoreFile = new File (getFileName());
+        if (!highscoreFile.exists()){
+            System.out.println("can't find highscore.txt");
+        }
+        try (BufferedReader reader = new BufferedReader(new FileReader(getFileName()))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(" ");
