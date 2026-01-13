@@ -1,5 +1,7 @@
 package src;
 
+import java.util.ArrayList;
+
 public class Airborne extends SnakeState{
     private int jumpLength;
     Airborne(int jumpLength){
@@ -7,7 +9,7 @@ public class Airborne extends SnakeState{
     }
 
     @Override
-    public boolean checkCollision(Snake snake, Position position) {
+    public boolean checkCollision(Snake snake, Position position, ArrayList<Snake> otherSnakes) {
         return false;
     }
 

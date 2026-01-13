@@ -1,7 +1,9 @@
 package src;
 
+import java.util.ArrayList;
+
 public abstract class SnakeState {
-    public boolean checkCollision(Snake snake, Position position) {
+    public boolean checkCollision(Snake snake, Position position, ArrayList<Snake> otherSnakes) {
         return false;
     }
 

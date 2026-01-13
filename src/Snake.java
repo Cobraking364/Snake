@@ -10,6 +10,7 @@ public class Snake implements ISpaceOccupier{
     private boolean turned;
     private SnakeState currentState;
     private int jumpLength = 2;
+    private boolean alive = true;
 
     Snake(Position pos, SnakeState initialState){
         body.add(new Position(pos.getX()+1, pos.getY()));
@@ -46,8 +47,8 @@ public class Snake implements ISpaceOccupier{
         return nextPos;
     }
 
-    public boolean checkCollision(Position position) {
-        return currentState.checkCollision(this, position);
+    public boolean checkCollision(Position position, ArrayList<Snake> otherSnakes) {
+        return currentState.checkCollision(this, position, otherSnakes);
     }
 
     public Position getHead() {
@@ -100,6 +101,10 @@ public class Snake implements ISpaceOccupier{
 
     public boolean getTurned() {
         return turned;
+    }
+
+    public void die(){
+        alive = false;
     }
 
 }

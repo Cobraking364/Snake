@@ -96,6 +96,7 @@ public class GameController extends Controller {
                 break;
             case KeyCode.SPACE:
                 board.getSnakes().get(0).jump();
+                break;
             case KeyCode.A:
                 board.getSnakes().get(1).updateDirection(Direction.LEFT);
                 break;
@@ -110,6 +111,7 @@ public class GameController extends Controller {
                 break;
             case KeyCode.Z:
                 board.getSnakes().get(1).jump();
+                break;
         }
     }
 

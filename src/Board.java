@@ -10,6 +10,7 @@ public class Board{
     private int amountOfSnakes;
     private ArrayList<Fruit> fruits;
     private ArrayList<Snake> snakes;
+    private boolean isSinglePlayer = true;
     private boolean isGameOver;
     private OccupiedSpace occupiedSpace;
 
@@ -19,6 +20,10 @@ public class Board{
         sizeY = y;
         this.amountOfFruits = amountOfFruits;
         this.amountOfSnakes = amountOfSnakes;
+
+        if(this.amountOfSnakes > 1){
+            isSinglePlayer = false;
+        }
 
         occupiedSpace = new OccupiedSpace();
         snakes = new ArrayList<Snake>();
@@ -65,9 +70,13 @@ public class Board{
             nextPosition.setX((nextPosition.getX() + sizeX) % sizeX);
             nextPosition.setY((nextPosition.getY() + sizeY) % sizeY);
 
-            if (snake.checkCollision(nextPosition)) {
-                gameOver();
-                return;
+            if (snake.checkCollision(nextPosition, snakes)) {
+                if (isSinglePlayer || !isSinglePlayer) {
+                    gameOver();
+                    return;
+                } else{
+                    snake.die();
+                }
             }
 
             int indexOfEaten = -1;
