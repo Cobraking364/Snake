@@ -62,7 +62,7 @@ public class HighscoreHandler {
 
     public static void writeMapToFile(Map<String, String> map) {
 
-        try (FileWriter writer = new FileWriter(HighscoreHandler.class.getResource(getFileName()).toString())) {
+        try (FileWriter writer = new FileWriter(HighscoreHandler.class.getResource(getFileName())) {
             String str = "";
             for (Map.Entry<String, String> entry : map.entrySet()) {
                 str += (entry.getKey() + " " + entry.getValue() + "\n");
