@@ -6,17 +6,19 @@ public class Board{
     private int sizeX;
     private int sizeY;
     private Snake snake;
-    private int amountOfFruits = 10;
-    private int amountOfSnakes = 2;
+    private int amountOfFruits;
+    private int amountOfSnakes;
     private ArrayList<Fruit> fruits;
     private ArrayList<Snake> snakes;
     private boolean isGameOver;
     private OccupiedSpace occupiedSpace;
 
-    Board(int x, int y) {
+    Board(int x, int y, int amountOfFruits, int amountOfSnakes) {
         isGameOver = false;
         sizeX = x;
         sizeY = y;
+        this.amountOfFruits = amountOfFruits;
+        this.amountOfSnakes = amountOfSnakes;
 
         occupiedSpace = new OccupiedSpace();
         snakes = new ArrayList<Snake>();

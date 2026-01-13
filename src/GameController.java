@@ -83,6 +83,20 @@ public class GameController extends Controller {
                 break;
             case KeyCode.SPACE:
                 board.getSnakes().get(0).jump();
+            case KeyCode.A:
+                board.getSnakes().get(1).updateDirection(Direction.LEFT);
+                break;
+            case KeyCode.D:
+                board.getSnakes().get(1).updateDirection(Direction.RIGHT);
+                break;
+            case KeyCode.W:
+                board.getSnakes().get(1).updateDirection(Direction.UP);
+                break;
+            case KeyCode.S:
+                board.getSnakes().get(1).updateDirection(Direction.DOWN);
+                break;
+            case KeyCode.Z:
+                board.getSnakes().get(1).jump();
 
         }
     }
