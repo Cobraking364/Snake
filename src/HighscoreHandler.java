@@ -7,7 +7,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-//maybe get as resource stuff
+//duno if works in jar
 public class HighscoreHandler {
     static void checkHighScore(int x, int y, int score) {
 
@@ -55,6 +55,6 @@ public class HighscoreHandler {
     }
 
     public static String getFileName() {
-        return "highscore.txt"; // Not called "/highscore.txt"
+        return "highscore.txt"; // Not "/highscore.txt"
     }
 }
