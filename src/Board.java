@@ -1,6 +1,5 @@
 package src;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Board{
@@ -8,7 +7,9 @@ public class Board{
     private int sizeY;
     private Snake snake;
     private int amountOfFruits = 10;
+    private int amountOfSnakes = 2;
     private ArrayList<Fruit> fruits;
+    private ArrayList<Snake> snakes;
     private boolean isGameOver;
     private OccupiedSpace occupiedSpace;
 
@@ -18,9 +19,18 @@ public class Board{
         sizeY = y;
 
         occupiedSpace = new OccupiedSpace();
-        snake = new Snake(new Position(sizeX / 2, sizeY / 2), new Grounded());
-
-        occupiedSpace.addOccupiedSpace(snake.getOccupiedSpace());
+        snakes = new ArrayList<Snake>();
+        if (amountOfSnakes == 1) {
+            snake = new Snake(new Position(sizeX / 2, sizeY / 2), new Grounded());
+            occupiedSpace.addOccupiedSpace(snake.getOccupiedSpace());
+            snakes.add(snake);
+        } else{
+            for (int i = 0; i<amountOfSnakes; i++) {
+                Snake tempSnake = new Snake(new Position(x, y), new Grounded());
+                occupiedSpace.addOccupiedSpace(tempSnake.getOccupiedSpace());
+                snakes.add(tempSnake);
+            }
+        }
 
         fruits = new ArrayList<Fruit>();
         for (int i = 0; i < amountOfFruits; i++) {
@@ -47,33 +57,35 @@ public class Board{
             return;
         }
 
-        Position nextPosition = snake.getNextPosition();
+        for (Snake snake : snakes) {
+            Position nextPosition = snake.getNextPosition();
 
-        nextPosition.setX((nextPosition.getX() + sizeX) % sizeX);
-        nextPosition.setY((nextPosition.getY() + sizeY) % sizeY);
+            nextPosition.setX((nextPosition.getX() + sizeX) % sizeX);
+            nextPosition.setY((nextPosition.getY() + sizeY) % sizeY);
 
-        if (snake.checkCollision(nextPosition)) {
-            gameOver();
-            return;
-        }
-
-        int indexOfEaten = -1;
-
-        for (int i  = 0; i <fruits.size(); i++) {
-            boolean isEatingFruit = snake.canEatFruit() && fruits.get(i).getPosition().equals(nextPosition);
-            if (isEatingFruit) {
-                snake.grow();
-                indexOfEaten = i;
+            if (snake.checkCollision(nextPosition)) {
+                gameOver();
+                return;
             }
-        }
-        occupiedSpace.removeOccupiedSpaces(snake.getOccupiedSpace());
-        snake.move(nextPosition);
-        occupiedSpace.addOccupiedSpace(snake.getOccupiedSpace());
 
-        if (indexOfEaten != -1) {
-            occupiedSpace.removeOccupiedSpace(fruits.get(indexOfEaten).getPosition());
-            fruits.get(indexOfEaten).respawn(sizeX, sizeY, occupiedSpace.getOccupiedSpaces());
-            occupiedSpace.addOccupiedSpace(fruits.get(indexOfEaten).getOccupiedSpace());
+            int indexOfEaten = -1;
+
+            for (int i = 0; i < fruits.size(); i++) {
+                boolean isEatingFruit = snake.canEatFruit() && fruits.get(i).getPosition().equals(nextPosition);
+                if (isEatingFruit) {
+                    snake.grow();
+                    indexOfEaten = i;
+                }
+            }
+            occupiedSpace.removeOccupiedSpaces(snake.getOccupiedSpace());
+            snake.move(nextPosition);
+            occupiedSpace.addOccupiedSpace(snake.getOccupiedSpace());
+
+            if (indexOfEaten != -1) {
+                occupiedSpace.removeOccupiedSpace(fruits.get(indexOfEaten).getPosition());
+                fruits.get(indexOfEaten).respawn(sizeX, sizeY, occupiedSpace.getOccupiedSpaces());
+                occupiedSpace.addOccupiedSpace(fruits.get(indexOfEaten).getOccupiedSpace());
+            }
         }
 
     }
@@ -90,7 +102,7 @@ public class Board{
         return fruits;
     }
 
-    public Snake getSnake() {
-        return snake;
+    public ArrayList<Snake> getSnakes() {
+        return snakes;
     }
 }

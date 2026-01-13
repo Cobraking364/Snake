@@ -30,23 +30,32 @@ public class GameController {
             public void handle(KeyEvent event) {
                 switch (event.getCode()) {
                     case KeyCode.LEFT:
-                        board.getSnake().updateDir(Direction.LEFT);
+                        board.getSnakes().get(0).updateDir(Direction.LEFT);
                         break;
                     case KeyCode.RIGHT:
-                        board.getSnake().updateDir(Direction.RIGHT);
+                        board.getSnakes().get(0).updateDir(Direction.RIGHT);
                         break;
                     case KeyCode.UP:
-                        board.getSnake().updateDir(Direction.UP);
+                        board.getSnakes().get(0).updateDir(Direction.UP);
                         break;
                     case KeyCode.DOWN:
-                        board.getSnake().updateDir(Direction.DOWN);
+                        board.getSnakes().get(0).updateDir(Direction.DOWN);
                         break;
+                    case KeyCode.W:
+                        board.getSnakes().get(1).updateDir(Direction.UP);
+                    case KeyCode.A:
+                        board.getSnakes().get(1).updateDir(Direction.LEFT);
                     case KeyCode.SPACE:
-                        board.getSnake().jump();
+                        board.getSnakes().get(0).jump();
 
                 }
-
-                if (board.getSnake().getTurned()) {
+                boolean shouldUpdate = false;
+                for (Snake snake : board.getSnakes()) {
+                    if (snake.getTurned()) {
+                        shouldUpdate = true;
+                    }
+                }
+                if (shouldUpdate) {
                     board.update();
                     updateView();
                 }
@@ -70,6 +79,8 @@ public class GameController {
         for (Fruit fruit : board.getFruits()) {
             view.drawFruit(fruit.getPosition(), board.getSizeX(), board.getSizeY());
         }
-        view.drawSnake(board.getSnake().getBody(), board.getSizeX(), board.getSizeY());
+        for (Snake snake : board.getSnakes()) {
+            view.drawSnake(snake.getBody(), board.getSizeX(), board.getSizeY());
+        }
     }
 }
