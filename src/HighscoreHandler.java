@@ -32,7 +32,8 @@ public class HighscoreHandler {
 //InputStream highscoreFile = HighscoreHandler.class.getResourceAsStream("/highscore.txt");
     public static Map<String, String> loadMapFromFile() {
         Map<String, String> highscoreMap = new HashMap<>();
-        try (InputStream highscoreFile = HighscoreHandler.class.getResourceAsStream(getFileName()); BufferedReader reader = new BufferedReader(new InputStreamReader(highscoreFile))) {
+        try (InputStream highscoreFile = HighscoreHandler.class.getResourceAsStream(getFileName());
+        BufferedReader reader = new BufferedReader(new InputStreamReader(highscoreFile))) {
             if (highscoreFile == null) {
                 throw new RuntimeException("highscore.txt not found on classpath");
             }
