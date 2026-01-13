@@ -1,7 +1,12 @@
 package src;
 
-import java.io.*;
-import java.util.*;
+import java.util.Map;
+import java.util.HashMap;
+import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class HighscoreHandler {
     static void checkHighScore(int x, int y, int score) {
@@ -50,7 +55,6 @@ public class HighscoreHandler {
     }
 
     public static String getFileName() {
-        return "/highscore.txt";
+        return "highscore.txt"; // Not called "/highscore.txt"
     }
-
 }
