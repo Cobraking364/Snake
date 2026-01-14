@@ -42,10 +42,6 @@ public class Settings {
         this.snakeSpeed = snakeSpeed;
     }
 
-    public void getSnakeSpeed(int value) {
-        snakeSpeed = value;
-    }
-
     public int getSnakeSpeed() {
         return snakeSpeed;
     }

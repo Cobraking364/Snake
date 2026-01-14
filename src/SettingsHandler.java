@@ -17,24 +17,30 @@ public class SettingsHandler {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("=");
-                String specificSetting = parts[0];
-                String value = parts[1];
                 if (parts.length != 2) {
                     return;
                 }
+                String specificSetting = parts[0];
+                String value = parts[1];
                 switch (specificSetting) {
                     case "sizeX":
                         settings.setSizeX(Integer.parseInt(value));
+                        break;
                     case "sizeY":
                         settings.setSizeY(Integer.parseInt(value));
+                        break;
                     case "soundVolume":
                         settings.setSoundVolume(Integer.parseInt(value));
+                        break;
                     case "snakeSpeed":
                         settings.setSnakeSpeed(Integer.parseInt(value));
+                        break;
                     case "fruitCount":
                         settings.setFruitCount(Integer.parseInt(value));
+                        break;
                     case "playerCount":
                         settings.setPlayerCount(Integer.parseInt(value));
+                        break;
                     default:
                         break;
                 }
@@ -53,12 +59,12 @@ public class SettingsHandler {
         int playerCount = settings.getPlayerCount();
         try (PrintWriter writer = new PrintWriter(getFileName())) {
             writer.write(
-                    "sizeX= " + sizeX + "\n" +
-                    "sizeY= " + sizeY + "\n" +
-                    "soundVolume= " + soundVolume + "\n" +
-                    "snakeSpeed= " + snakeSpeed + "\n" +
-                    "fruitCount= " + fruitCount + "\n" +
-                    "playerCount= " + playerCount + "\n");
+                    "sizeX=" + sizeX + "\n" +
+                    "sizeY=" + sizeY + "\n" +
+                    "soundVolume=" + soundVolume + "\n" +
+                    "snakeSpeed=" + snakeSpeed + "\n" +
+                    "fruitCount=" + fruitCount + "\n" +
+                    "playerCount=" + playerCount + "\n");
 
         } catch (IOException e) {
             System.out.println("can't find " + getFileName());
