@@ -75,11 +75,30 @@ public class Board{
         }
 
         ArrayList<Position> nextPositions = new ArrayList<Position>();
+        for (Snake snake : snakes) {
+            if(snake.getLivingStatus()){
+                Position nextPosition = snake.getNextPosition();
+                nextPositions.add(nextPosition);
+            }
+        }
+        ArrayList<Integer> snakesInCollision = new ArrayList<Integer>();
+        for (Position pos : nextPositions) {
+            for (Position pos2 : nextPositions) {
+                if (pos != pos2) {
+                    if (pos.equals(pos2)) {
+                        snakesInCollision.add(nextPositions.indexOf(pos));
+                    }
+                }
+            }
+        }
+
+        for (Integer i : snakesInCollision) {
+            snakes.get(i).die();
+        }
 
         for (Snake snake : snakes) {
             if (snake.getLivingStatus()) {
                 Position nextPosition = snake.getNextPosition();
-                nextPositions.add(nextPosition);
 
                 nextPosition.setX((nextPosition.getX() + sizeX) % sizeX);
                 nextPosition.setY((nextPosition.getY() + sizeY) % sizeY);
@@ -103,7 +122,9 @@ public class Board{
                     }
                 }
                 occupiedSpace.removeOccupiedSpaces(snake.getOccupiedSpace());
-                snake.move(nextPosition);
+                if (snake.getLivingStatus()) {
+                    snake.move(nextPosition);
+                }
                 occupiedSpace.addOccupiedSpace(snake.getOccupiedSpace());
 
                 if (indexOfEaten != -1) {
@@ -112,21 +133,6 @@ public class Board{
                     occupiedSpace.addOccupiedSpace(fruits.get(indexOfEaten).getOccupiedSpace());
                 }
             }
-        }
-
-        ArrayList<Integer> snakesInCollision = new ArrayList<Integer>();
-        for (Position pos : nextPositions) {
-            for (Position pos2 : nextPositions) {
-                if (pos != pos2) {
-                    if (pos.equals(pos2)) {
-                        snakesInCollision.add(nextPositions.indexOf(pos));
-                    }
-                }
-            }
-        }
-
-        for (Integer i : snakesInCollision) {
-            snakes.get(i).die();
         }
 
     }
