@@ -1,5 +1,7 @@
 package src;
 
+import java.util.LinkedList;
+
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.event.EventHandler;
@@ -125,8 +127,10 @@ public class GameController extends Controller {
         for (Fruit fruit : board.getFruits()) {
             view.drawFruit(fruit.getPosition(), board.getSizeX(), board.getSizeY());
         }
-        for (Snake snake : board.getSnakes()) {
-            view.drawSnake(snake.getBody(), board.getSizeX(), board.getSizeY());
+        LinkedList<Position>[] snakeBodies = new LinkedList[getSettings().getPlayerCount()];
+        for (int i = 0; i < getSettings().getPlayerCount(); i++) {
+            snakeBodies[i] = board.getSnakes().get(i).getBody();
         }
+        view.drawSnakes(snakeBodies);
     }
 }
