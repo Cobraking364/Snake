@@ -103,6 +103,10 @@ public class Snake implements ISpaceOccupier{
         return turned;
     }
 
+    public Direction getDirection(){
+        return direction;
+    }
+
     public void die(){
         alive = false;
     }

@@ -29,9 +29,9 @@ public class WinScreenView extends StackPane {
         ImageView selelctedImage = new ImageView();
         selelctedImage.setImage(pokal);
         
-        quitButton = new Button("Quit");
-        mainMenuButton = new Button("Mainmenu");
-        playAgainButton = new Button("Play Again");
+        quitButton = new MenuButton("Quit");
+        mainMenuButton = new MenuButton("Mainmenu");
+        playAgainButton = new MenuButton("Play Again");
         Label winScreenLabel = new Label("You Win!");
 
         winScreenLabel.setId("wintitle-label");
