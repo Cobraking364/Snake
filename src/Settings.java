@@ -12,34 +12,34 @@ public class Settings {
     private final int DEFAULT_FRUIT_COUNT = 1;
     private final int DEFAULT_PLAYER_COUNT = 1;
 
-    public Settings(int sizeX, int sizeY){
-        this.sizeX=sizeX;
-        this.sizeY=sizeY;
+    public Settings(int sizeX, int sizeY) {
+        this.sizeX = sizeX;
+        this.sizeY = sizeY;
         this.soundVolume = DEFAULT_SOUND_VOLUME;
         this.snakeSpeed = DEFAULT_SNAKE_SPEED;
         this.fruitCount = DEFAULT_FRUIT_COUNT;
         this.playerCount = DEFAULT_PLAYER_COUNT;
     }
 
-    public int getSizeX(){
+    public int getSizeX() {
         return sizeX;
     }
 
-    public void setSizeX(int sizeX){
-        this.sizeX=sizeX;
+    public void setSizeX(int sizeX) {
+        this.sizeX = sizeX;
     }
-    
-    public int getSizeY(){
+
+    public int getSizeY() {
         return sizeY;
     }
 
     public void setSizeY(int sizeY) {
         this.sizeY = sizeY;
     }
-    
-    public void setSnakeSpeed(int snakeSpeed){
-        
-        this.snakeSpeed=snakeSpeed;
+
+    public void setSnakeSpeed(int snakeSpeed) {
+
+        this.snakeSpeed = snakeSpeed;
     }
 
     public void getSnakeSpeed(int value) {
