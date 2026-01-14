@@ -38,7 +38,7 @@ public class GameController extends Controller {
 
                 board.update();
                 if (board.getHasEaten()) {
-                    SoundManager.playSound(Sounds.EAT);
+                  SoundManager.playSound(Sounds.EAT);
                 }
                 draw();
 
