@@ -14,7 +14,7 @@ public class GameOverController extends Controller {
         view.getRestartButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                GameView gameView = new GameView(settings.getSizeY(), settings.getSizeY());
+                GameView gameView = new GameView(settings.getSizeX(), settings.getSizeY());
                 Scene gameViewScene = new Scene(gameView);
                 Board board = new Board(settings.getSizeX(), settings.getSizeY());
                 getSceneManager().changeScene(gameViewScene);
