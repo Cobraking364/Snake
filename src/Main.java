@@ -50,7 +50,7 @@ public class Main extends Application {
                 sceneManager);
 
         sceneManager.changeScene(mainMenuScene);
-        Image icon = new Image("src/Snake.png");
+        Image icon = new Image(getClass().getResource("/resources/Snake.png").toExternalForm());
         stage.getIcons().add(icon);
         stage.setResizable(true);
         stage.setTitle("Snake");
