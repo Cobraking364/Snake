@@ -16,7 +16,9 @@ public class SoundManager {
             SoundManager.class.getResource(Sounds.JUMP.getSound()).toExternalForm());
     private static AudioClip start = new AudioClip(
             SoundManager.class.getResource(Sounds.START.getSound()).toExternalForm());
-
+    private static AudioClip powerup = new AudioClip(
+            SoundManager.class.getResource(Sounds.POWERUP.getSound()).toExternalForm());
+            
     public static void playSound(Sounds audioFile) {
         switch (audioFile) {
             case BOOTUP:
@@ -36,6 +38,9 @@ public class SoundManager {
                 break;
             case START:
                 start.play(volume);
+                break;
+            case POWERUP:
+                powerup.play(volume);
                 break;
             default:
                 break;

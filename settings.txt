@@ -1,0 +1,9 @@
+sizeX= 12
+sizeY= 12
+soundVolume= 50
+snakeSpeed= 12
+fruitCount= 1
+playerCount= 1
+
+
+    

@@ -6,8 +6,8 @@ enum Sounds {
     JUMP("jump.wav"),
     START("start.wav"),
     CLICK("click.wav"),
-    BOOTUP("bootup.wav");
-    
+    BOOTUP("bootup.wav"),
+    POWERUP("powerUp.wav");
 
     private final String soundPath;
 
