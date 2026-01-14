@@ -7,7 +7,7 @@ public class Grounded extends SnakeState{
     public boolean checkCollision(Snake snake, Position position, ArrayList<Snake> otherSnakes) {
         for (Snake iteSnake : otherSnakes) {
             if (iteSnake != snake) {
-                for (int i = 0; i < iteSnake.getBody().size() - 1; i++) {
+                for (int i = 0; i < iteSnake.getBody().size(); i++) {
                     if (iteSnake.getBody().get(i).equals(position)) {
                         return true;
                     }
