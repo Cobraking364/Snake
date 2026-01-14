@@ -7,13 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class SettingsHandler {
-    private int sizeX;
-    private int sizeY;
-    private int soundVolume;
-    private int snakeSpeed;
-    private int fruitCount;
-    private int playerCount;
-
+    
     public void loadSettings(Settings settings) {
         File settingsFile = new File(getFileName());
         if (!settingsFile.exists()) {
@@ -30,17 +24,17 @@ public class SettingsHandler {
                 }
                 switch (specificSetting) {
                     case "sizeX":
-                        sizeX = Integer.parseInt(value);
+                        settings.setSizeX(Integer.parseInt(value));
                     case "sizeY":
-                        sizeY = Integer.parseInt(value);
+                        settings.setSizeY(Integer.parseInt(value));
                     case "soundVolume":
-                        soundVolume = Integer.parseInt(value);
+                        settings.setSoundVolume(Integer.parseInt(value));
                     case "snakeSpeed":
-                        snakeSpeed = Integer.parseInt(value);
+                        settings.setSnakeSpeed(Integer.parseInt(value));
                     case "fruitCount":
-                        fruitCount = Integer.parseInt(value);
+                        settings.setFruitCount(Integer.parseInt(value));
                     case "playerCount":
-                        playerCount = Integer.parseInt(value);
+                        settings.setPlayerCount(Integer.parseInt(value));
                     default:
                         break;
                 }
@@ -51,6 +45,12 @@ public class SettingsHandler {
     }
 
     public void saveSettings(Settings settings) {
+        int sizeX = settings.getSizeX();
+        int sizeY = settings.getSizeY();
+        int soundVolume = settings.getSoundVolume();
+        int snakeSpeed = settings.getSnakeSpeed();
+        int fruitCount = settings.getFruitCount();
+        int playerCount = settings.getPlayerCount();
         try (PrintWriter writer = new PrintWriter(getFileName())) {
             writer.write(
                     "sizeX= " + sizeX + "\n" +

@@ -21,7 +21,6 @@ public class SettingsController extends Controller {
                 Scene mainMenuScene = new Scene(mainMenuView);
                 MainMenuController mainMenuController = new MainMenuController(mainMenuView, mainMenuScene,
                     getSettings(), getSceneManager());
-                    Settings settings = new Settings(6,6);
                     SettingsHandler handler = new SettingsHandler();
                     handler.saveSettings(settings);
                 getSceneManager().changeScene(mainMenuScene);

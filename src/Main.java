@@ -46,6 +46,7 @@ public class Main extends Application {
         MainMenuView mainMenuView = new MainMenuView(windowWidth, windowHeight);
         Scene mainMenuScene = new Scene(mainMenuView);
         Settings settings = new Settings(sizeX, sizeY);
+        SettingsHandler handler = new SettingsHandler();
         MainMenuController mainMenuController = new MainMenuController(mainMenuView, mainMenuScene, settings,
                 sceneManager);
 
@@ -55,5 +56,6 @@ public class Main extends Application {
         stage.setResizable(true);
         stage.setTitle("Snake");
         stage.show();
+        handler.loadSettings(settings);
     }
 }
