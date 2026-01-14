@@ -22,7 +22,7 @@ public class Snake implements ISpaceOccupier{
         currentState = initialState;
     }
 
-    public void move(Position nextPosition) {
+    public void move(Position nextPosition, double  deltaTime) {
         body.add(nextPosition);
         previousDirection = direction;
         if (!growing) {
@@ -30,21 +30,12 @@ public class Snake implements ISpaceOccupier{
         } else {
             growing = false;
         }
-        currentState.update(this);
+        currentState.update(this, deltaTime);
     }
 
     public Position getNextPosition() {
-        Position currentHeadPos = getHead();
-        Position nextPos;
-        nextPos = switch (direction) {
-            case Direction.UP -> new Position(currentHeadPos.getX(), currentHeadPos.getY() - 1);
-            case Direction.LEFT -> new Position(currentHeadPos.getX() - 1, currentHeadPos.getY());
-            case Direction.DOWN -> new Position(currentHeadPos.getX(), currentHeadPos.getY() + 1);
-            case Direction.RIGHT -> new Position(currentHeadPos.getX() + 1, currentHeadPos.getY());
-            default -> new Position(0, 0);
-        };
+        return currentState.getNextPosition(getHead(), direction);
 
-        return nextPos;
     }
 
     public boolean checkCollision(Position position, ArrayList<Snake> otherSnakes) {

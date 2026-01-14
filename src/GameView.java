@@ -15,8 +15,9 @@ public class GameView extends StackPane {
     private int tileSize;
     private int gameWidth;
     private int gameHeight;
-    private final Color[] SNAKE_COLORS = {Color.BLUE, Color.ORANGE, Color.FUCHSIA, Color.YELLOW};
+    private final Color[] SNAKE_COLORS = {Color.BLUE, Color.VIOLET, Color.FUCHSIA, Color.ORANGE};
     private final Color OVERLAP_COLOR = Color.LIGHTYELLOW;
+    private final Color POWERUP_COLOR = Color.PURPLE;
 
     public GameView(int gameWidth, int gameHeight) {
         this.gameWidth = gameWidth;
@@ -66,9 +67,13 @@ public class GameView extends StackPane {
         });
     }
 
-    public void drawFruit(Position fruitPosition, int width, int height) {
+    public void drawFruit(Position fruitPosition) {
         gc.setFill(Color.RED);
         gc.fillRect(fruitPosition.getX() * tileSize, fruitPosition.getY() * tileSize, tileSize, tileSize);
+    }
+    public void drawPowerUp(Position powerUpPosition) {
+        gc.setFill(POWERUP_COLOR);
+        gc.fillRect(powerUpPosition.getX() * tileSize, powerUpPosition.getY() * tileSize, tileSize, tileSize);
     }
 
     public void updateTileSize() {
@@ -76,4 +81,5 @@ public class GameView extends StackPane {
         canvas.setWidth(tileSize * gameWidth);
         canvas.setHeight(tileSize * gameHeight);
     }
+
 }

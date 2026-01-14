@@ -4,13 +4,18 @@ import javafx.animation.AnimationTimer;
 
 public class GameLoop extends AnimationTimer {
 
-    private long lastTime = 0;
+    private long lastTime;
     private int fps;
+    private double accumalatedTime;
+    private double frameDuration;
 
 
 
     GameLoop(int fps) {
         this.fps = fps;
+        frameDuration = 1.0 / fps;
+        lastTime = 0;
+        accumalatedTime = 0;
     }
 
     @Override
@@ -19,12 +24,13 @@ public class GameLoop extends AnimationTimer {
             lastTime = now;
             return;
         }
-
         double deltaTime = (now - lastTime) / 1_000_000_000.0;
-        if (deltaTime > 1.0 / fps) {
-            update(deltaTime);
-            lastTime = now;
+        accumalatedTime += deltaTime;
+        if (accumalatedTime > frameDuration) {
+            update(frameDuration);
+            accumalatedTime -= frameDuration;
         }
+        lastTime = now;
     }
 
     public void update(double deltaTime) {
