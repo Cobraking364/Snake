@@ -59,15 +59,23 @@ public class Snake implements ISpaceOccupier{
         growing = true;
     }
 
-
+    // Uses turning logic
     public void updateDirection(Direction newDir) {
         if (!canChanceDirection(newDir, previousDirection)) {
             turned = false;
             return;
         }
-
-        direction = newDir;
+        setDirection(newDir);
         turned = true;
+    }
+
+    // Ignores turning logic
+    public void setDirection(Direction newDirection) {
+        direction = newDirection;
+    }
+
+    public void setPreviousDirection(Direction newDirection) {
+        previousDirection = newDirection;
     }
 
     public void jump() {

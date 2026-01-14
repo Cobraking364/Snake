@@ -11,6 +11,9 @@ public class Board {
     private OccupiedSpace occupiedSpace;
     private ArrayList<SnakePowerup> powerups;
     private double powerupChance;
+    private final double BASE_POWERUP_CHANCE = 0.05;
+    private final double POWERUP_CHANCE_INCREASE = 0.1;
+    private final int POWER_UP_COUNT = 3;
 
     Board(int x, int y, int amountOfFruits, int amountOfSnakes) {
         isGameOver = false;
@@ -18,7 +21,7 @@ public class Board {
         sizeY = y;
         occupiedSpace = new OccupiedSpace();
         snakes = new ArrayList<Snake>();
-        powerupChance = 0.05;
+        powerupChance = BASE_POWERUP_CHANCE;
         if (amountOfSnakes == 1) {
             Snake snake = new Snake(new Position(sizeX / 2, sizeY / 2), new Grounded());
             occupiedSpace.addOccupiedSpace(snake.getOccupiedSpace());
@@ -40,9 +43,6 @@ public class Board {
         }
 
         powerups = new ArrayList<>();
-        for (int i = 0; i < 2; i++) {
-            spawnPowerup();
-        }
     }
 
     public Position getAvailablePosition(List<Position> occupiedSpace) {
@@ -79,27 +79,17 @@ public class Board {
             return;
         }
 
-        boolean allDead = true;
-        for (Snake snake : snakes) {
-            if (snake.getLivingStatus()) {
-                allDead = false;
-            }
-        }
-        if (allDead) {
+        if (getAllDead()) {
             gameOver();
             return;
         }
 
-        HashMap<Snake, Position> nextPositions = new HashMap<>();
-
-        for (Snake snake : snakes) {
-            if (snake.getLivingStatus()) {
-                Position nextPosition = snake.getNextPosition();
-                nextPositions.put(snake, nextPosition);
-            }
-        }
+        HashMap<Snake, Position> nextPositions = getNextPositions();
 
         ArrayList<Snake> snakesInCollision = new ArrayList<Snake>();
+
+
+        // Check colliding heads
 
         nextPositions.forEach((firstSnake, firstPosition) -> {
             nextPositions.forEach((secondSnake, secondPosition) -> {
@@ -135,25 +125,27 @@ public class Board {
                 if (isEatingFruit) {
                     snake.grow();
                     indexOfEaten = i;
+                    rollPowerupSpawn();
                 }
             }
 
-            // Powerup collision
-            for (SnakePowerup powerup : getPowerups()) {
-                boolean isPickinUpPowerUp = snake.canEatFruit() && powerup.getPosition().equals(nextPosition);
-                if (isPickinUpPowerUp) {
-                    powerup.use(snake);
-                    occupiedSpace.removeOccupiedSpaces(powerup.getOccupiedSpace());
-                    getPowerups().remove(powerup);
-
-                }
-            }
-
+            
             // Moving snake
             if (snake.getLivingStatus()) {
                 occupiedSpace.removeOccupiedSpaces(snake.getOccupiedSpace());
                 snake.move(nextPosition, deltaTime);
                 occupiedSpace.addOccupiedSpace(snake.getOccupiedSpace());
+            }
+            
+            // Powerup collision
+            for (Iterator<SnakePowerup> iterator = getPowerups().iterator(); iterator.hasNext();) {
+                SnakePowerup powerup = iterator.next();
+                boolean isPickinUpPowerUp = snake.canEatFruit() && powerup.getPosition().equals(nextPosition);
+                if (isPickinUpPowerUp) {
+                    powerup.use(snake);
+                    occupiedSpace.removeOccupiedSpaces(powerup.getOccupiedSpace());
+                    iterator.remove();
+                }
             }
 
             // Respawn fruit
@@ -166,14 +158,49 @@ public class Board {
         }
     }
 
-    public void spawnPowerup() {
-        SnakePowerup powerup = new SkipPowerUp(getAvailablePosition(occupiedSpace.getOccupiedSpaces()));
+    public void spawnRandomPowerup() {
+        Position spawnPosition = getAvailablePosition(occupiedSpace.getOccupiedSpaces());
+        SnakePowerup powerup = switch (new Random().nextInt(POWER_UP_COUNT)) {
+            case 1 -> new RainbowPowerup(spawnPosition);
+            case 2 -> new SkipPowerUp(spawnPosition);
+            default -> new ReversePowerup(spawnPosition);
+        };
         occupiedSpace.addOccupiedSpace(powerup.getOccupiedSpace());
         getPowerups().add(powerup);
     }
 
+    private void rollPowerupSpawn() {
+        if (new Random().nextDouble() < powerupChance) {
+            spawnRandomPowerup();
+            powerupChance = BASE_POWERUP_CHANCE;
+        } else {
+            powerupChance += POWERUP_CHANCE_INCREASE;
+        }
+    }
+
     public ArrayList<SnakePowerup> getPowerups() {
         return powerups;
+    }
+
+    private boolean getAllDead() {
+        for (Snake snake : snakes) {
+            if (snake.getLivingStatus()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private HashMap<Snake, Position> getNextPositions() {
+        HashMap<Snake, Position> nextPositions = new HashMap<>();
+        for (Snake snake : snakes) {
+            if (snake.getLivingStatus()) {
+                Position nextPosition = snake.getNextPosition();
+                nextPositions.put(snake, nextPosition);
+            }
+        }
+
+        return nextPositions;
     }
 
     public int getSizeX() {

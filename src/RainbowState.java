@@ -8,6 +8,7 @@ public class RainbowState extends SnakeState{
     RainbowState() {
         currentDuration = MAX_DURATION;
     }
+
     
     @Override
     public void update(Snake snake, double deltaTime) {

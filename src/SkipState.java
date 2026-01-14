@@ -1,5 +1,7 @@
 package src;
 
+import java.util.ArrayList;
+
 public class SkipState extends SnakeState{
 
     
@@ -12,7 +14,6 @@ public class SkipState extends SnakeState{
     
     @Override
     public void update(Snake snake, double deltaTime) {
-        System.out.println(currentDuration);
         currentDuration -= deltaTime;
         if (currentDuration <= 0) {
             snake.changeState(new Grounded());
@@ -20,6 +21,26 @@ public class SkipState extends SnakeState{
     }
     @Override
     public void jump(Snake snake) {
+    }
+
+    @Override
+    public boolean checkCollision(Snake snake, Position position, ArrayList<Snake> otherSnakes) {
+        for (Snake iteSnake : otherSnakes) {
+            if (iteSnake != snake) {
+                for (int i = 0; i < iteSnake.getBody().size(); i++) {
+                    if (iteSnake.getBody().get(i).equals(position)) {
+                        return true;
+                    }
+                }
+            } else{
+                for (int i = 1; i < iteSnake.getBody().size() - 2; i++) {
+                    if (iteSnake.getBody().get(i).equals(position)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     @Override
