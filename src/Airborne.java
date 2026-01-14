@@ -18,10 +18,10 @@ public class Airborne extends SnakeState{
         return newDir == currentDir;
     }
     
-    private int jumpCheck = 1;
+    private int jumpCheck = 0;
 
     @Override
-    public void update(Snake snake){
+    public void update(Snake snake, double deltaTime){
         if(jumpCheck == jumpLength){
             snake.changeState(new Grounded());
         }else{
@@ -34,7 +34,8 @@ public class Airborne extends SnakeState{
         return false;
     }
 
-    public void jump(Snake snake){
-        update(snake);
+    @Override
+    public void jump(Snake snake) {
+        
     }
 }

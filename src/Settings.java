@@ -13,8 +13,8 @@ public class Settings {
     private final int DEFAULT_PLAYER_COUNT = 1;
 
     public Settings(int sizeX, int sizeY){
-        this.sizeX=sizeX;
-        this.sizeY=sizeY;
+        this.sizeX = sizeX;
+        this.sizeY = sizeY;
         this.soundVolume = DEFAULT_SOUND_VOLUME;
         this.snakeSpeed = DEFAULT_SNAKE_SPEED;
         this.fruitCount = DEFAULT_FRUIT_COUNT;

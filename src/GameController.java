@@ -44,7 +44,7 @@ public class GameController extends Controller {
                     
                 }
 
-                board.update();
+                board.update(deltaTime);
                 draw();
 
                 if (board.getIsGameOver()) {
@@ -125,7 +125,10 @@ public class GameController extends Controller {
     private void draw() {
         view.drawBackground(board.getSizeX(), board.getSizeY());
         for (Fruit fruit : board.getFruits()) {
-            view.drawFruit(fruit.getPosition(), board.getSizeX(), board.getSizeY());
+            view.drawFruit(fruit.getPosition());
+        }
+        for (SnakePowerup powerup : board.getPowerups()) {
+            view.drawPowerUp(powerup.getPosition());
         }
         LinkedList<Position>[] snakeBodies = new LinkedList[getSettings().getPlayerCount()];
         for (int i = 0; i < getSettings().getPlayerCount(); i++) {
