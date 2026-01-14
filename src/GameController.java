@@ -38,6 +38,9 @@ public class GameController extends Controller {
 
                 board.update();
                 draw();
+                if (board.getHasEaten()) {
+                    SoundManager.playSound(Sounds.EAT);
+                }
 
                 if (board.getIsGameOver()) {
                     gameLoop.stop();

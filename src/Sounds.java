@@ -1,6 +1,6 @@
 package src;
 
-enum SoundManagerHelper {
+enum Sounds {
     EAT("pickFruit.wav"),
     COLLISION("collision.wav"),
     JUMP("jump.wav"),
@@ -8,7 +8,7 @@ enum SoundManagerHelper {
 
     private final String soundPath;
 
-    SoundManagerHelper(final String newSoundPath) {
+    Sounds(final String newSoundPath) {
         soundPath = newSoundPath;
     }
 
