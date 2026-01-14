@@ -30,9 +30,9 @@ public class GameOverView extends StackPane {
 
         getChildren().add(blackBackground);
 
-        restartButton = new Button("Restart");
-        quitButton = new Button("Quit");
-        mainMenuButton = new Button("Mainmenu");
+        restartButton = new MenuButton("Restart");
+        quitButton = new MenuButton("Quit");
+        mainMenuButton = new MenuButton("Mainmenu");
         Label gameOverLabel = new Label("Game over");
 
         gameOverLabel.setId("title-label");

@@ -13,9 +13,9 @@ public class MainMenuView extends StackPane {
     private Button settingsButton;
 
     MainMenuView(int width, int height) {
-        startButton = new Button("Start");
-        quitButton = new Button("Quit");
-        settingsButton = new Button("Settings");
+        startButton = new MenuButton("Start");
+        quitButton = new MenuButton("Quit");
+        settingsButton = new MenuButton("Settings");
         Label titleLabel = new Label("Snake");
         getStylesheets().add(getClass().getResource("/resources/menu.css").toExternalForm());
         titleLabel.setId("title-label");
