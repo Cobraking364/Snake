@@ -2,7 +2,7 @@ package src;
 
 import java.util.*;
 
-public class Fruit {
+public class Fruit implements ISpaceOccupier{
     private Position position;
 
 
@@ -38,5 +38,12 @@ public class Fruit {
 
     public Position getPosition(){
         return position;
+    }
+
+    @Override
+    public LinkedList<Position> getOccupiedSpace(){
+        LinkedList<Position> temp = new LinkedList<>();
+        temp.add(getPosition());
+        return temp;
     }
 }

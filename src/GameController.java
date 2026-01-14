@@ -1,5 +1,7 @@
 package src;
 
+import java.util.LinkedList;
+
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.event.EventHandler;
@@ -13,7 +15,7 @@ public class GameController extends Controller {
     private Scene scene;
     private Board board;
     private Settings settings;
-    private InputBuffer inputBuffer;
+    private InputBuffer[] inputBuffers;
     private GameLoop gameLoop;
 
     GameController(GameView view, Scene scene, Board board, Settings settings, SceneManager sceneManager) {
@@ -21,7 +23,10 @@ public class GameController extends Controller {
         this.view = view;
         this.scene = scene;
         this.board = board;
-        inputBuffer = new InputBuffer(3);
+        inputBuffers = new InputBuffer[settings.getPlayerCount()];
+        for (int i = 0; i < inputBuffers.length; i++) {
+            inputBuffers[i] = new InputBuffer(3);
+        }
         updateView();
 
         ChangeListener<Number> windowSizeListener = (observable, oldValue, newValue) -> Platform
@@ -32,8 +37,11 @@ public class GameController extends Controller {
         gameLoop = new GameLoop(settings.getSnakeSpeed()) {
             @Override
             public void update(double deltaTime) {
-                if (inputBuffer.hasInput()) {
-                    handleInput(inputBuffer.getNext());
+                for (InputBuffer inputBuffer : inputBuffers) {
+                    if (inputBuffer.hasInput()) {
+                        handleInput(inputBuffer.getNext());
+                    }
+                    
                 }
 
                 board.update();
@@ -58,7 +66,14 @@ public class GameController extends Controller {
                     case KeyCode.UP:
                     case KeyCode.DOWN:
                     case KeyCode.SPACE:
-                        inputBuffer.addInput(event.getCode());
+                        inputBuffers[0].addInput(event.getCode());
+                        break;
+                    case KeyCode.A:
+                    case KeyCode.D:
+                    case KeyCode.W:
+                    case KeyCode.S:
+                    case KeyCode.Z:
+                        inputBuffers[1].addInput(event.getCode());
                 }
 
             }
@@ -70,20 +85,35 @@ public class GameController extends Controller {
     private void handleInput(KeyCode input) {
         switch (input) {
             case KeyCode.LEFT:
-                board.getSnake().updateDirection(Direction.LEFT);
+                board.getSnakes().get(0).updateDirection(Direction.LEFT);
                 break;
             case KeyCode.RIGHT:
-                board.getSnake().updateDirection(Direction.RIGHT);
+                board.getSnakes().get(0).updateDirection(Direction.RIGHT);
                 break;
             case KeyCode.UP:
-                board.getSnake().updateDirection(Direction.UP);
+                board.getSnakes().get(0).updateDirection(Direction.UP);
                 break;
             case KeyCode.DOWN:
-                board.getSnake().updateDirection(Direction.DOWN);
+                board.getSnakes().get(0).updateDirection(Direction.DOWN);
                 break;
             case KeyCode.SPACE:
-                board.getSnake().jump();
-
+                board.getSnakes().get(0).jump();
+                break;
+            case KeyCode.A:
+                board.getSnakes().get(1).updateDirection(Direction.LEFT);
+                break;
+            case KeyCode.D:
+                board.getSnakes().get(1).updateDirection(Direction.RIGHT);
+                break;
+            case KeyCode.W:
+                board.getSnakes().get(1).updateDirection(Direction.UP);
+                break;
+            case KeyCode.S:
+                board.getSnakes().get(1).updateDirection(Direction.DOWN);
+                break;
+            case KeyCode.Z:
+                board.getSnakes().get(1).jump();
+                break;
         }
     }
 
@@ -94,7 +124,13 @@ public class GameController extends Controller {
 
     private void draw() {
         view.drawBackground(board.getSizeX(), board.getSizeY());
-        view.drawFruit(board.getFruit().getPosition(), board.getSizeX(), board.getSizeY());
-        view.drawSnake(board.getSnake().getBody(), board.getSizeX(), board.getSizeY());
+        for (Fruit fruit : board.getFruits()) {
+            view.drawFruit(fruit.getPosition(), board.getSizeX(), board.getSizeY());
+        }
+        LinkedList<Position>[] snakeBodies = new LinkedList[getSettings().getPlayerCount()];
+        for (int i = 0; i < getSettings().getPlayerCount(); i++) {
+            snakeBodies[i] = board.getSnakes().get(i).getBody();
+        }
+        view.drawSnakes(snakeBodies);
     }
 }

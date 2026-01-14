@@ -2,7 +2,7 @@ package src;
 
 import java.util.*;
 
-public class Snake {
+public class Snake implements ISpaceOccupier{
     private LinkedList<Position> body = new LinkedList<Position>();
     private Direction direction;
     private Direction previousDirection;
@@ -10,6 +10,7 @@ public class Snake {
     private boolean turned;
     private SnakeState currentState;
     private int jumpLength = 2;
+    private boolean alive = true;
 
     Snake(Position pos, SnakeState initialState){
         body.add(new Position(pos.getX()+1, pos.getY()));
@@ -29,8 +30,7 @@ public class Snake {
         } else {
             growing = false;
         }
-
-        currentState.jumpFinished(this);
+        currentState.update(this);
     }
 
     public Position getNextPosition() {
@@ -47,8 +47,8 @@ public class Snake {
         return nextPos;
     }
 
-    public boolean checkCollision(Position position) {
-        return currentState.checkCollision(this, position);
+    public boolean checkCollision(Position position, ArrayList<Snake> otherSnakes) {
+        return currentState.checkCollision(this, position, otherSnakes);
     }
 
     public Position getHead() {
@@ -57,6 +57,11 @@ public class Snake {
 
     public LinkedList<Position> getBody() {
         return body;
+    }
+
+    @Override
+    public LinkedList<Position> getOccupiedSpace(){
+        return getBody();
     }
 
     public void grow() {
@@ -96,6 +101,14 @@ public class Snake {
 
     public boolean getTurned() {
         return turned;
+    }
+
+    public void die(){
+        alive = false;
+    }
+
+    public boolean getLivingStatus(){
+        return alive;
     }
 
 }
