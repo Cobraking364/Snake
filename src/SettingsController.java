@@ -20,7 +20,9 @@ public class SettingsController extends Controller {
                 MainMenuView mainMenuView = new MainMenuView((int) view.getWidth(), (int) view.getHeight());
                 Scene mainMenuScene = new Scene(mainMenuView);
                 MainMenuController mainMenuController = new MainMenuController(mainMenuView, mainMenuScene,
-                        getSettings(), getSceneManager());
+                    getSettings(), getSceneManager());
+                Settings settings = new Settings(0,0);
+                SettingsHandler.saveSettings(settings);
                 getSceneManager().changeScene(mainMenuScene);
             }
         });
