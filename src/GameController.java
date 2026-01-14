@@ -37,12 +37,17 @@ public class GameController extends Controller {
                 }
 
                 board.update();
-                draw();
+                if (board.getHasEaten()) {
+                    System.out.println("EAT detected at " + System.nanoTime());
+                    SoundManager.playSound(Sounds.EAT);
+                }
                 if (board.getHasEaten()) {
                     SoundManager.playSound(Sounds.EAT);
                 }
+                draw();
 
                 if (board.getIsGameOver()) {
+
                     gameLoop.stop();
                     GameOverView gameOverView = new GameOverView();
                     GameOverController gameOverController = new GameOverController(gameOverView, getSettings(), getSceneManager());

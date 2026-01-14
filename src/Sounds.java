@@ -1,7 +1,7 @@
 package src;
 
 enum Sounds {
-    EAT("pickFruit.wav"),
+    EAT("pickupFruit.wav"),
     COLLISION("collision.wav"),
     JUMP("jump.wav"),
     START("start.wav");

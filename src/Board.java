@@ -5,10 +5,12 @@ public class Board{
     private int sizeY;
     private Snake snake;
     private Fruit fruit;
+    private boolean hasEaten;
     private boolean isGameOver;
 
     Board(int x, int y) {
         isGameOver = false;
+        hasEaten = false;
         sizeX = x;
         sizeY = y;
 
@@ -29,6 +31,7 @@ public class Board{
         if (isGameOver) {
             return;
         }
+        hasEaten = false;
 
         Position nextPosition = snake.getNextPosition();
 
@@ -43,6 +46,7 @@ public class Board{
         boolean isEatingFruit = snake.canEatFruit() && fruit.getPosition().equals(nextPosition);
         if (isEatingFruit) {
             snake.grow();
+            hasEaten = true;
         }
         snake.move(nextPosition);
 
@@ -66,5 +70,8 @@ public class Board{
 
     public Snake getSnake() {
         return snake;
+    }
+    public boolean getHasEaten(){
+        return hasEaten;
     }
 }
