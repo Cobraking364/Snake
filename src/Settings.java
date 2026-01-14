@@ -3,7 +3,7 @@ package src;
 public class Settings {
     private int sizeX;
     private int sizeY;
-    private int soundVolume;
+    static private int soundVolume;
     private int snakeSpeed;
     private int fruitCount;
     private int playerCount;
@@ -50,7 +50,7 @@ public class Settings {
         return snakeSpeed;
     }
 
-    public int getSoundVolume() {
+    public static int getSoundVolume() {
         return soundVolume;
     }
 

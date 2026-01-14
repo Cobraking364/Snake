@@ -7,11 +7,9 @@ public class Board{
     private Fruit fruit;
     private boolean hasEaten;
     private boolean isAlive;
-    private boolean hasCollided;
     private boolean isGameOver;
 
     Board(int x, int y) {
-        hasCollided = false;
         hasEaten = false;
         isAlive = true;
         isGameOver = false;
@@ -36,7 +34,6 @@ public class Board{
             return;
         }
         hasEaten = false;
-        hasCollided = false;
 
         Position nextPosition = snake.getNextPosition();
 
@@ -64,7 +61,6 @@ public class Board{
 
     private void gameOver() {
         isGameOver = true;
-        hasCollided = true;
     }
 
     public boolean getIsGameOver() {
