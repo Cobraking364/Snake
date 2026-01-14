@@ -38,10 +38,6 @@ public class GameController extends Controller {
 
                 board.update();
                 if (board.getHasEaten()) {
-                    System.out.println("EAT detected at " + System.nanoTime());
-                    SoundManager.playSound(Sounds.EAT);
-                }
-                if (board.getHasEaten()) {
                     SoundManager.playSound(Sounds.EAT);
                 }
                 draw();
