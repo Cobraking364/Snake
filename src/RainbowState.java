@@ -12,7 +12,6 @@ public class RainbowState extends SnakeState{
     
     @Override
     public void update(Snake snake, double deltaTime) {
-        System.out.println(currentDuration);
         currentDuration -= deltaTime;
         if (currentDuration <= 0) {
             snake.changeState(new Grounded());
