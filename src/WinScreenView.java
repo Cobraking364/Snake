@@ -28,11 +28,6 @@ public class WinScreenView extends StackPane {
         Image pokal = new Image(getClass().getResource("/resources/Pokal1.png").toExternalForm(),200,200,false,false);
         ImageView selelctedImage = new ImageView();
         selelctedImage.setImage(pokal);
-        //selelctedImage.setScaleX(0.5);
-        //selelctedImage.setScaleY(0.5);
-        ///selelctedImage.setX(0.5);
-        //selelctedImage.setY(0.5);
-        
         
         quitButton = new Button("Quit");
         mainMenuButton = new Button("Mainmenu");
