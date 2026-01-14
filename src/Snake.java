@@ -8,6 +8,7 @@ public class Snake {
     private Direction previousDirection;
     private boolean growing;
     private boolean turned;
+    private boolean hasJumped;
     private SnakeState currentState;
     private int jumpLength = 2;
 
@@ -31,6 +32,7 @@ public class Snake {
         }
 
         currentState.jumpFinished(this);
+        hasJumped = false;
     }
 
     public Position getNextPosition() {
@@ -76,6 +78,7 @@ public class Snake {
 
     public void jump() {
         currentState.jump(this);
+        hasJumped = true;
     }
 
     public int getJumpLength() {
@@ -96,6 +99,9 @@ public class Snake {
 
     public boolean getTurned() {
         return turned;
+    }
+    public boolean getHasJumped() {
+        return hasJumped;
     }
 
 }

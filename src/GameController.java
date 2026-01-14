@@ -49,6 +49,7 @@ public class GameController extends Controller {
                     GameOverController gameOverController = new GameOverController(gameOverView, getSettings(), getSceneManager());
 
                     view.getChildren().add(gameOverView);
+                    SoundManager.playSound(Sounds.COLLISION);
                 }
             }
         };
@@ -87,7 +88,10 @@ public class GameController extends Controller {
                 break;
             case KeyCode.SPACE:
                 board.getSnake().jump();
-
+                if (!board.getIsAlive()){
+                    return;
+                }
+                SoundManager.playSound(Sounds.JUMP);
         }
     }
 
