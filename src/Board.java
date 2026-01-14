@@ -33,7 +33,7 @@ public class Board{
             snakes.add(snake);
         } else{
             for (int i = 0; i<amountOfSnakes; i++) {
-                Snake tempSnake = new Snake(new Position(x, y), new Grounded());
+                Snake tempSnake = new Snake(new Position(5 * i, y), new Grounded());
                 occupiedSpace.addOccupiedSpace(tempSnake.getOccupiedSpace());
                 snakes.add(tempSnake);
             }
@@ -64,8 +64,21 @@ public class Board{
             return;
         }
 
+        boolean allDead = true;
+        for (Snake snake : snakes) {
+            if (snake.getLivingStatus()) {
+                allDead = false;
+            }
+        }
+        if (allDead) {
+            gameOver();
+        }
+
+        ArrayList<Position> nextPositions = new ArrayList<Position>();
+
         for (Snake snake : snakes) {
             Position nextPosition = snake.getNextPosition();
+            nextPositions.add(nextPosition);
 
             nextPosition.setX((nextPosition.getX() + sizeX) % sizeX);
             nextPosition.setY((nextPosition.getY() + sizeY) % sizeY);
@@ -97,6 +110,21 @@ public class Board{
                 fruits.get(indexOfEaten).respawn(sizeX, sizeY, occupiedSpace.getOccupiedSpaces());
                 occupiedSpace.addOccupiedSpace(fruits.get(indexOfEaten).getOccupiedSpace());
             }
+        }
+
+        ArrayList<Integer> snakesInCollision = new ArrayList<Integer>();
+        for (Position pos : nextPositions) {
+            for (Position pos2 : nextPositions) {
+                if (pos != pos2) {
+                    if (pos.equals(pos2)) {
+                        snakesInCollision.add(nextPositions.indexOf(pos));
+                    }
+                }
+            }
+        }
+
+        for (Integer i : snakesInCollision) {
+            snakes.get(i).die();
         }
 
     }

@@ -23,14 +23,16 @@ public class Snake implements ISpaceOccupier{
     }
 
     public void move(Position nextPosition) {
-        body.add(nextPosition);
-        previousDirection = direction;
-        if (!growing) {
-            body.remove(0);
-        } else {
-            growing = false;
+        if (alive) {
+            body.add(nextPosition);
+            previousDirection = direction;
+            if (!growing) {
+                body.remove(0);
+            } else {
+                growing = false;
+            }
+            currentState.update(this);
         }
-        currentState.update(this);
     }
 
     public Position getNextPosition() {
@@ -105,6 +107,10 @@ public class Snake implements ISpaceOccupier{
 
     public void die(){
         alive = false;
+    }
+
+    public boolean getLivingStatus(){
+        return alive;
     }
 
 }
