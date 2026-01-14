@@ -14,6 +14,12 @@
     -fx-effect: dropshadow(one-pass-box, #06283D, 0, 0, 0, 8);
 }
 
+#wintitle-label {
+    -fx-font-size: 64;
+    -fx-text-fill: #1E90FF;
+    -fx-effect: dropshadow(one-pass-box, #06283D, 0, 0, 0, 8);
+}
+
 .slider .track {
     -fx-block-increment: 5;
     -fx-background-color: #0B6E4F;

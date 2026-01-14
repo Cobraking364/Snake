@@ -98,4 +98,8 @@ public class Snake {
         return turned;
     }
 
+    public Direction getDirection(){
+        return direction;
+    }
+
 }
