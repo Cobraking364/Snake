@@ -7,6 +7,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -35,10 +36,18 @@ public class GameOverView extends StackPane {
         mainMenuButton = new MenuButton("Mainmenu");
         Label gameOverLabel = new Label("Game over");
 
+        
+        String x = "12";
+        String y = "12";
+        Label boardLabel = new Label(x + " X " + y);
+
+        HighScoreModule highScoreBox = new HighScoreModule("HighScore", 0, 20);
+        HighScoreModule yourScoreBox = new HighScoreModule("Your Score", 0, 20);
         gameOverLabel.setId("title-label");
+        
         buttonContainer = new VBox(BUTTON_SPACING);
         buttonContainer.setAlignment(Pos.CENTER);
-        buttonContainer.getChildren().addAll(gameOverLabel, restartButton, mainMenuButton, quitButton);
+        buttonContainer.getChildren().addAll(gameOverLabel,boardLabel, highScoreBox, yourScoreBox, restartButton, mainMenuButton, quitButton);
 
         getChildren().add(buttonContainer);
 

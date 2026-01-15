@@ -49,20 +49,31 @@ public class GameController extends Controller {
 
                 board.update(deltaTime);
                 if (board.getHasEaten()) {
-                  SoundManager.playSound(Sounds.EAT, getSettings().getSoundVolume());
+                    SoundManager.playSound(Sounds.EAT, getSettings().getSoundVolume());
                 }
                 draw();
 
-                if (board.getIsGameOver()) {
-
+                if (board.getIsgameWon() || board.getIsGameOver()) {
                     gameLoop.stop();
-                    GameOverView gameOverView = new GameOverView();
-                    GameOverController gameOverController = new GameOverController(gameOverView, getSettings(),
-                            getSceneManager());
-
-                    view.getChildren().add(gameOverView);
-                    SoundManager.playSound(Sounds.COLLISION, getSettings().getSoundVolume());
+                    if (board.getIsGameOver()) {
+                        GameOverView gameOverView = new GameOverView();
+                        GameOverController gameOverController = new GameOverController(gameOverView, getSettings(),
+                                getSceneManager());
+                        view.getChildren().add(gameOverView);
+                        SoundManager.playSound(Sounds.COLLISION, getSettings().getSoundVolume());
+                    } else if (board.getIsGameMultiplayer()) {
+                        MultiplayerWinScreenView multiplayerWinScreenView = new MultiPlayerWinScreenView();
+                        MultiplayerWinScreenController = multiplayerWinScreenController = new MultiplayerWinScreenController(winScreenView, getSettings(),
+                                getSceneManager());
+                        view.getChildren().add(multiplayerWinScreenView);
+                    } else {
+                        WinScreenView winScreenView = new WinScreenView();
+                        WinScreenController winScreenController = new WinScreenController(winScreenView, getSettings(),
+                                getSceneManager());
+                        view.getChildren().add(winScreenView);
+                    }
                 }
+
             }
         };
 
@@ -85,14 +96,20 @@ public class GameController extends Controller {
 
     private void handleInput(KeyCode input) {
 
-            for (int i = 0; i < getSettings().getPlayerCount(); i++) {
-                KeyControls keyControls = getSettings().getKeyControls()[i];
-                if (input == keyControls.getUpButton()) {board.getSnakes().get(i).updateDirection(Direction.UP);}
-                else if (input == keyControls.getLeftButton()) {board.getSnakes().get(i).updateDirection(Direction.LEFT);}
-                else if (input == keyControls.getDownButton()) {board.getSnakes().get(i).updateDirection(Direction.DOWN);}
-                else if (input == keyControls.getRightButton()) {board.getSnakes().get(i).updateDirection(Direction.RIGHT);}
-                else if (input == keyControls.getJumpButton()) {board.getSnakes().get(i).jump();}
+        for (int i = 0; i < getSettings().getPlayerCount(); i++) {
+            KeyControls keyControls = getSettings().getKeyControls()[i];
+            if (input == keyControls.getUpButton()) {
+                board.getSnakes().get(i).updateDirection(Direction.UP);
+            } else if (input == keyControls.getLeftButton()) {
+                board.getSnakes().get(i).updateDirection(Direction.LEFT);
+            } else if (input == keyControls.getDownButton()) {
+                board.getSnakes().get(i).updateDirection(Direction.DOWN);
+            } else if (input == keyControls.getRightButton()) {
+                board.getSnakes().get(i).updateDirection(Direction.RIGHT);
+            } else if (input == keyControls.getJumpButton()) {
+                board.getSnakes().get(i).jump();
             }
+        }
 
     }
 
