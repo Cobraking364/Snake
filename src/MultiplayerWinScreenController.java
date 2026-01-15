@@ -6,9 +6,9 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 
 public class MultiplayerWinScreenController extends Controller{
-    private WinScreenView view;
+    private MultiplayerWinScreenView view;
     
-    public MultiplayerWinScreenController(WinScreenView view, Settings settings, SceneManager sceneManager){
+    public MultiplayerWinScreenController(MultiplayerWinScreenView view, Settings settings, SceneManager sceneManager){
         super(settings, sceneManager);
         this.view = view;
         view.getPlayAgainButton().setOnAction(new EventHandler<ActionEvent>() {
