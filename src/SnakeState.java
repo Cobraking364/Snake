@@ -32,4 +32,10 @@ public abstract class SnakeState {
 
         return nextPos;
     }
+
+    public void die(Snake snake){
+        snake.changeState(new DeadState());
+    }
+
+    
 }

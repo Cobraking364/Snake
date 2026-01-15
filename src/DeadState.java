@@ -29,7 +29,7 @@ public class DeadState extends SnakeState {
 
     @Override
     public void update(Snake snake, double deltaTime){
-        
+
     }
 
 }

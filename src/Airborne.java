@@ -38,4 +38,9 @@ public class Airborne extends SnakeState{
     public void jump(Snake snake) {
         
     }
+
+    @Override
+    public void die(Snake snake){
+
+    }
 }

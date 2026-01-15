@@ -11,7 +11,6 @@ public class Snake implements ISpaceOccupier{
     private boolean hasJumped;
     private SnakeState currentState;
     private int jumpLength = 2;
-    private boolean alive = true;
 
     Snake(Position pos, SnakeState initialState){
         body.add(new Position(pos.getX()+1, pos.getY()));
@@ -115,13 +114,11 @@ public class Snake implements ISpaceOccupier{
     }
 
     public void die(){
-        System.out.println("Snake died");
-        alive = false;
         changeState(new DeadState());
     }
 
     public boolean getLivingStatus(){
-        return alive;
+        return currentState.getClass().getName() != "src.DeadState";
     }
 
 }

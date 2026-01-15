@@ -24,4 +24,8 @@ public class RainbowState extends SnakeState{
         
     }
 
+    @Override
+    public void die(Snake snake){
+
+    }
 }
