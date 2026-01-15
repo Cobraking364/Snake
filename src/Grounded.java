@@ -23,6 +23,11 @@ public class Grounded extends SnakeState{
         return false;
     }
 
+    @Override
+    public void update(Snake snake, double deltaTime){
+
+    }
+
     public void jump(Snake snake){
         snake.changeState(new Airborne(snake.getJumpLength()));
     }

@@ -8,9 +8,7 @@ public abstract class SnakeState {
         return false;
     }
 
-    public void update(Snake snake, double deltaTime){
-
-    }
+    public abstract void update(Snake snake, double deltaTime);
 
     public boolean canEatFruit() {
         return true;
