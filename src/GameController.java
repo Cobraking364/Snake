@@ -84,36 +84,16 @@ public class GameController extends Controller {
 
     private void handleInput(KeyCode input) {
         switch (input) {
-            case KeyCode.LEFT:
-                board.getSnakes().get(0).updateDirection(Direction.LEFT);
-                break;
-            case KeyCode.RIGHT:
-                board.getSnakes().get(0).updateDirection(Direction.RIGHT);
-                break;
-            case KeyCode.UP:
-                board.getSnakes().get(0).updateDirection(Direction.UP);
-                break;
-            case KeyCode.DOWN:
-                board.getSnakes().get(0).updateDirection(Direction.DOWN);
-                break;
-            case KeyCode.SPACE:
-                board.getSnakes().get(0).jump();
-                break;
-            case KeyCode.A:
-                board.getSnakes().get(1).updateDirection(Direction.LEFT);
-                break;
-            case KeyCode.D:
-                board.getSnakes().get(1).updateDirection(Direction.RIGHT);
-                break;
-            case KeyCode.W:
-                board.getSnakes().get(1).updateDirection(Direction.UP);
-                break;
-            case KeyCode.S:
-                board.getSnakes().get(1).updateDirection(Direction.DOWN);
-                break;
-            case KeyCode.Z:
-                board.getSnakes().get(1).jump();
-                break;
+            case KeyCode.LEFT -> board.getSnakes().get(0).updateDirection(Direction.LEFT);
+            case KeyCode.RIGHT -> board.getSnakes().get(0).updateDirection(Direction.RIGHT);
+            case KeyCode.UP -> board.getSnakes().get(0).updateDirection(Direction.UP);
+            case KeyCode.DOWN -> board.getSnakes().get(0).updateDirection(Direction.DOWN);
+            case KeyCode.SPACE -> board.getSnakes().get(0).jump();
+            case KeyCode.A -> board.getSnakes().get(1).updateDirection(Direction.LEFT);
+            case KeyCode.D -> board.getSnakes().get(1).updateDirection(Direction.RIGHT);
+            case KeyCode.W -> board.getSnakes().get(1).updateDirection(Direction.UP);
+            case KeyCode.S -> board.getSnakes().get(1).updateDirection(Direction.DOWN);
+            case KeyCode.Z -> board.getSnakes().get(1).jump();
         }
     }
 
