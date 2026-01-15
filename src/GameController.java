@@ -54,8 +54,12 @@ public class GameController extends Controller {
                 }
 
                 board.update(deltaTime);
+
                 if (board.getHasEaten()) {
                     SoundManager.playSound(Sounds.EAT, getSettings().getSoundVolume());
+                    if(!board.getIsGameMultiplayer()){
+                        view.updateScore(board.getScore());
+                    }
                 }
                 draw();
 
