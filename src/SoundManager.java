@@ -20,7 +20,7 @@ public class SoundManager {
     }
 
     public static void playSound(Sounds audioFile, int intVolume) {
-        double volume = intVolume/100.0;
+        double volume = Math.clamp((intVolume/100.0),0,1);
         switch (audioFile) {
             case BOOTUP -> bootup.play(volume);
             case CLICK -> click.play(volume);
