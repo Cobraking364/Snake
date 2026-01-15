@@ -17,6 +17,8 @@ public class HighScoreModule extends HBox {
         Label valueLabel = new Label(current + "");     
         HBox valueContainer = new HBox();
         HBox nameContainer= new HBox();
+        nameLabel.setId("highscore-label");
+        valueLabel.setId("highscore-label");
 
         nameLabel.setMinWidth(80);
         valueLabel.setMinWidth(80);

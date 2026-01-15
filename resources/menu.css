@@ -26,6 +26,15 @@
     -fx-effect: dropshadow(one-pass-box, #120000, 0, 0, 0, 8);
 }
 
+#score-label {
+    -fx-font-size: 32;
+    -fx-text-fill: #ffffff;
+}
+#highscore-label {
+    -fx-font-size: 16;
+    -fx-text-fill: #ffffff;
+}
+
 .slider .track {
     -fx-block-increment: 5;
     -fx-background-color: #0B6E4F;

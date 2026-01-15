@@ -14,29 +14,27 @@ public class MultiplayerWinScreenController extends Controller{
         view.getPlayAgainButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                GameView gameView = new GameView(settings.getSizeY(), settings.getSizeY());
-                Scene gameViewScene = new Scene(gameView);
-                Board board = new Board(settings.getSizeX(), settings.getSizeY(), settings.getFruitCount(), settings.getPlayerCount());
-                getSceneManager().changeScene(gameViewScene);
-                GameController gameController = new GameController(gameView, gameViewScene, board, getSettings(), getSceneManager());
+                getSceneManager().newGame(getSettings());
+                SoundManager.playSound(Sounds.CLICK, getSettings().getSoundVolume());
             }
         });
-
+        
         view.getQuitButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                SoundManager.playSound(Sounds.CLICK, getSettings().getSoundVolume());
                 Platform.exit();
             }
         });
-
+        
         view.getMainMenuButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
                 MainMenuView mainMenuView = new MainMenuView((int) view.getWidth(), (int) view.getHeight());
                 Scene mainMenuScene = new Scene(mainMenuView);
                 getSceneManager().changeScene(mainMenuScene);
                 MainMenuController mainMenuController = new MainMenuController(mainMenuView, mainMenuScene, getSettings(), getSceneManager());
+                SoundManager.playSound(Sounds.CLICK, getSettings().getSoundVolume());
             }
         });
 

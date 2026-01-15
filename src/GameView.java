@@ -3,9 +3,15 @@ package src;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -15,6 +21,7 @@ public class GameView extends StackPane {
     private int tileSize;
     private int gameWidth;
     private int gameHeight;
+    private Label scoreLabel;
     private final Color[] SNAKE_COLORS = {SnakeColor.BLUE.getValue(), SnakeColor.VIOLET.getValue(), SnakeColor.ORANGE.getValue(), SnakeColor.YELLOW.getValue()};
     private final Color OVERLAP_COLOR = Color.LIGHTYELLOW;
     private final Color POWERUP_COLOR = Color.PURPLE;
@@ -29,8 +36,18 @@ public class GameView extends StackPane {
         blackBackground.setFill(Color.BLACK);
         blackBackground.heightProperty().bind(heightProperty());
         blackBackground.widthProperty().bind(widthProperty());
+        scoreLabel = new Label("0");
+        scoreLabel.setId("score-label");
+        VBox scoreVBox =new VBox();
+        scoreVBox.setAlignment(Pos.TOP_RIGHT);
+        scoreVBox.getChildren().add(scoreLabel);
+        VBox.setMargin(scoreLabel, new Insets(10,10,0,0));
+
         getChildren().add(blackBackground);
         getChildren().add(canvas);
+        getChildren().add(scoreVBox);
+        
+
         getStylesheets().add(getClass().getResource("/resources/menu.css").toExternalForm());
 
     }
@@ -82,4 +99,7 @@ public class GameView extends StackPane {
         canvas.setHeight(tileSize * gameHeight);
     }
 
+    public void updateScore(int score){
+        scoreLabel.setText(""+score);
+    }
 }

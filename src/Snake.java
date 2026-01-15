@@ -25,7 +25,7 @@ public class Snake implements ISpaceOccupier{
 
     public void move(Position nextPosition, double  deltaTime) {
         body.add(nextPosition);
-        previousDirection = direction;
+        setPreviousDirection(direction);
         if (!growing) {
             body.remove(0);
         } else {

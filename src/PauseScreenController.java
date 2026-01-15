@@ -20,10 +20,7 @@ public class PauseScreenController extends Controller{
         view.getRestarButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                GameView gameView = new GameView(settings.getSizeX(), settings.getSizeY());
-                Scene gameViewScene = new Scene(gameView);
-                getSceneManager().changeScene(gameViewScene);
-                GameController gameController = new GameController(gameView, gameViewScene, board, settings, sceneManager);
+                getSceneManager().newGame(getSettings());
             }
         });
 

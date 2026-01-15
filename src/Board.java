@@ -27,6 +27,7 @@ public class Board {
 
     Board(int x, int y, int amountOfFruits, int amountOfSnakes) {
         isGameOver = false;
+        isGameWon = false;
         sizeX = x;
         sizeY = y;
         occupiedSpace = new OccupiedSpace();
@@ -109,14 +110,7 @@ public class Board {
             if (snake.checkCollision(nextPosition, snakes)) {
                 snake.die();
             }
-
-            // Moving snake
-            if (snake.getLivingStatus()) {
-                occupiedSpace.removeOccupiedSpaces(snake.getOccupiedSpace());
-                snake.move(nextPosition, deltaTime);
-                occupiedSpace.addOccupiedSpace(snake.getOccupiedSpace());
-            }
-
+            
             // Fruit collision
             int indexOfEaten = -1;
             for (int i = 0; i < getFruits().size(); i++) {
@@ -128,6 +122,13 @@ public class Board {
                     rollPowerupSpawn();
                 }
             }
+            // Moving snake
+            if (snake.getLivingStatus()) {
+                occupiedSpace.removeOccupiedSpaces(snake.getOccupiedSpace());
+                snake.move(nextPosition, deltaTime);
+                occupiedSpace.addOccupiedSpace(snake.getOccupiedSpace());
+            }
+
 
             // Powerup collision
             for (Iterator<SnakePowerup> iterator = getPowerups().iterator(); iterator.hasNext();) {
