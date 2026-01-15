@@ -11,14 +11,15 @@ public class SoundManager {
     private static AudioClip start = loadSound(Sounds.START);
 
     private static AudioClip loadSound(Sounds sound){
-        AudioClip s = new AudioClip(
+        AudioClip s  = new AudioClip(
             SoundManager.class.getResource(sound.getSound()).toExternalForm());
             s.play(0.0);
+            s.stop();
             return s;
     }
 
-    public static void playSound(Sounds audioFile, int oldVolume) {
-        double volume = oldVolume/100.0;
+    public static void playSound(Sounds audioFile, int intVolume) {
+        double volume = intVolume/100.0;
         switch (audioFile) {
             case BOOTUP -> bootup.play(volume);
             case CLICK -> click.play(volume);
