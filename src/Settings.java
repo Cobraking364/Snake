@@ -30,8 +30,9 @@ public class Settings {
         this.snakeSpeed = DEFAULT_SNAKE_SPEED;
         this.fruitCount = DEFAULT_FRUIT_COUNT;
         this.playerCount = DEFAULT_PLAYER_COUNT;
+        this.keyControls = DEFAULT_KEY_CONTROLS;
     }
-
+    
     Settings() {
         this.sizeX = DEFAULT_SIZE_X;
         this.sizeY = DEFAULT_SIZE_Y;
@@ -58,10 +59,6 @@ public class Settings {
         this.sizeY = sizeY;
     }
 
-    public void setSnakeSpeed(int snakeSpeed) {
-
-        this.snakeSpeed = snakeSpeed;
-    }
 
     public void setSnakeSpeed(int snakeSpeed) {
 
@@ -99,4 +96,5 @@ public class Settings {
     public KeyControls[] getKeyControls() {
         return keyControls;
     }
+
 }

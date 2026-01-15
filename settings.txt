@@ -1,6 +1,6 @@
-sizeX=54
-sizeY=25
-soundVolume=50
-snakeSpeed=8
-fruitCount=1
-playerCount=1
+sizeX=50
+sizeY=47
+soundVolume=98
+snakeSpeed=11
+fruitCount=6
+playerCount=4
