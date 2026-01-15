@@ -9,7 +9,6 @@ enum Sounds {
     BOOTUP("bootup.wav"),
     POWERUP("powerUp.wav");
     
-
     private final String soundPath;
 
     Sounds(final String newSoundPath) {
