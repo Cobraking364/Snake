@@ -117,6 +117,13 @@ public class Board {
             if (snake.checkCollision(nextPosition, snakes)) {
                 snake.die();
             }
+            
+            // Moving snake
+            if (snake.getLivingStatus()) {
+                occupiedSpace.removeOccupiedSpaces(snake.getOccupiedSpace());
+                snake.move(nextPosition, deltaTime);
+                occupiedSpace.addOccupiedSpace(snake.getOccupiedSpace());
+            }
 
             // Fruit collision
             int indexOfEaten = -1;
@@ -127,14 +134,6 @@ public class Board {
                     indexOfEaten = i;
                     rollPowerupSpawn();
                 }
-            }
-
-            
-            // Moving snake
-            if (snake.getLivingStatus()) {
-                occupiedSpace.removeOccupiedSpaces(snake.getOccupiedSpace());
-                snake.move(nextPosition, deltaTime);
-                occupiedSpace.addOccupiedSpace(snake.getOccupiedSpace());
             }
             
             // Powerup collision
