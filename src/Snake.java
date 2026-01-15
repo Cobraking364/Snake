@@ -31,6 +31,7 @@ public class Snake implements ISpaceOccupier{
         } else {
             growing = false;
         }
+        setHasJumped(false);
         currentState.update(this, deltaTime);
     }
 
@@ -81,7 +82,6 @@ public class Snake implements ISpaceOccupier{
 
     public void jump() {
         currentState.jump(this);
-        hasJumped = true;
     }
 
     public int getJumpLength() {
@@ -106,13 +106,18 @@ public class Snake implements ISpaceOccupier{
     public boolean getHasJumped() {
         return hasJumped;
     }
+    public void setHasJumped(boolean a) {
+        hasJumped = a;
+    }
 
     public Direction getDirection(){
         return direction;
     }
 
     public void die(){
+        System.out.println("Snake died");
         alive = false;
+        changeState(new DeadState());
     }
 
     public boolean getLivingStatus(){

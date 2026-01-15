@@ -17,7 +17,7 @@ public class Settings {
     private final KeyControls[] DEFAULT_KEY_CONTROLS = {
             new KeyControls(KeyCode.UP, KeyCode.LEFT, KeyCode.DOWN, KeyCode.RIGHT, KeyCode.MINUS),
             new KeyControls(KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.Q),
-            new KeyControls(KeyCode.I, KeyCode.J, KeyCode.K, KeyCode.L, KeyCode.MINUS),
+            new KeyControls(KeyCode.I, KeyCode.J, KeyCode.K, KeyCode.L, KeyCode.U),
             new KeyControls(KeyCode.G, KeyCode.V, KeyCode.B, KeyCode.N, KeyCode.F),
     };
 
