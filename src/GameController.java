@@ -52,6 +52,9 @@ public class GameController extends Controller {
                     }
 
                 }
+                if (board.getHasSnakeJumped()) {
+                    SoundManager.playSound(Sounds.JUMP, settings.getSoundVolume());
+                }
 
                 board.update(deltaTime);
 

@@ -10,42 +10,51 @@ import javafx.stage.Stage;
 public class Main extends Application {
     private int windowWidth = 600;
     private int windowHeight = 600;
-    int sizeX;
-    int sizeY;
+    private int sizeX;
+    private int sizeY;
+    private boolean parsingFailed;
 
     public static void main(String[] args) {
-        // if (args.length != 2) {
-        // throw new IllegalArgumentException("Must be excactly 2 parameters.");
-        // }
-        // try {
-        // Integer.parseInt(args[0]);
-        // Integer.parseInt(args[1]);
-        // } catch (NumberFormatException e) {cls
-        // throw new IllegalArgumentException("Parameters must be integers.");
-        // }
-
         launch(args);
     }
 
     @Override
+    public void init() {
+        var params = getParameters().getRaw();
+        if (params.size() != 2) {
+            System.out.println("Must have excactly two parameters. Using saved or default values.");
+            parsingFailed = true;
+            return;
+        }
+
+        try {
+            sizeX = Integer.parseInt(params.get(0));
+            sizeY = Integer.parseInt(params.get(1));
+        } catch (Exception e) {
+            System.out.println("Parameters must be integers. Using saved or default values.");
+            parsingFailed = true;
+        }
+    }
+
+    @Override
     public void start(Stage stage) {
-        List<String> parameters = getParameters().getRaw();
-        // sizeX = Integer.parseInt(parameters.get(0))
-        sizeX = 12;
-        // sizeY = Integer.parseInt(parameters.get(1));
-        sizeY = 12;
-        sizeX = Math.clamp(sizeX, 5, 100);
-        sizeY = Math.clamp(sizeY, 5, 100);
+        SettingsHandler handler = new SettingsHandler();
+        Settings settings = new Settings(sizeX, sizeY);
+        handler.loadSettings(settings);
+        if (!parsingFailed) {
+            List<String> parameters = getParameters().getRaw();
+            settings.setSizeX(Math.clamp(sizeX, 5, 100));
+            settings.setSizeY(Math.clamp(sizeY, 5, 100));
+            handler.saveSettings(settings);
+        }
 
         SceneManager sceneManager = new SceneManager(stage);
-
         Font.loadFont(
                 getClass().getResource("/resources/PressStart2P-Regular.ttf").toExternalForm(),
                 16);
 
         MainMenuView mainMenuView = new MainMenuView(windowWidth, windowHeight);
         Scene mainMenuScene = new Scene(mainMenuView);
-        Settings settings = new Settings(sizeX, sizeY);
         MainMenuController mainMenuController = new MainMenuController(mainMenuView, mainMenuScene, settings,
                 sceneManager);
 
