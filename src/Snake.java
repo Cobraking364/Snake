@@ -120,5 +120,4 @@ public class Snake implements ISpaceOccupier{
     public boolean getLivingStatus(){
         return currentState.getClass().getName() != "src.DeadState";
     }
-
 }
