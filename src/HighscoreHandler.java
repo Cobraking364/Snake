@@ -1,21 +1,24 @@
 package src;
 
-import java.util.Map;
-import java.util.HashMap;
-import java.io.File;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-
+import java.util.HashMap;
+import java.util.Map;
+//duno if works in jar
 public class HighscoreHandler {
-    static void checkHighScore(int x, int y, int score) {
+
+    private static Map<String,String> map;
+    static void checkHighscore(int x, int y, int score) {
 
         String boardSize = x + ":" + y;
-        Map<String, String> map = loadMapFromFile();
+        map = loadMapFromFile();
 
-        String oldHighscore = map.getOrDefault(boardSize, "0");
-        if (Integer.parseInt(oldHighscore) < score) {
+        int oldHighscore = getHighscore(x, y);
+
+        if (oldHighscore < score) {
             map.put(boardSize, score + "");
         }
 
@@ -55,6 +58,10 @@ public class HighscoreHandler {
     }
 
     public static String getFileName() {
-        return "highscore.txt"; // Not called "/highscore.txt"
+        return "highscore.txt"; // Not "/highscore.txt"
+    }
+    public static int getHighscore(int x, int y){
+        String boardSize = x + ":" + y;
+        return Integer.parseInt(map.getOrDefault(boardSize, "0"));
     }
 }

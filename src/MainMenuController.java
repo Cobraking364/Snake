@@ -17,17 +17,15 @@ public class MainMenuController extends Controller{
         view.getStartButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                GameView gameView = new GameView(settings.getSizeX(), settings.getSizeY());
-                Scene gameViewScene = new Scene(gameView);
-                Board board = new Board(settings.getSizeX(), settings.getSizeY(), settings.getFruitCount(), settings.getPlayerCount());
-                getSceneManager().changeScene(gameViewScene);
-                GameController gameController = new GameController(gameView, gameViewScene, board, settings, sceneManager);
+                getSceneManager().newGame(getSettings());
+                SoundManager.playSound(Sounds.START, getSettings().getSoundVolume());
             }
         });
 
         view.getQuitButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                SoundManager.playSound(Sounds.CLICK, getSettings().getSoundVolume());
                 Platform.exit();
             }
 
@@ -40,6 +38,7 @@ public class MainMenuController extends Controller{
                 Scene settingsScene = new Scene(settingsView);
                 getSceneManager().changeScene(settingsScene);
                 SettingsController settingsController = new SettingsController(settingsView, settingsScene, settings, sceneManager);
+                SoundManager.playSound(Sounds.CLICK, getSettings().getSoundVolume());
             }
 
         });

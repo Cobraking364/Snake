@@ -17,6 +17,8 @@ public class SettingsSliderModule extends HBox {
         HBox sliderContainer = new HBox();
         slider = new Slider(min, max, current);
 
+
+        // Always rounds slider-thumb position to nearst integer pixel value
         slider.layoutBoundsProperty().addListener((obs, oldBounds, newBounds) -> {
             slider.lookupAll(".thumb").forEach(node -> {
                 node.setLayoutX(Math.round(node.getLayoutX()));

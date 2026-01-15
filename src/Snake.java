@@ -8,6 +8,7 @@ public class Snake implements ISpaceOccupier{
     private Direction previousDirection;
     private boolean growing;
     private boolean turned;
+    private boolean hasJumped;
     private SnakeState currentState;
     private int jumpLength = 2;
     private boolean alive = true;
@@ -22,29 +23,21 @@ public class Snake implements ISpaceOccupier{
         currentState = initialState;
     }
 
-    public void move(Position nextPosition) {
+    public void move(Position nextPosition, double  deltaTime) {
         body.add(nextPosition);
-        previousDirection = direction;
+        setPreviousDirection(direction);
         if (!growing) {
             body.remove(0);
         } else {
             growing = false;
         }
-        currentState.update(this);
+        setHasJumped(false);
+        currentState.update(this, deltaTime);
     }
 
     public Position getNextPosition() {
-        Position currentHeadPos = getHead();
-        Position nextPos;
-        nextPos = switch (direction) {
-            case Direction.UP -> new Position(currentHeadPos.getX(), currentHeadPos.getY() - 1);
-            case Direction.LEFT -> new Position(currentHeadPos.getX() - 1, currentHeadPos.getY());
-            case Direction.DOWN -> new Position(currentHeadPos.getX(), currentHeadPos.getY() + 1);
-            case Direction.RIGHT -> new Position(currentHeadPos.getX() + 1, currentHeadPos.getY());
-            default -> new Position(0, 0);
-        };
+        return currentState.getNextPosition(getHead(), direction);
 
-        return nextPos;
     }
 
     public boolean checkCollision(Position position, ArrayList<Snake> otherSnakes) {
@@ -68,15 +61,23 @@ public class Snake implements ISpaceOccupier{
         growing = true;
     }
 
-
+    // Uses turning logic
     public void updateDirection(Direction newDir) {
         if (!canChanceDirection(newDir, previousDirection)) {
             turned = false;
             return;
         }
-
-        direction = newDir;
+        setDirection(newDir);
         turned = true;
+    }
+
+    // Ignores turning logic
+    public void setDirection(Direction newDirection) {
+        direction = newDirection;
+    }
+
+    public void setPreviousDirection(Direction newDirection) {
+        previousDirection = newDirection;
     }
 
     public void jump() {
@@ -102,13 +103,21 @@ public class Snake implements ISpaceOccupier{
     public boolean getTurned() {
         return turned;
     }
+    public boolean getHasJumped() {
+        return hasJumped;
+    }
+    public void setHasJumped(boolean a) {
+        hasJumped = a;
+    }
 
     public Direction getDirection(){
         return direction;
     }
 
     public void die(){
+        System.out.println("Snake died");
         alive = false;
+        changeState(new DeadState());
     }
 
     public boolean getLivingStatus(){

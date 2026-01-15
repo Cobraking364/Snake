@@ -5,17 +5,22 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 
-public class WinScreenController extends Controller{
-    private WinScreenView view;
+public class PauseScreenController extends Controller{
+    private PauseScreenView view;
     
-    public WinScreenController(WinScreenView view, Settings settings, SceneManager sceneManager){
+    public PauseScreenController(PauseScreenView view, Board board, Settings settings, SceneManager sceneManager){
         super(settings, sceneManager);
         this.view = view;
-        view.getPlayAgainButton().setOnAction(new EventHandler<ActionEvent>() {
+        view.getResumeButton().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            }
+        });
+
+        view.getRestarButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 getSceneManager().newGame(getSettings());
-                SoundManager.playSound(Sounds.CLICK, getSettings().getSoundVolume());
             }
         });
 
@@ -29,7 +34,6 @@ public class WinScreenController extends Controller{
         view.getMainMenuButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
                 MainMenuView mainMenuView = new MainMenuView((int) view.getWidth(), (int) view.getHeight());
                 Scene mainMenuScene = new Scene(mainMenuView);
                 getSceneManager().changeScene(mainMenuScene);

@@ -3,6 +3,8 @@ package src;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
@@ -24,8 +26,13 @@ public class MainMenuView extends StackPane {
         VBox buttonContainer = new VBox(BUTTON_SPACING);
         buttonContainer.setAlignment(Pos.CENTER);
         buttonContainer.getChildren().addAll(titleLabel, startButton, settingsButton, quitButton);
-        
-        getChildren().add(buttonContainer);
+        Image backGroundPicture = new Image(getClass().getResource("/resources/Snake mainmenu background.png").toExternalForm(),600,600,false,false);
+        ImageView backGround = new ImageView();
+        backGround.fitHeightProperty().bind(heightProperty());
+        backGround.fitWidthProperty().bind(widthProperty());
+        backGround.setImage(backGroundPicture);
+
+        getChildren().addAll(backGround,buttonContainer);
         setPrefSize(width, height);
     }
 

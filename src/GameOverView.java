@@ -20,25 +20,33 @@ public class GameOverView extends StackPane {
     private Button restartButton;
     private Button quitButton;
     private Button mainMenuButton;
+    private final int BOX_SPACING = 25;
 
-    GameOverView() {
+    GameOverView(int yourScore, int highScore, Settings settings) {
         Rectangle blackBackground = new Rectangle();
         blackBackground.heightProperty().bind(heightProperty());
         blackBackground.widthProperty().bind(widthProperty());
         fadeIn(blackBackground);
         redToBlack(blackBackground);
-
         getChildren().add(blackBackground);
 
         restartButton = new MenuButton("Restart");
         quitButton = new MenuButton("Quit");
         mainMenuButton = new MenuButton("Mainmenu");
         Label gameOverLabel = new Label("Game over");
+        gameOverLabel.setId("gameover-label");
+        
+        String x = ""+settings.getSizeX();
+        String y = ""+settings.getSizeY();
+        Label boardLabel = new Label(x + " x " + y);
 
+        HighScoreModule highScoreBox = new HighScoreModule("HighScore", highScore, BOX_SPACING);
+        HighScoreModule yourScoreBox = new HighScoreModule("Your Score", yourScore, BOX_SPACING);
         gameOverLabel.setId("title-label");
+        
         buttonContainer = new VBox(BUTTON_SPACING);
         buttonContainer.setAlignment(Pos.CENTER);
-        buttonContainer.getChildren().addAll(gameOverLabel, restartButton, mainMenuButton, quitButton);
+        buttonContainer.getChildren().addAll(gameOverLabel,boardLabel, highScoreBox, yourScoreBox, restartButton, mainMenuButton, quitButton);
 
         getChildren().add(buttonContainer);
 
