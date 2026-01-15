@@ -27,7 +27,11 @@
 }
 
 #score-label {
-    -fx-font-size: 40;
+    -fx-font-size: 32;
+    -fx-text-fill: #ffffff;
+}
+#highscore-label {
+    -fx-font-size: 16;
     -fx-text-fill: #ffffff;
 }
 
