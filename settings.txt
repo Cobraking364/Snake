@@ -1,12 +1,6 @@
-    private int sizeX;
-    private int sizeY;
-    private int soundVolume;
-    private int snakeSpeed;
-    private int fruitCount;
-    private int playerCount;
-    private final int DEFAULT_SOUND_VOLUME = 50;
-    private final int DEFAULT_SNAKE_SPEED = 8;
-    private final int DEFAULT_FRUIT_COUNT = 1;
-    private final int DEFAULT_PLAYER_COUNT = 1;
-
-    
+sizeX=54
+sizeY=25
+soundVolume=50
+snakeSpeed=8
+fruitCount=1
+playerCount=1

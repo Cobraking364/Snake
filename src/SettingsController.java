@@ -22,7 +22,7 @@ public class SettingsController extends Controller {
                 MainMenuController mainMenuController = new MainMenuController(mainMenuView, mainMenuScene,
                     getSettings(), getSceneManager());
                     SettingsHandler handler = new SettingsHandler();
-                    handler.saveSettings(settings);
+                handler.saveSettings(settings);
                 getSceneManager().changeScene(mainMenuScene);
             }
         });
