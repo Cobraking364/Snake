@@ -9,13 +9,14 @@ public class SoundManager {
     private static AudioClip eat = loadSound(Sounds.EAT);
     private static AudioClip jump = loadSound(Sounds.JUMP);
     private static AudioClip start = loadSound(Sounds.START);
+    private static AudioClip powerup = loadSound(Sounds.POWERUP);
 
     private static AudioClip loadSound(Sounds sound){
-        AudioClip s  = new AudioClip(
+        AudioClip clip  = new AudioClip(
             SoundManager.class.getResource(sound.getSound()).toExternalForm());
-            s.play(0.0);
-            s.stop();
-            return s;
+            clip.play(0.0); 
+            clip.stop();
+            return clip;
     }
 
     public static void playSound(Sounds audioFile, int intVolume) {
