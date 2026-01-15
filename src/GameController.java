@@ -48,15 +48,20 @@ public class GameController extends Controller {
                 }
 
                 board.update(deltaTime);
+                if (board.getHasEaten()) {
+                  SoundManager.playSound(Sounds.EAT, getSettings().getSoundVolume());
+                }
                 draw();
 
                 if (board.getIsGameOver()) {
+
                     gameLoop.stop();
                     GameOverView gameOverView = new GameOverView();
                     GameOverController gameOverController = new GameOverController(gameOverView, getSettings(),
                             getSceneManager());
 
                     view.getChildren().add(gameOverView);
+                    SoundManager.playSound(Sounds.COLLISION, getSettings().getSoundVolume());
                 }
             }
         };

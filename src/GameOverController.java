@@ -19,12 +19,14 @@ public class GameOverController extends Controller {
                 Board board = new Board(settings.getSizeX(), settings.getSizeY(), settings.getFruitCount(), settings.getPlayerCount());
                 getSceneManager().changeScene(gameViewScene);
                 GameController gameController = new GameController(gameView, gameViewScene, board, getSettings(), getSceneManager());
+                SoundManager.playSound(Sounds.START, getSettings().getSoundVolume());
             }
         });
 
         view.getQuitButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                SoundManager.playSound(Sounds.CLICK, getSettings().getSoundVolume());
                 Platform.exit();
             }
         });
@@ -37,6 +39,7 @@ public class GameOverController extends Controller {
                 Scene mainMenuScene = new Scene(mainMenuView);
                 getSceneManager().changeScene(mainMenuScene);
                 MainMenuController mainMenuController = new MainMenuController(mainMenuView, mainMenuScene, getSettings(), getSceneManager());
+                SoundManager.playSound(Sounds.CLICK, getSettings().getSoundVolume());
             }
         });
     }

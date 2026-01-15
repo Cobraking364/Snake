@@ -8,6 +8,7 @@ public class Snake implements ISpaceOccupier{
     private Direction previousDirection;
     private boolean growing;
     private boolean turned;
+    private boolean hasJumped;
     private SnakeState currentState;
     private int jumpLength = 2;
     private boolean alive = true;
@@ -80,6 +81,7 @@ public class Snake implements ISpaceOccupier{
 
     public void jump() {
         currentState.jump(this);
+        hasJumped = true;
     }
 
     public int getJumpLength() {
@@ -100,6 +102,9 @@ public class Snake implements ISpaceOccupier{
 
     public boolean getTurned() {
         return turned;
+    }
+    public boolean getHasJumped() {
+        return hasJumped;
     }
 
     public Direction getDirection(){

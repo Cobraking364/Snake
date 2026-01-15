@@ -5,6 +5,12 @@ import java.util.*;
 public class Board {
     private int sizeX;
     private int sizeY;
+    private Snake snake;
+    private Fruit fruit;
+    private boolean hasEaten;
+    private boolean isAlive;
+    private boolean hasCollided;
+    private boolean isGameOver;
     private ArrayList<Fruit> fruits;
     private ArrayList<Snake> snakes;
     private boolean isGameOver;
@@ -14,6 +20,10 @@ public class Board {
     private final double BASE_POWERUP_CHANCE = 0.05;
     private final double POWERUP_CHANCE_INCREASE = 0.1;
     private final int POWER_UP_COUNT = 3;
+  
+  Board(int x, int y) {
+        hasCollided = false;
+        hasEaten = false;
 
     Board(int x, int y, int amountOfFruits, int amountOfSnakes) {
         isGameOver = false;
@@ -78,12 +88,19 @@ public class Board {
         if (isGameOver) {
             return;
         }
+        hasEaten = false;
+        hasCollided = false;
 
         if (getAllDead()) {
             gameOver();
             return;
+              
         }
 
+        boolean isEatingFruit = snake.canEatFruit() && fruit.getPosition().equals(nextPosition);
+        if (isEatingFruit) {
+            snake.grow();
+            hasEaten = true;
         HashMap<Snake, Position> nextPositions = getNextPositions();
 
         ArrayList<Snake> snakesInCollision = new ArrayList<Snake>();
@@ -212,6 +229,7 @@ public class Board {
 
     private void gameOver() {
         isGameOver = true;
+        hasCollided = true;
     }
 
     public boolean getIsGameOver() {
@@ -224,5 +242,8 @@ public class Board {
 
     public ArrayList<Snake> getSnakes() {
         return snakes;
+    }
+    public boolean getHasEaten(){
+        return hasEaten;
     }
 }
