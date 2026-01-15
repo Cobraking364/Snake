@@ -28,6 +28,8 @@ public class MainMenuView extends StackPane {
         buttonContainer.getChildren().addAll(titleLabel, startButton, settingsButton, quitButton);
         Image backGroundPicture = new Image(getClass().getResource("/resources/Snake mainmenu background.png").toExternalForm(),600,600,false,false);
         ImageView backGround = new ImageView();
+        backGround.fitHeightProperty().bind(heightProperty());
+        backGround.fitWidthProperty().bind(widthProperty());
         backGround.setImage(backGroundPicture);
 
         getChildren().addAll(backGround,buttonContainer);

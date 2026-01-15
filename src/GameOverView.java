@@ -22,7 +22,7 @@ public class GameOverView extends StackPane {
     private Button quitButton;
     private Button mainMenuButton;
 
-    GameOverView() {
+    GameOverView(int yourScore,int highScore, Settings settings) {
         Rectangle blackBackground = new Rectangle();
         blackBackground.heightProperty().bind(heightProperty());
         blackBackground.widthProperty().bind(widthProperty());
@@ -35,14 +35,13 @@ public class GameOverView extends StackPane {
         quitButton = new MenuButton("Quit");
         mainMenuButton = new MenuButton("Mainmenu");
         Label gameOverLabel = new Label("Game over");
-
         
-        String x = "12";
-        String y = "12";
+        String x = ""+settings.getSizeX();
+        String y = ""+settings.getSizeY();
         Label boardLabel = new Label(x + " X " + y);
 
-        HighScoreModule highScoreBox = new HighScoreModule("HighScore", 0, 20);
-        HighScoreModule yourScoreBox = new HighScoreModule("Your Score", 0, 20);
+        HighScoreModule highScoreBox = new HighScoreModule("HighScore", 0, highScore);
+        HighScoreModule yourScoreBox = new HighScoreModule("Your Score", 0, yourScore);
         gameOverLabel.setId("title-label");
         
         buttonContainer = new VBox(BUTTON_SPACING);
