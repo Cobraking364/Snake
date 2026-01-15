@@ -23,6 +23,7 @@ public class Board {
     private final int POWER_UP_COUNT = 3;
     private boolean isGameMultiplayer;
     private int winnerIndex;
+    private int score;
 
     Board(int x, int y, int amountOfFruits, int amountOfSnakes) {
         isGameOver = false;
@@ -31,6 +32,7 @@ public class Board {
         occupiedSpace = new OccupiedSpace();
         snakes = new ArrayList<Snake>();
         powerupChance = BASE_POWERUP_CHANCE;
+        isGameMultiplayer = amountOfSnakes > 1;
         if (amountOfSnakes == 1) {
             Snake snake = new Snake(new Position(sizeX / 2, sizeY / 2), new Grounded());
             occupiedSpace.addOccupiedSpace(snake.getOccupiedSpace());
@@ -58,26 +60,27 @@ public class Board {
         if (isGameOver || isGameWon) {
             return;
         }
+
         hasEaten = false;
         hasCollided = false;
 
-        if (getAliveCount() == 0) {
+        if (getAliveCount() == 0 && !isGameMultiplayer) {
             gameOver();
             return;
-
         }
+        
+        if (getAliveCount() <= 1 && isGameMultiplayer) {
+            win();
+            return;
+        }
+        
+        if (!isGameMultiplayer && sizeX * sizeY - getPowerups().size() <= getSnakes().get(0).getBody().size()) {
+            win();
+            return;
+        }
+
         HashMap<Snake, Position> nextPositions = getNextPositions();
-
         ArrayList<Snake> snakesInCollision = new ArrayList<Snake>();
-        if (getAliveCount() == 1 && isGameMultiplayer) {
-            win();
-            return;
-        }
-
-        if (!isGameMultiplayer && sizeX * sizeY <= getSnakes().get(0).getBody().size()) {
-            win();
-            return;
-        }
 
         // Check colliding heads
         nextPositions.forEach((firstSnake, firstPosition) -> {
@@ -247,6 +250,22 @@ public class Board {
 
     private void win() {
         isGameWon = true;
+        winnerIndex = -1;
+        for (int i = 0; i < getSnakes().size(); i++) {
+            if (getSnakes().get(i).getLivingStatus()) {
+                winnerIndex = i;
+                break;
+            }
+        }
+    }
+
+    public int getScore() {
+        final int STARTING_LENGTH = 2;
+        return getSnakes().get(0).getBody().size() - STARTING_LENGTH;
+    }
+
+    public int getWinnerIndex() {
+        return winnerIndex;
     }
 
     public boolean getIsgameWon() {

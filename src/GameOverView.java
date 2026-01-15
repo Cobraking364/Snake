@@ -7,7 +7,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -21,27 +20,28 @@ public class GameOverView extends StackPane {
     private Button restartButton;
     private Button quitButton;
     private Button mainMenuButton;
+    private final int BOX_SPACING = 25;
 
-    GameOverView(int yourScore,int highScore, Settings settings) {
+    GameOverView(int yourScore, int highScore, Settings settings) {
         Rectangle blackBackground = new Rectangle();
         blackBackground.heightProperty().bind(heightProperty());
         blackBackground.widthProperty().bind(widthProperty());
         fadeIn(blackBackground);
         redToBlack(blackBackground);
-
         getChildren().add(blackBackground);
 
         restartButton = new MenuButton("Restart");
         quitButton = new MenuButton("Quit");
         mainMenuButton = new MenuButton("Mainmenu");
         Label gameOverLabel = new Label("Game over");
+        gameOverLabel.setId("gameover-label");
         
         String x = ""+settings.getSizeX();
         String y = ""+settings.getSizeY();
-        Label boardLabel = new Label(x + " X " + y);
+        Label boardLabel = new Label(x + " x " + y);
 
-        HighScoreModule highScoreBox = new HighScoreModule("HighScore", 0, highScore);
-        HighScoreModule yourScoreBox = new HighScoreModule("Your Score", 0, yourScore);
+        HighScoreModule highScoreBox = new HighScoreModule("HighScore", highScore, BOX_SPACING);
+        HighScoreModule yourScoreBox = new HighScoreModule("Your Score", yourScore, BOX_SPACING);
         gameOverLabel.setId("title-label");
         
         buttonContainer = new VBox(BUTTON_SPACING);

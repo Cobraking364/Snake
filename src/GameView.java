@@ -15,7 +15,7 @@ public class GameView extends StackPane {
     private int tileSize;
     private int gameWidth;
     private int gameHeight;
-    private final Color[] SNAKE_COLORS = {Color.BLUE, Color.VIOLET, Color.FUCHSIA, Color.ORANGE};
+    private final Color[] SNAKE_COLORS = {SnakeColor.BLUE.getValue(), SnakeColor.VIOLET.getValue(), SnakeColor.ORANGE.getValue(), SnakeColor.YELLOW.getValue()};
     private final Color OVERLAP_COLOR = Color.LIGHTYELLOW;
     private final Color POWERUP_COLOR = Color.PURPLE;
 

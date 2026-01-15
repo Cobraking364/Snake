@@ -16,7 +16,7 @@ public class MultiplayerWinScreenView extends StackPane {
     private final int BUTTON_SPACING = 25;
     private String winColor;
 
-    public MultiplayerWinScreenView(){
+    public MultiplayerWinScreenView(String wintext){
 
         Image pokal = new Image(getClass().getResource("/resources/Pokal1.png").toExternalForm(),200,200,false,false);
         ImageView selelctedImage = new ImageView();
@@ -25,7 +25,7 @@ public class MultiplayerWinScreenView extends StackPane {
         quitButton = new MenuButton("Quit");
         mainMenuButton = new MenuButton("Mainmenu");
         playAgainButton = new MenuButton("Play Again");
-        Label winScreenLabel = new Label(winColor + " snake won");
+        Label winScreenLabel = new Label(wintext);
 
         winScreenLabel.setId("wintitle-label");
         buttonContainer = new VBox(BUTTON_SPACING);
