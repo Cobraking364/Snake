@@ -27,6 +27,7 @@ public class Board {
 
     Board(int x, int y, int amountOfFruits, int amountOfSnakes) {
         isGameOver = false;
+        isGameWon = false;
         sizeX = x;
         sizeY = y;
         occupiedSpace = new OccupiedSpace();

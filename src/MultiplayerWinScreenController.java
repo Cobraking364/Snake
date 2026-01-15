@@ -14,9 +14,9 @@ public class MultiplayerWinScreenController extends Controller{
         view.getPlayAgainButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                GameView gameView = new GameView(settings.getSizeY(), settings.getSizeY());
+                GameView gameView = new GameView(getSettings().getSizeX(), getSettings().getSizeY());
                 Scene gameViewScene = new Scene(gameView);
-                Board board = new Board(settings.getSizeX(), settings.getSizeY(), settings.getFruitCount(), settings.getPlayerCount());
+                Board board = new Board(getSettings().getSizeX(), getSettings().getSizeY(), getSettings().getFruitCount(), getSettings().getPlayerCount());
                 getSceneManager().changeScene(gameViewScene);
                 GameController gameController = new GameController(gameView, gameViewScene, board, getSettings(), getSceneManager());
             }
