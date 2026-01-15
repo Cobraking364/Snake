@@ -27,4 +27,9 @@ public class DeadState extends SnakeState {
         return currentHeadPos;
     }
 
+    @Override
+    public void update(Snake snake, double deltaTime){
+        
+    }
+
 }
