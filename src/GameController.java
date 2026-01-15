@@ -3,7 +3,6 @@ package src;
 import java.util.LinkedList;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
-import javafx.css.Match;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -121,35 +120,46 @@ public class GameController extends Controller {
 
     private void handleGameOver() {
         if (board.getIsGameOver()) {
-            HighscoreHandler.checkHighscore(board.getSizeX(), board.getSizeY(), board.getScore());
-            int highScore = HighscoreHandler.getHighscore(board.getSizeX(), board.getSizeY());
-            
-            GameOverView gameOverView = new GameOverView(board.getScore(), highScore, getSettings());
-            GameOverController gameOverController = new GameOverController(gameOverView, getSettings(),
-                    getSceneManager());
-            view.getChildren().add(gameOverView);
-            SoundManager.playSound(Sounds.COLLISION, getSettings().getSoundVolume());
+            handleSingeplayerGameOver();
         } else if (board.getIsGameMultiplayer()) {
-            String winText = switch (board.getWinnerIndex()) {
-                case 0 -> SnakeColor.BLUE + " WON";
-                case 1 -> SnakeColor.VIOLET + " WON";
-                case 2 -> SnakeColor.ORANGE + " WON";
-                case 3 -> SnakeColor.YELLOW + " WON";
-                default -> "No one won";
-            };
-            MultiplayerWinScreenView multiplayerWinScreenView = new MultiplayerWinScreenView(winText);
-            MultiplayerWinScreenController multiplayerWinScreenController = new MultiplayerWinScreenController( 
-                    multiplayerWinScreenView, getSettings(),
-                    getSceneManager());
-            view.getChildren().add(multiplayerWinScreenView);
+            handleMultiplayerGameOver();
         } else {
 
-            HighscoreHandler.checkHighscore(board.getSizeX(), board.getSizeY(), board.getScore());
-            int highScore = HighscoreHandler.getHighscore(board.getSizeX(), board.getSizeY());
-            WinScreenView winScreenView = new WinScreenView(board.getScore(), highScore, getSettings());
-            WinScreenController winScreenController = new WinScreenController(winScreenView, getSettings(),
-                    getSceneManager());
-            view.getChildren().add(winScreenView);
         }
+    }
+
+    private void handleSingeplayerGameOver() {
+        HighscoreHandler.checkHighscore(board.getSizeX(), board.getSizeY(), board.getScore());
+        int highScore = HighscoreHandler.getHighscore(board.getSizeX(), board.getSizeY());
+
+        GameOverView gameOverView = new GameOverView(board.getScore(), highScore, getSettings());
+        GameOverController gameOverController = new GameOverController(gameOverView, getSettings(),
+                getSceneManager());
+        view.getChildren().add(gameOverView);
+        SoundManager.playSound(Sounds.COLLISION, getSettings().getSoundVolume());
+    }
+
+    private void handleMultiplayerGameOver() {
+        String winText = switch (board.getWinnerIndex()) {
+            case 0 -> SnakeColor.BLUE + " WON";
+            case 1 -> SnakeColor.VIOLET + " WON";
+            case 2 -> SnakeColor.ORANGE + " WON";
+            case 3 -> SnakeColor.YELLOW + " WON";
+            default -> "No one won";
+        };
+        MultiplayerWinScreenView multiplayerWinScreenView = new MultiplayerWinScreenView(winText);
+        MultiplayerWinScreenController multiplayerWinScreenController = new MultiplayerWinScreenController(
+                multiplayerWinScreenView, getSettings(),
+                getSceneManager());
+        view.getChildren().add(multiplayerWinScreenView);
+    }
+
+    private void handleSinglePlayerWin() {
+        HighscoreHandler.checkHighscore(board.getSizeX(), board.getSizeY(), board.getScore());
+        int highScore = HighscoreHandler.getHighscore(board.getSizeX(), board.getSizeY());
+        WinScreenView winScreenView = new WinScreenView(board.getScore(), highScore, getSettings());
+        WinScreenController winScreenController = new WinScreenController(winScreenView, getSettings(),
+                getSceneManager());
+        view.getChildren().add(winScreenView);
     }
 }
