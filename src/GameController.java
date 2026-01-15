@@ -1,7 +1,6 @@
 package src;
 
 import java.util.LinkedList;
-
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.event.EventHandler;
@@ -24,16 +23,20 @@ public class GameController extends Controller {
         this.scene = scene;
         this.board = board;
         inputBuffers = new InputBuffer[settings.getPlayerCount()];
+
         for (int i = 0; i < inputBuffers.length; i++) {
             inputBuffers[i] = new InputBuffer(3);
         }
-        updateView();
 
+        updateView();
+        // Updates view on screen resize
         ChangeListener<Number> windowSizeListener = (observable, oldValue, newValue) -> Platform
                 .runLater(this::updateView);
 
         scene.getWindow().widthProperty().addListener(windowSizeListener);
         scene.getWindow().heightProperty().addListener(windowSizeListener);
+
+        // Inits game clock
         gameLoop = new GameLoop(settings.getSnakeSpeed()) {
             @Override
             public void update(double deltaTime) {
@@ -41,7 +44,7 @@ public class GameController extends Controller {
                     if (inputBuffer.hasInput()) {
                         handleInput(inputBuffer.getNext());
                     }
-                    
+
                 }
 
                 board.update(deltaTime);
@@ -50,7 +53,8 @@ public class GameController extends Controller {
                 if (board.getIsGameOver()) {
                     gameLoop.stop();
                     GameOverView gameOverView = new GameOverView();
-                    GameOverController gameOverController = new GameOverController(gameOverView, getSettings(), getSceneManager());
+                    GameOverController gameOverController = new GameOverController(gameOverView, getSettings(),
+                            getSceneManager());
 
                     view.getChildren().add(gameOverView);
                 }
@@ -60,20 +64,12 @@ public class GameController extends Controller {
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                switch (event.getCode()) {
-                    case KeyCode.LEFT:
-                    case KeyCode.RIGHT:
-                    case KeyCode.UP:
-                    case KeyCode.DOWN:
-                    case KeyCode.SPACE:
-                        inputBuffers[0].addInput(event.getCode());
-                        break;
-                    case KeyCode.A:
-                    case KeyCode.D:
-                    case KeyCode.W:
-                    case KeyCode.S:
-                    case KeyCode.Z:
-                        inputBuffers[1].addInput(event.getCode());
+                KeyCode code = event.getCode();
+                for (int i = 0; i < getSettings().getPlayerCount(); i++) {
+                    if (getSettings().getKeyControls()[i].containsKey(code)) {
+                        inputBuffers[i].addInput(code);
+                    }
+
                 }
 
             }
@@ -83,18 +79,16 @@ public class GameController extends Controller {
     }
 
     private void handleInput(KeyCode input) {
-        switch (input) {
-            case KeyCode.LEFT -> board.getSnakes().get(0).updateDirection(Direction.LEFT);
-            case KeyCode.RIGHT -> board.getSnakes().get(0).updateDirection(Direction.RIGHT);
-            case KeyCode.UP -> board.getSnakes().get(0).updateDirection(Direction.UP);
-            case KeyCode.DOWN -> board.getSnakes().get(0).updateDirection(Direction.DOWN);
-            case KeyCode.SPACE -> board.getSnakes().get(0).jump();
-            case KeyCode.A -> board.getSnakes().get(1).updateDirection(Direction.LEFT);
-            case KeyCode.D -> board.getSnakes().get(1).updateDirection(Direction.RIGHT);
-            case KeyCode.W -> board.getSnakes().get(1).updateDirection(Direction.UP);
-            case KeyCode.S -> board.getSnakes().get(1).updateDirection(Direction.DOWN);
-            case KeyCode.Z -> board.getSnakes().get(1).jump();
-        }
+
+            for (int i = 0; i < getSettings().getPlayerCount(); i++) {
+                KeyControls keyControls = getSettings().getKeyControls()[i];
+                if (input == keyControls.getUpButton()) {board.getSnakes().get(i).updateDirection(Direction.UP);}
+                else if (input == keyControls.getLeftButton()) {board.getSnakes().get(i).updateDirection(Direction.LEFT);}
+                else if (input == keyControls.getDownButton()) {board.getSnakes().get(i).updateDirection(Direction.DOWN);}
+                else if (input == keyControls.getRightButton()) {board.getSnakes().get(i).updateDirection(Direction.RIGHT);}
+                else if (input == keyControls.getJumpButton()) {board.getSnakes().get(i).jump();}
+            }
+
     }
 
     private void updateView() {

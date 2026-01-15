@@ -5,7 +5,7 @@ enum Direction{
     LEFT(1),
     DOWN(2),
     RIGHT(3);
-
+    
     private final int value;
 
     Direction(final int newValue){
