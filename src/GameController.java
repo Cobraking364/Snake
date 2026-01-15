@@ -38,7 +38,7 @@ public class GameController extends Controller {
 
                 board.update();
                 if (board.getHasEaten()) {
-                  SoundManager.playSound(Sounds.EAT);
+                  SoundManager.playSound(Sounds.EAT, settings.getSoundVolume());
                 }
                 draw();
 
@@ -49,7 +49,7 @@ public class GameController extends Controller {
                     GameOverController gameOverController = new GameOverController(gameOverView, getSettings(), getSceneManager());
 
                     view.getChildren().add(gameOverView);
-                    SoundManager.playSound(Sounds.COLLISION);
+                    SoundManager.playSound(Sounds.COLLISION, settings.getSoundVolume());
                 }
             }
         };
@@ -91,7 +91,7 @@ public class GameController extends Controller {
                 if (!board.getIsAlive()){
                     return;
                 }
-                SoundManager.playSound(Sounds.JUMP);
+                SoundManager.playSound(Sounds.JUMP, settings.getSoundVolume());
         }
     }
 
