@@ -68,12 +68,12 @@ public class Board {
             gameOver();
             return;
         }
-        
+
         if (getAliveCount() <= 1 && isGameMultiplayer) {
             win();
             return;
         }
-        
+
         if (!isGameMultiplayer && sizeX * sizeY - getPowerups().size() <= getSnakes().get(0).getBody().size()) {
             win();
             return;
@@ -238,6 +238,7 @@ public class Board {
     private void gameOver() {
         isGameOver = true;
         hasCollided = true;
+        
     }
 
     public boolean getIsGameMultiplayer() {
@@ -282,5 +283,14 @@ public class Board {
 
     public boolean getHasEaten() {
         return hasEaten;
+    }
+
+    public boolean getHasSnakeJumped() {
+        for (int i = 0; i < getSnakes().size(); i++) {
+            if (getSnakes().get(i).getHasJumped()) {
+                return true;
+            }
+        }
+        return false;
     }
 }

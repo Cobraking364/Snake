@@ -3,7 +3,6 @@ package src;
 import java.util.LinkedList;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
-import javafx.css.Match;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -52,6 +51,9 @@ public class GameController extends Controller {
                         handleInput(inputBuffer.getNext());
                     }
 
+                }
+                if (board.getHasSnakeJumped()) {
+                    SoundManager.playSound(Sounds.JUMP, settings.getSoundVolume());
                 }
 
                 board.update(deltaTime);
