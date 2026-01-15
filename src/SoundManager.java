@@ -3,7 +3,7 @@ package src;
 import javafx.scene.media.AudioClip;
 
 public class SoundManager {
-    private static double volume = (Settings.getSoundVolume())/1; //placeholder
+    private static double volume = (Settings.getSoundVolume())/100.0; //placeholder
     private static AudioClip bootup = new AudioClip(
             SoundManager.class.getResource(Sounds.BOOTUP.getSound()).toExternalForm());
     private static AudioClip click = new AudioClip(
@@ -21,29 +21,15 @@ public class SoundManager {
             
     public static void playSound(Sounds audioFile) {
         switch (audioFile) {
-            case BOOTUP:
-                bootup.play(volume);
-                break;
-            case CLICK:
-                click.play(volume);
-                break;
-            case COLLISION:
-                collision.play(volume);
-                break;
-            case EAT:
-                eat.play(volume);
-                break;
-            case JUMP:
-                jump.play(volume);
-                break;
-            case START:
-                start.play(volume);
-                break;
-            case POWERUP:
-                powerup.play(volume);
-                break;
-            default:
-                break;
+            case BOOTUP -> bootup.play((Settings.getSoundVolume())/100.0);
+            case CLICK -> click.play((Settings.getSoundVolume())/100.0);
+            case COLLISION -> collision.play((Settings.getSoundVolume())/100.0);
+            case EAT -> eat.play((Settings.getSoundVolume())/100.0);
+            case JUMP -> jump.play((Settings.getSoundVolume())/100.0);
+            case START -> start.play((Settings.getSoundVolume())/100.0);
+            case POWERUP -> powerup.play((Settings.getSoundVolume())/100.0);
+            default -> {
+            }
         }
     }
 }
