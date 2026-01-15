@@ -22,14 +22,14 @@ public class MainMenuController extends Controller{
                 Board board = new Board(settings.getSizeX(), settings.getSizeY());
                 getSceneManager().changeScene(gameViewScene);
                 GameController gameController = new GameController(gameView, gameViewScene, board, settings, sceneManager);
-                SoundManager.playSound(Sounds.START);
+                SoundManager.playSound(Sounds.START, getSettings().getSoundVolume());
             }
         });
 
         view.getQuitButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                SoundManager.playSound(Sounds.CLICK);
+                SoundManager.playSound(Sounds.CLICK, getSettings().getSoundVolume());
                 Platform.exit();
             }
 
@@ -42,7 +42,7 @@ public class MainMenuController extends Controller{
                 Scene settingsScene = new Scene(settingsView);
                 getSceneManager().changeScene(settingsScene);
                 SettingsController settingsController = new SettingsController(settingsView, settingsScene, settings, sceneManager);
-                SoundManager.playSound(Sounds.CLICK);
+                SoundManager.playSound(Sounds.CLICK, getSettings().getSoundVolume());
             }
 
         });

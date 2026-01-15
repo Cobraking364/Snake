@@ -3,41 +3,31 @@ package src;
 import javafx.scene.media.AudioClip;
 
 public class SoundManager {
-    private static AudioClip bootup = new AudioClip(
-            SoundManager.class.getResource(Sounds.BOOTUP.getSound()).toExternalForm());
-    private static AudioClip click = new AudioClip(
-            SoundManager.class.getResource(Sounds.CLICK.getSound()).toExternalForm());
-    private static AudioClip collision = new AudioClip(
-            SoundManager.class.getResource(Sounds.COLLISION.getSound()).toExternalForm());
-    private static AudioClip eat = new AudioClip(
-            SoundManager.class.getResource(Sounds.EAT.getSound()).toExternalForm());
-    private static AudioClip jump = new AudioClip(
-            SoundManager.class.getResource(Sounds.JUMP.getSound()).toExternalForm());
-    private static AudioClip start = new AudioClip(
-            SoundManager.class.getResource(Sounds.START.getSound()).toExternalForm());
+    private static AudioClip bootup = loadSound(Sounds.BOOTUP);
+    private static AudioClip click = loadSound(Sounds.CLICK);
+    private static AudioClip collision = loadSound(Sounds.COLLISION);
+    private static AudioClip eat = loadSound(Sounds.EAT);
+    private static AudioClip jump = loadSound(Sounds.JUMP);
+    private static AudioClip start = loadSound(Sounds.START);
 
-    public static void playSound(Sounds audioFile) {
+    private static AudioClip loadSound(Sounds sound){
+        AudioClip s = new AudioClip(
+            SoundManager.class.getResource(sound.getSound()).toExternalForm());
+            s.play(0.0);
+            return s;
+    }
+
+    public static void playSound(Sounds audioFile, int oldVolume) {
+        double volume = oldVolume/100.0;
         switch (audioFile) {
-            case BOOTUP:
-                bootup.play();
-                break;
-            case CLICK:
-                click.play();
-                break;
-            case COLLISION:
-                collision.play();
-                break;
-            case EAT:
-                eat.play(0.75);
-                break;
-            case JUMP:
-                jump.play();
-                break;
-            case START:
-                start.play();
-                break;
-            default:
-                break;
+            case BOOTUP -> bootup.play(volume);
+            case CLICK -> click.play(volume);
+            case COLLISION -> collision.play(volume);
+            case EAT -> eat.play(volume);
+            case JUMP -> jump.play(volume);
+            case START -> start.play(volume);
+            default -> {
+            }
         }
     }
 }

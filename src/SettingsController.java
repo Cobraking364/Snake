@@ -16,7 +16,7 @@ public class SettingsController extends Controller {
         view.getBackButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                SoundManager.playSound(Sounds.CLICK);
+                SoundManager.playSound(Sounds.CLICK, getSettings().getSoundVolume());
 
                 MainMenuView mainMenuView = new MainMenuView((int) view.getWidth(), (int) view.getHeight());
                 Scene mainMenuScene = new Scene(mainMenuView);

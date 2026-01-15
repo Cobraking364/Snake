@@ -47,6 +47,7 @@ public class Board{
             gameOver();
             isAlive = false;
             return;
+              
         }
 
         boolean isEatingFruit = snake.canEatFruit() && fruit.getPosition().equals(nextPosition);
