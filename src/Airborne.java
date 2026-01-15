@@ -1,5 +1,7 @@
 package src;
 
+import java.util.ArrayList;
+
 public class Airborne extends SnakeState{
     private int jumpLength;
     Airborne(int jumpLength){
@@ -7,7 +9,7 @@ public class Airborne extends SnakeState{
     }
 
     @Override
-    public boolean checkCollision(Snake snake, Position position) {
+    public boolean checkCollision(Snake snake, Position position, ArrayList<Snake> otherSnakes) {
         return false;
     }
 
@@ -16,10 +18,10 @@ public class Airborne extends SnakeState{
         return newDir == currentDir;
     }
     
-    private int jumpCheck = 1;
+    private int jumpCheck = 0;
 
     @Override
-    public void jumpFinished(Snake snake){
+    public void update(Snake snake, double deltaTime){
         if(jumpCheck == jumpLength){
             snake.changeState(new Grounded());
         }else{
@@ -32,7 +34,8 @@ public class Airborne extends SnakeState{
         return false;
     }
 
-    public void jump(Snake snake){
-
+    @Override
+    public void jump(Snake snake) {
+        
     }
 }

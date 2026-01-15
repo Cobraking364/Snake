@@ -5,28 +5,26 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 
-public class GameOverController extends Controller {
-    private GameOverView view;
-
-    public GameOverController(GameOverView view, Settings settings, SceneManager sceneManager) {
+public class WinScreenController extends Controller{
+    private WinScreenView view;
+    
+    public WinScreenController(WinScreenView view, Settings settings, SceneManager sceneManager){
         super(settings, sceneManager);
         this.view = view;
-        view.getRestartButton().setOnAction(new EventHandler<ActionEvent>() {
+        view.getPlayAgainButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                GameView gameView = new GameView(settings.getSizeX(), settings.getSizeY());
+                GameView gameView = new GameView(settings.getSizeY(), settings.getSizeY());
                 Scene gameViewScene = new Scene(gameView);
                 Board board = new Board(settings.getSizeX(), settings.getSizeY(), settings.getFruitCount(), settings.getPlayerCount());
                 getSceneManager().changeScene(gameViewScene);
                 GameController gameController = new GameController(gameView, gameViewScene, board, getSettings(), getSceneManager());
-                SoundManager.playSound(Sounds.START, getSettings().getSoundVolume());
             }
         });
 
         view.getQuitButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                SoundManager.playSound(Sounds.CLICK, getSettings().getSoundVolume());
                 Platform.exit();
             }
         });
@@ -39,9 +37,8 @@ public class GameOverController extends Controller {
                 Scene mainMenuScene = new Scene(mainMenuView);
                 getSceneManager().changeScene(mainMenuScene);
                 MainMenuController mainMenuController = new MainMenuController(mainMenuView, mainMenuScene, getSettings(), getSceneManager());
-                SoundManager.playSound(Sounds.CLICK, getSettings().getSoundVolume());
             }
         });
-    }
 
+    }
 }

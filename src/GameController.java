@@ -1,5 +1,6 @@
 package src;
 
+import java.util.LinkedList;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.event.EventHandler;
@@ -13,7 +14,7 @@ public class GameController extends Controller {
     private Scene scene;
     private Board board;
     private Settings settings;
-    private InputBuffer inputBuffer;
+    private InputBuffer[] inputBuffers;
     private GameLoop gameLoop;
 
     GameController(GameView view, Scene scene, Board board, Settings settings, SceneManager sceneManager) {
@@ -21,22 +22,32 @@ public class GameController extends Controller {
         this.view = view;
         this.scene = scene;
         this.board = board;
-        inputBuffer = new InputBuffer(3);
-        updateView();
+        inputBuffers = new InputBuffer[settings.getPlayerCount()];
 
+        for (int i = 0; i < inputBuffers.length; i++) {
+            inputBuffers[i] = new InputBuffer(3);
+        }
+
+        updateView();
+        // Updates view on screen resize
         ChangeListener<Number> windowSizeListener = (observable, oldValue, newValue) -> Platform
                 .runLater(this::updateView);
 
         scene.getWindow().widthProperty().addListener(windowSizeListener);
         scene.getWindow().heightProperty().addListener(windowSizeListener);
+
+        // Inits game clock
         gameLoop = new GameLoop(settings.getSnakeSpeed()) {
             @Override
             public void update(double deltaTime) {
-                if (inputBuffer.hasInput()) {
-                    handleInput(inputBuffer.getNext());
+                for (InputBuffer inputBuffer : inputBuffers) {
+                    if (inputBuffer.hasInput()) {
+                        handleInput(inputBuffer.getNext());
+                    }
+
                 }
 
-                board.update();
+                board.update(deltaTime);
                 if (board.getHasEaten()) {
                   SoundManager.playSound(Sounds.EAT, getSettings().getSoundVolume());
                 }
@@ -46,7 +57,8 @@ public class GameController extends Controller {
 
                     gameLoop.stop();
                     GameOverView gameOverView = new GameOverView();
-                    GameOverController gameOverController = new GameOverController(gameOverView, getSettings(), getSceneManager());
+                    GameOverController gameOverController = new GameOverController(gameOverView, getSettings(),
+                            getSceneManager());
 
                     view.getChildren().add(gameOverView);
                     SoundManager.playSound(Sounds.COLLISION, getSettings().getSoundVolume());
@@ -57,13 +69,12 @@ public class GameController extends Controller {
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                switch (event.getCode()) {
-                    case KeyCode.LEFT:
-                    case KeyCode.RIGHT:
-                    case KeyCode.UP:
-                    case KeyCode.DOWN:
-                    case KeyCode.SPACE:
-                        inputBuffer.addInput(event.getCode());
+                KeyCode code = event.getCode();
+                for (int i = 0; i < getSettings().getPlayerCount(); i++) {
+                    if (getSettings().getKeyControls()[i].containsKey(code)) {
+                        inputBuffers[i].addInput(code);
+                    }
+
                 }
 
             }
@@ -73,26 +84,16 @@ public class GameController extends Controller {
     }
 
     private void handleInput(KeyCode input) {
-        switch (input) {
-            case KeyCode.LEFT:
-                board.getSnake().updateDirection(Direction.LEFT);
-                break;
-            case KeyCode.RIGHT:
-                board.getSnake().updateDirection(Direction.RIGHT);
-                break;
-            case KeyCode.UP:
-                board.getSnake().updateDirection(Direction.UP);
-                break;
-            case KeyCode.DOWN:
-                board.getSnake().updateDirection(Direction.DOWN);
-                break;
-            case KeyCode.SPACE:
-                board.getSnake().jump();
-                if (!board.getIsAlive()){
-                    return;
-                }
-                SoundManager.playSound(Sounds.JUMP, getSettings().getSoundVolume());
-        }
+
+            for (int i = 0; i < getSettings().getPlayerCount(); i++) {
+                KeyControls keyControls = getSettings().getKeyControls()[i];
+                if (input == keyControls.getUpButton()) {board.getSnakes().get(i).updateDirection(Direction.UP);}
+                else if (input == keyControls.getLeftButton()) {board.getSnakes().get(i).updateDirection(Direction.LEFT);}
+                else if (input == keyControls.getDownButton()) {board.getSnakes().get(i).updateDirection(Direction.DOWN);}
+                else if (input == keyControls.getRightButton()) {board.getSnakes().get(i).updateDirection(Direction.RIGHT);}
+                else if (input == keyControls.getJumpButton()) {board.getSnakes().get(i).jump();}
+            }
+
     }
 
     private void updateView() {
@@ -102,7 +103,16 @@ public class GameController extends Controller {
 
     private void draw() {
         view.drawBackground(board.getSizeX(), board.getSizeY());
-        view.drawFruit(board.getFruit().getPosition(), board.getSizeX(), board.getSizeY());
-        view.drawSnake(board.getSnake().getBody(), board.getSizeX(), board.getSizeY());
+        for (Fruit fruit : board.getFruits()) {
+            view.drawFruit(fruit.getPosition());
+        }
+        for (SnakePowerup powerup : board.getPowerups()) {
+            view.drawPowerUp(powerup.getPosition());
+        }
+        LinkedList<Position>[] snakeBodies = new LinkedList[getSettings().getPlayerCount()];
+        for (int i = 0; i < getSettings().getPlayerCount(); i++) {
+            snakeBodies[i] = board.getSnakes().get(i).getBody();
+        }
+        view.drawSnakes(snakeBodies);
     }
 }

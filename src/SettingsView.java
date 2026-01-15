@@ -25,7 +25,7 @@ public class SettingsView extends StackPane{
         snakeSpeedSlider = new SettingsSliderModule("Snake speed", 4, 20, settings.getSnakeSpeed(), BUTTON_SPACING);
         playerCountSlider = new SettingsSliderModule("Player count", 1, 4, settings.getPlayerCount(), BUTTON_SPACING);
         fruitCountSlider = new SettingsSliderModule("Fruit count", 1, 20, settings.getFruitCount(), BUTTON_SPACING);
-        backButton = new Button("Back");
+        backButton = new MenuButton("Back");
         Label settingsLabel = new Label("Settings");
         settingsLabel.setId("title-label");
 

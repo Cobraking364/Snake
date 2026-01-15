@@ -2,7 +2,7 @@ package src;
 
 import java.util.*;
 
-public class Snake {
+public class Snake implements ISpaceOccupier{
     private LinkedList<Position> body = new LinkedList<Position>();
     private Direction direction;
     private Direction previousDirection;
@@ -11,6 +11,7 @@ public class Snake {
     private boolean hasJumped;
     private SnakeState currentState;
     private int jumpLength = 2;
+    private boolean alive = true;
 
     Snake(Position pos, SnakeState initialState){
         body.add(new Position(pos.getX()+1, pos.getY()));
@@ -22,7 +23,7 @@ public class Snake {
         currentState = initialState;
     }
 
-    public void move(Position nextPosition) {
+    public void move(Position nextPosition, double  deltaTime) {
         body.add(nextPosition);
         previousDirection = direction;
         if (!growing) {
@@ -30,27 +31,16 @@ public class Snake {
         } else {
             growing = false;
         }
-
-        currentState.jumpFinished(this);
-        hasJumped = false;
+        currentState.update(this, deltaTime);
     }
 
     public Position getNextPosition() {
-        Position currentHeadPos = getHead();
-        Position nextPos;
-        nextPos = switch (direction) {
-            case Direction.UP -> new Position(currentHeadPos.getX(), currentHeadPos.getY() - 1);
-            case Direction.LEFT -> new Position(currentHeadPos.getX() - 1, currentHeadPos.getY());
-            case Direction.DOWN -> new Position(currentHeadPos.getX(), currentHeadPos.getY() + 1);
-            case Direction.RIGHT -> new Position(currentHeadPos.getX() + 1, currentHeadPos.getY());
-            default -> new Position(0, 0);
-        };
+        return currentState.getNextPosition(getHead(), direction);
 
-        return nextPos;
     }
 
-    public boolean checkCollision(Position position) {
-        return currentState.checkCollision(this, position);
+    public boolean checkCollision(Position position, ArrayList<Snake> otherSnakes) {
+        return currentState.checkCollision(this, position, otherSnakes);
     }
 
     public Position getHead() {
@@ -61,19 +51,32 @@ public class Snake {
         return body;
     }
 
+    @Override
+    public LinkedList<Position> getOccupiedSpace(){
+        return getBody();
+    }
+
     public void grow() {
         growing = true;
     }
 
-
+    // Uses turning logic
     public void updateDirection(Direction newDir) {
         if (!canChanceDirection(newDir, previousDirection)) {
             turned = false;
             return;
         }
-
-        direction = newDir;
+        setDirection(newDir);
         turned = true;
+    }
+
+    // Ignores turning logic
+    public void setDirection(Direction newDirection) {
+        direction = newDirection;
+    }
+
+    public void setPreviousDirection(Direction newDirection) {
+        previousDirection = newDirection;
     }
 
     public void jump() {
@@ -102,6 +105,18 @@ public class Snake {
     }
     public boolean getHasJumped() {
         return hasJumped;
+    }
+
+    public Direction getDirection(){
+        return direction;
+    }
+
+    public void die(){
+        alive = false;
+    }
+
+    public boolean getLivingStatus(){
+        return alive;
     }
 
 }

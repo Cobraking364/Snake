@@ -19,7 +19,7 @@ public class MainMenuController extends Controller{
             public void handle(ActionEvent event) {
                 GameView gameView = new GameView(settings.getSizeX(), settings.getSizeY());
                 Scene gameViewScene = new Scene(gameView);
-                Board board = new Board(settings.getSizeX(), settings.getSizeY());
+                Board board = new Board(settings.getSizeX(), settings.getSizeY(), settings.getFruitCount(), settings.getPlayerCount());
                 getSceneManager().changeScene(gameViewScene);
                 GameController gameController = new GameController(gameView, gameViewScene, board, settings, sceneManager);
                 SoundManager.playSound(Sounds.START, getSettings().getSoundVolume());

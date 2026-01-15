@@ -15,6 +15,9 @@ public class GameView extends StackPane {
     private int tileSize;
     private int gameWidth;
     private int gameHeight;
+    private final Color[] SNAKE_COLORS = {Color.BLUE, Color.VIOLET, Color.FUCHSIA, Color.ORANGE};
+    private final Color OVERLAP_COLOR = Color.LIGHTYELLOW;
+    private final Color POWERUP_COLOR = Color.PURPLE;
 
     public GameView(int gameWidth, int gameHeight) {
         this.gameWidth = gameWidth;
@@ -41,30 +44,36 @@ public class GameView extends StackPane {
         }
     }
 
-    public void drawSnake(LinkedList<Position> snake, int width, int height) {
-        // Body
+    public void drawSnakes(LinkedList<Position>[] snakeBodies) {
         Map<Position, Integer> layers = new HashMap<>();
-        for (int i = 0; i < snake.size() - 1; i++) {
-            Position position = snake.get(i);
-            layers.put(position, layers.getOrDefault(position, 0) + 1);
+        for (int i = 0; i < snakeBodies.length; i++) {
+            gc.setFill(SNAKE_COLORS[i]);
+            // Bodies
+            snakeBodies[i].forEach(position -> {
+                layers.put(position, layers.getOrDefault(position, 0) + 1);
+                gc.fillRect(position.getX() * tileSize, position.getY() * tileSize, tileSize, tileSize);
+            });
+            // Heads
+            gc.setFill(SNAKE_COLORS[i].darker());
+            Position head = snakeBodies[i].get(snakeBodies[i].size() - 1);
+            gc.fillRect(head.getX() * tileSize, head.getY() * tileSize, tileSize, tileSize);
         }
-        
-        gc.setFill(Color.BLUE);
-        for (Position position : layers.keySet()) {
-            gc.setFill(layers.get(position) == 1 ? Color.BLUE : Color.LIGHTBLUE);
-            gc.fillRect(position.getX() * tileSize, position.getY() * tileSize, tileSize, tileSize);
-        }
-
-        // Head
-        gc.setFill(Color.DARKBLUE);
-
-        Position head = snake.get(snake.size() - 1);
-        gc.fillRect(head.getX() * tileSize, head.getY() * tileSize, tileSize, tileSize);
+        // Overlaps
+        gc.setFill(OVERLAP_COLOR);
+        layers.forEach((position, count) -> {
+            if (count >= 2) {
+                gc.fillRect(position.getX() * tileSize, position.getY() * tileSize, tileSize, tileSize);
+            }
+        });
     }
 
-    public void drawFruit(Position fruitPosition, int width, int height) {
+    public void drawFruit(Position fruitPosition) {
         gc.setFill(Color.RED);
         gc.fillRect(fruitPosition.getX() * tileSize, fruitPosition.getY() * tileSize, tileSize, tileSize);
+    }
+    public void drawPowerUp(Position powerUpPosition) {
+        gc.setFill(POWERUP_COLOR);
+        gc.fillRect(powerUpPosition.getX() * tileSize, powerUpPosition.getY() * tileSize, tileSize, tileSize);
     }
 
     public void updateTileSize() {
@@ -72,4 +81,5 @@ public class GameView extends StackPane {
         canvas.setWidth(tileSize * gameWidth);
         canvas.setHeight(tileSize * gameHeight);
     }
+
 }
