@@ -79,6 +79,13 @@ public class GameController extends Controller {
                     }
 
                 }
+                if (code == KeyCode.ESCAPE) {
+                    PauseScreenView pauseScreenView = new PauseScreenView((int) view.getWidth(), (int) view.getHeight());
+                    Scene scene = new Scene(pauseScreenView);
+                    getSceneManager().changeScene(scene);
+                    PauseScreenController pauseScreenController = new PauseScreenController(pauseScreenView, board, getSettings(), getSceneManager());
+                    gameLoop.stop();
+                }
 
             }
 
@@ -87,7 +94,6 @@ public class GameController extends Controller {
     }
 
     private void handleInput(KeyCode input) {
-
         for (int i = 0; i < getSettings().getPlayerCount(); i++) {
             KeyControls keyControls = getSettings().getKeyControls()[i];
             if (input == keyControls.getUpButton()) {

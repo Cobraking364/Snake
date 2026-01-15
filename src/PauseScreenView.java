@@ -5,7 +5,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 public class PauseScreenView extends StackPane{
     private Button quitButton;
@@ -15,13 +14,13 @@ public class PauseScreenView extends StackPane{
     private VBox buttonContainer;
     private final int BUTTON_SPACING = 25;
 
-    public PauseScreenView(){
+    public PauseScreenView(int width, int height){
         quitButton = new MenuButton("Quit");
         mainMenuButton = new MenuButton("Mainmenu");
         restartButton = new MenuButton("Restart");
         resume = new MenuButton("Resume");
         Label pauseScreenLabel = new Label("Game Paused");
-
+        getStylesheets().add(getClass().getResource("/resources/menu.css").toExternalForm());
         pauseScreenLabel.setId("title-label");
         buttonContainer = new VBox(BUTTON_SPACING);
         buttonContainer.setAlignment(Pos.CENTER);
@@ -29,6 +28,8 @@ public class PauseScreenView extends StackPane{
         
 
         getChildren().add(buttonContainer);
+
+        setPrefSize(width, height);
 
     }
     public Button getResumeButton() {

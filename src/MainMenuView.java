@@ -26,13 +26,13 @@ public class MainMenuView extends StackPane {
         VBox buttonContainer = new VBox(BUTTON_SPACING);
         buttonContainer.setAlignment(Pos.CENTER);
         buttonContainer.getChildren().addAll(titleLabel, startButton, settingsButton, quitButton);
-        Image backGroundPicture = new Image(getClass().getResource("/resources/Snake mainmenu background.png").toExternalForm(),600,600,false,false);
-        ImageView backGround = new ImageView();
-        backGround.fitHeightProperty().bind(heightProperty());
-        backGround.fitWidthProperty().bind(widthProperty());
-        backGround.setImage(backGroundPicture);
+        Image backgroundPicture = new Image(getClass().getResource("/resources/Snake mainmenu background.png").toExternalForm(),600,600,false,false);
+        ImageView background = new ImageView();
+        background.fitHeightProperty().bind(heightProperty());
+        background.fitWidthProperty().bind(widthProperty());
+        background.setImage(backgroundPicture);
 
-        getChildren().addAll(backGround,buttonContainer);
+        getChildren().addAll(background,buttonContainer);
         setPrefSize(width, height);
     }
 

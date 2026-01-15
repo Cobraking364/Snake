@@ -14,6 +14,11 @@ public class PauseScreenController extends Controller{
         view.getResumeButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                System.out.println("resume");
+                GameView gameView = new GameView(getSettings().getSizeX(), getSettings().getSizeY());
+                Scene scene = new Scene(gameView);
+                getSceneManager().changeScene(scene);
+                GameController gameController = new GameController(gameView, scene, board, getSettings(), getSceneManager());
             }
         });
 
