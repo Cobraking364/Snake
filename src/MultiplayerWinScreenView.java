@@ -23,7 +23,7 @@ public class MultiplayerWinScreenView extends StackPane {
         selelctedImage.setImage(pokal);
         
         quitButton = new MenuButton("Quit");
-        mainMenuButton = new MenuButton("Mainmenu");
+        mainMenuButton = new MenuButton("Main menu");
         playAgainButton = new MenuButton("Play Again");
         Label winScreenLabel = new Label(wintext);
 

@@ -32,7 +32,7 @@ public class GameOverView extends StackPane {
 
         restartButton = new MenuButton("Restart");
         quitButton = new MenuButton("Quit");
-        mainMenuButton = new MenuButton("Mainmenu");
+        mainMenuButton = new MenuButton("Main menu");
         Label gameOverLabel = new Label("Game over");
         gameOverLabel.setId("gameover-label");
         

@@ -3,13 +3,11 @@ package src;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -32,30 +30,26 @@ public class GameView extends StackPane {
         canvas = new Canvas();
         gc = canvas.getGraphicsContext2D();
         updateTileSize();
+        getStylesheets().add(getClass().getResource("/resources/menu.css").toExternalForm());
         Rectangle blackBackground = new Rectangle();
         blackBackground.setFill(Color.BLACK);
         blackBackground.heightProperty().bind(heightProperty());
         blackBackground.widthProperty().bind(widthProperty());
-        scoreLabel = new Label("0");
+        scoreLabel = new Label("");
         scoreLabel.setId("score-label");
         VBox scoreVBox =new VBox();
         scoreVBox.setAlignment(Pos.TOP_RIGHT);
         scoreVBox.getChildren().add(scoreLabel);
         VBox.setMargin(scoreLabel, new Insets(10,10,0,0));
-
         getChildren().add(blackBackground);
         getChildren().add(canvas);
         getChildren().add(scoreVBox);
-        
-
-        getStylesheets().add(getClass().getResource("/resources/menu.css").toExternalForm());
-
     }
 
     public void drawBackground(int width, int height) {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                gc.setFill((i + j) % 2 == 0 ? Color.GREEN : Color.LIMEGREEN);
+                gc.setFill((i + j) % 2 == 0 ? Color.GREEN.brighter() : Color.LIMEGREEN);
                 gc.fillRect(i * tileSize, j * tileSize, tileSize, tileSize);
             }
         }

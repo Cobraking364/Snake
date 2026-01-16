@@ -21,4 +21,8 @@ public class SceneManager {
         changeScene(gameViewScene);
         GameController gameController = new GameController(gameView, gameViewScene, board, settings, this);
     }
+
+    public void newPauseScene() {
+        
+    }
 }

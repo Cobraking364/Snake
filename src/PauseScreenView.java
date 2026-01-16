@@ -16,7 +16,7 @@ public class PauseScreenView extends StackPane{
 
     public PauseScreenView(int width, int height){
         quitButton = new MenuButton("Quit");
-        mainMenuButton = new MenuButton("Mainmenu");
+        mainMenuButton = new MenuButton("Main menu");
         restartButton = new MenuButton("Restart");
         resume = new MenuButton("Resume");
         Label pauseScreenLabel = new Label("Game Paused");

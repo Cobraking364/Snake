@@ -23,13 +23,17 @@ public class GameController extends Controller {
         this.scene = scene;
         this.board = board;
         inputBuffers = new InputBuffer[settings.getPlayerCount()];
-
         for (int i = 0; i < inputBuffers.length; i++) {
             inputBuffers[i] = new InputBuffer(3);
         }
 
         updateView();
-        // Updates view on screen resize
+
+        if (!board.getIsGameMultiplayer()) {
+            view.updateScore(board.getScore());
+        }
+
+        // Binds screen resizing to updating
         ChangeListener<Number> windowSizeListener = (observable, oldValue, newValue) -> Platform
                 .runLater(this::updateView);
 
@@ -55,12 +59,15 @@ public class GameController extends Controller {
                 if (board.getHasSnakeJumped()) {
                     SoundManager.playSound(Sounds.JUMP, settings.getSoundVolume());
                 }
+                if (board.getHasCollided()) {
+                    SoundManager.playSound(Sounds.COLLISION, settings.getSoundVolume());
+                }
 
                 board.update(deltaTime);
 
                 if (board.getHasEaten()) {
                     SoundManager.playSound(Sounds.EAT, getSettings().getSoundVolume());
-                    if(!board.getIsGameMultiplayer()){
+                    if (!board.getIsGameMultiplayer()) {
                         view.updateScore(board.getScore());
                     }
                 }
@@ -80,10 +87,12 @@ public class GameController extends Controller {
 
                 }
                 if (code == KeyCode.ESCAPE) {
-                    PauseScreenView pauseScreenView = new PauseScreenView((int) view.getWidth(), (int) view.getHeight());
+                    PauseScreenView pauseScreenView = new PauseScreenView((int) view.getWidth(),
+                            (int) view.getHeight());
                     Scene scene = new Scene(pauseScreenView);
                     getSceneManager().changeScene(scene);
-                    PauseScreenController pauseScreenController = new PauseScreenController(pauseScreenView, board, getSettings(), getSceneManager());
+                    PauseScreenController pauseScreenController = new PauseScreenController(pauseScreenView, board,
+                            getSettings(), getSceneManager());
                     gameLoop.stop();
                 }
 
@@ -149,7 +158,6 @@ public class GameController extends Controller {
         GameOverController gameOverController = new GameOverController(gameOverView, getSettings(),
                 getSceneManager());
         view.getChildren().add(gameOverView);
-        SoundManager.playSound(Sounds.COLLISION, getSettings().getSoundVolume());
     }
 
     private void handleMultiplayerGameOver() {

@@ -1,20 +1,12 @@
 package src;
 
-import javafx.animation.FadeTransition;
-import javafx.animation.FillTransition;
-import javafx.animation.Interpolator;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
-import javafx.util.Duration;
 
 public class WinScreenView extends StackPane {
     private Button quitButton;
@@ -30,7 +22,7 @@ public class WinScreenView extends StackPane {
         selelctedImage.setImage(pokal);
         
         quitButton = new MenuButton("Quit");
-        mainMenuButton = new MenuButton("Mainmenu");
+        mainMenuButton = new MenuButton("Main menu");
         playAgainButton = new MenuButton("Play Again");
         Label winScreenLabel = new Label("You Win!");
         String x = ""+settings.getSizeX();

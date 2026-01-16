@@ -95,6 +95,7 @@ public class Board {
         });
 
         for (Snake snake : snakesInCollision) {
+            hasCollided = true;
             snake.die();
         }
 
@@ -108,6 +109,7 @@ public class Board {
             nextPosition.setY((nextPosition.getY() + sizeY) % sizeY);
 
             if (snake.checkCollision(nextPosition, snakes)) {
+                hasCollided = true;
                 snake.die();
             }
             
@@ -238,7 +240,6 @@ public class Board {
 
     private void gameOver() {
         isGameOver = true;
-        hasCollided = true;
         
     }
 
@@ -293,5 +294,9 @@ public class Board {
             }
         }
         return false;
+    }
+
+    public boolean getHasCollided() {
+        return hasCollided;
     }
 }
