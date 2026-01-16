@@ -4,7 +4,7 @@ JavaFX is required for this program to run. The used version of JavaFX can be do
 # Controls
 Up, Left, Down, Right, Jump
 
-Clicking jump makes it possible to jump over the body of snakes and avoid colliding while midair. 
+Clicking jump makes it possible to jump over the body of snakes to avoid colliding. 
 - Blue snake: UP LEFT DOWN RIGHT, MINUS
 - Violet snake: W A S D, Q
 - Orange snake: I, J, K, L, U
