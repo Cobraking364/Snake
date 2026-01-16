@@ -5,7 +5,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.TextAlignment;
 
 public class SettingsSliderModule extends HBox {
     private Slider slider;
@@ -28,7 +27,7 @@ public class SettingsSliderModule extends HBox {
         nameLabel.setMinWidth(100);
         valueLabel.setMinWidth(100);
         slider.setPrefWidth(200);
-        valueLabel.setTextAlignment(TextAlignment.JUSTIFY);
+        valueLabel.setAlignment(Pos.CENTER_RIGHT);;
 
         sliderContainer.getChildren().add(slider);
         sliderContainer.setAlignment(Pos.CENTER_RIGHT);

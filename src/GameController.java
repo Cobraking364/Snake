@@ -17,8 +17,9 @@ public class GameController extends Controller {
     private InputBuffer[] inputBuffers;
     private GameLoop gameLoop;
 
-    GameController(GameView view, Scene scene, Board board, Settings settings, SceneManager sceneManager) {
-        super(settings, sceneManager);
+    GameController(GameView view, Scene scene, Board board, Settings settings, SceneManager sceneManager,
+            SoundManager soundManager) {
+        super(settings, sceneManager, soundManager);
         this.view = view;
         this.scene = scene;
         this.board = board;
@@ -57,16 +58,16 @@ public class GameController extends Controller {
 
                 }
                 if (board.getHasSnakeJumped()) {
-                    SoundManager.playSound(Sounds.JUMP, settings.getSoundVolume());
+                    soundManager.playSound(Sounds.JUMP, settings.getSoundVolume());
                 }
                 if (board.getHasCollided()) {
-                    SoundManager.playSound(Sounds.COLLISION, settings.getSoundVolume());
+                    soundManager.playSound(Sounds.COLLISION, settings.getSoundVolume());
                 }
 
                 board.update(deltaTime);
 
                 if (board.getHasEaten()) {
-                    SoundManager.playSound(Sounds.EAT, getSettings().getSoundVolume());
+                    soundManager.playSound(Sounds.EAT, getSettings().getSoundVolume());
                     if (!board.getIsGameMultiplayer()) {
                         view.updateScore(board.getScore());
                     }
@@ -87,17 +88,11 @@ public class GameController extends Controller {
 
                 }
                 if (code == KeyCode.ESCAPE) {
-                    PauseScreenView pauseScreenView = new PauseScreenView((int) view.getWidth(),
-                            (int) view.getHeight());
-                    Scene scene = new Scene(pauseScreenView);
-                    getSceneManager().changeScene(scene);
-                    PauseScreenController pauseScreenController = new PauseScreenController(pauseScreenView, board,
-                            getSettings(), getSceneManager());
                     gameLoop.stop();
+                    getSceneManager().changeToPauseMenu((int) view.getWidth(), (int) view.getHeight(), getSettings(),
+                            board, getSoundManager());
                 }
-
             }
-
         });
         gameLoop.start();
     }
@@ -156,7 +151,7 @@ public class GameController extends Controller {
 
         GameOverView gameOverView = new GameOverView(board.getScore(), highScore, getSettings());
         GameOverController gameOverController = new GameOverController(gameOverView, getSettings(),
-                getSceneManager());
+                getSceneManager(), getSoundManager());
         view.getChildren().add(gameOverView);
     }
 
@@ -171,7 +166,7 @@ public class GameController extends Controller {
         MultiplayerWinScreenView multiplayerWinScreenView = new MultiplayerWinScreenView(winText);
         MultiplayerWinScreenController multiplayerWinScreenController = new MultiplayerWinScreenController(
                 multiplayerWinScreenView, getSettings(),
-                getSceneManager());
+                getSceneManager(), getSoundManager());
         view.getChildren().add(multiplayerWinScreenView);
     }
 
@@ -180,7 +175,7 @@ public class GameController extends Controller {
         int highScore = HighscoreHandler.getHighscore(board.getSizeX(), board.getSizeY());
         WinScreenView winScreenView = new WinScreenView(board.getScore(), highScore, getSettings());
         WinScreenController winScreenController = new WinScreenController(winScreenView, getSettings(),
-                getSceneManager());
+                getSceneManager(), getSoundManager());
         view.getChildren().add(winScreenView);
     }
 }

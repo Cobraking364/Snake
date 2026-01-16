@@ -2,7 +2,6 @@ package src;
 
 import java.util.List;
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -49,21 +48,17 @@ public class Main extends Application {
         }
 
         SceneManager sceneManager = new SceneManager(stage);
+        SoundManager soundManager = new SoundManager();
         Font.loadFont(
                 getClass().getResource("/resources/PressStart2P-Regular.ttf").toExternalForm(),
                 16);
 
-        MainMenuView mainMenuView = new MainMenuView(windowWidth, windowHeight);
-        Scene mainMenuScene = new Scene(mainMenuView);
-        MainMenuController mainMenuController = new MainMenuController(mainMenuView, mainMenuScene, settings,
-                sceneManager);
-
-        sceneManager.changeScene(mainMenuScene);
+        sceneManager.changeToMainMenu(windowWidth, windowHeight, settings, soundManager);
         Image icon = new Image(getClass().getResource("/resources/Snake.png").toExternalForm());
         stage.getIcons().add(icon);
         stage.setResizable(true);
         stage.setTitle("Snake");
         stage.show();
-        SoundManager.playSound(Sounds.BOOTUP, settings.getSoundVolume());
+        soundManager.playSound(Sounds.BOOTUP, settings.getSoundVolume());
     }
 }

@@ -19,7 +19,7 @@ public class PauseScreenView extends StackPane{
         mainMenuButton = new MenuButton("Main menu");
         restartButton = new MenuButton("Restart");
         resume = new MenuButton("Resume");
-        Label pauseScreenLabel = new Label("Game Paused");
+        Label pauseScreenLabel = new Label("Paused");
         getStylesheets().add(getClass().getResource("/resources/menu.css").toExternalForm());
         pauseScreenLabel.setId("title-label");
         buttonContainer = new VBox(BUTTON_SPACING);

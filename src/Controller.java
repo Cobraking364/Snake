@@ -4,11 +4,13 @@ public class Controller {
 
     private Settings settings;
     private SceneManager sceneManager;
+    private SoundManager soundManager;
 
 
-    Controller(Settings settings, SceneManager sceneManager) {
+    Controller(Settings settings, SceneManager sceneManager, SoundManager soundManager) {
         this.settings = settings;
         this.sceneManager = sceneManager;
+        this.soundManager = soundManager;
     }
 
     public void setSettings(Settings settings) {
@@ -19,11 +21,11 @@ public class Controller {
         return settings;
     }
     
-    public void setSceneManager(SceneManager sceneManager) {
-        this.sceneManager = sceneManager;
-    }
-    
     public SceneManager getSceneManager() {
         return sceneManager;
+    }
+
+    public SoundManager getSoundManager() {
+        return soundManager;
     }
 }  

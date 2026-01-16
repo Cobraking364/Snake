@@ -6,6 +6,6 @@ public class MenuButton extends Button{
     
     public MenuButton (String name){
         super(name);
-        this.setMinSize(168,48);
+        this.setMinSize(184,48);
     }
 }

@@ -8,23 +8,16 @@ public class SettingsController extends Controller {
     private SettingsView view;
     private Scene scene;
 
-    public SettingsController(SettingsView view, Scene scene, Settings settings, SceneManager SceneManager) {
-        super(settings, SceneManager);
+    public SettingsController(SettingsView view, Scene scene, Settings settings, SceneManager SceneManager, SoundManager soundManager) {
+        super(settings, SceneManager, soundManager);
         this.view = view;
         this.scene = scene;
 
         view.getBackButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                SoundManager.playSound(Sounds.CLICK, getSettings().getSoundVolume());
-
-                MainMenuView mainMenuView = new MainMenuView((int) view.getWidth(), (int) view.getHeight());
-                Scene mainMenuScene = new Scene(mainMenuView);
-                MainMenuController mainMenuController = new MainMenuController(mainMenuView, mainMenuScene,
-                    getSettings(), getSceneManager());
-                    SettingsHandler handler = new SettingsHandler();
-                handler.saveSettings(settings);
-                getSceneManager().changeScene(mainMenuScene);
+                soundManager.playSound(Sounds.CLICK, getSettings().getSoundVolume());
+                getSceneManager().changeToMainMenu((int) view.getWidth(), (int) view.getHeight(), getSettings(), getSoundManager());
             }
         });
 
