@@ -117,7 +117,6 @@ public class Snake implements ISpaceOccupier{
     }
 
     public void die(){
-        System.out.println(("DIED!"));
         currentState.die(this);
     }
 
