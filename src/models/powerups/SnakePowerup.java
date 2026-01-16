@@ -1,6 +1,9 @@
-package src;
+package src.models.powerups;
 
 import java.util.LinkedList;
+import src.models.ISpaceOccupier;
+import src.models.Position;
+import src.models.Snake;
 
 public abstract class SnakePowerup implements ISpaceOccupier{
     private Position position;

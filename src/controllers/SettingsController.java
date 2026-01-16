@@ -1,8 +1,11 @@
-package src;
+package src.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import src.models.Settings;
+import src.models.Sounds;
+import src.views.SettingsView;
 
 public class SettingsController extends Controller {
     private SettingsView view;
@@ -16,6 +19,8 @@ public class SettingsController extends Controller {
         view.getBackButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                SettingsHandler handler = new SettingsHandler();
+                handler.saveSettings(settings);
                 soundManager.playSound(Sounds.CLICK, getSettings().getSoundVolume());
                 getSceneManager().changeToMainMenu((int) view.getWidth(), (int) view.getHeight(), getSettings(), getSoundManager());
             }

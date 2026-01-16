@@ -1,7 +1,8 @@
-package src;
+package src.controllers;
 
 import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer; 
+import javafx.scene.media.MediaPlayer;
+import src.models.Sounds; 
 
 public class SoundManager {
     private MediaPlayer bootup = loadSound(Sounds.BOOTUP);

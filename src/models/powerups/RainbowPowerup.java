@@ -1,8 +1,12 @@
-package src;
+package src.models.powerups;
+
+import src.models.Position;
+import src.models.Snake;
+import src.models.snakeState.RainbowState;
 
 public class RainbowPowerup extends SnakePowerup {
 
-    RainbowPowerup(Position position) {
+    public RainbowPowerup(Position position) {
         super(position);
     }
 

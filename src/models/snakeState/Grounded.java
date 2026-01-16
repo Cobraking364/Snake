@@ -1,6 +1,8 @@
-package src;
+package src.models.snakeState;
 
 import java.util.ArrayList;
+import src.models.Position;
+import src.models.Snake;
 
 public class Grounded extends SnakeState{
     @Override

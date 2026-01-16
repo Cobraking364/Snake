@@ -1,4 +1,6 @@
-package src;
+package src.controllers;
+
+import src.models.Settings;
 
 public class Controller {
 

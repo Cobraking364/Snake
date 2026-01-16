@@ -1,12 +1,8 @@
-package src;
+package src.views;
 
-import javafx.beans.property.DoubleProperty;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.text.TextAlignment;
 
 public class HighScoreModule extends HBox {
     

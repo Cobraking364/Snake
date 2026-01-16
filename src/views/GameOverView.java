@@ -1,4 +1,4 @@
-package src;
+package src.views;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.FillTransition;
@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.util.Duration;
+import src.models.Settings;
 
 public class GameOverView extends StackPane {
     private final int BUTTON_SPACING = 25;
@@ -22,7 +23,7 @@ public class GameOverView extends StackPane {
     private Button mainMenuButton;
     private final int BOX_SPACING = 25;
 
-    GameOverView(int yourScore, int highScore, Settings settings) {
+    public GameOverView(int yourScore, int highScore, Settings settings) {
         Rectangle blackBackground = new Rectangle();
         blackBackground.heightProperty().bind(heightProperty());
         blackBackground.widthProperty().bind(widthProperty());

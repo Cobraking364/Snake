@@ -1,4 +1,8 @@
-package src;
+package src.models.powerups;
+
+import src.models.Position;
+import src.models.Snake;
+import src.models.snakeState.SkipState;
 
 public class SkipPowerUp extends SnakePowerup{
 

@@ -1,7 +1,13 @@
-package src;
+package src.controllers;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import src.models.Board;
+import src.models.Settings;
+import src.views.GameView;
+import src.views.MainMenuView;
+import src.views.PauseScreenView;
+import src.views.SettingsView;
 
 public class SceneManager {
     private Stage stage;

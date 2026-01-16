@@ -1,12 +1,12 @@
-package src;
+package src.models;
 
 import java.util.Objects;
 
-class Position{
+public class Position{
     private int x;
     private int y;
 
-    Position(int x, int y){
+    public Position(int x, int y){
         this.x = x;
         this.y = y;
     }
@@ -41,6 +41,6 @@ class Position{
 
     @Override
     public int hashCode() {
-        return Objects.hash(getY(), getY());
+        return Objects.hash(getX(), getY());
     }
 }

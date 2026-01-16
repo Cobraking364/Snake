@@ -1,6 +1,9 @@
-package src;
+package src.models.snakeState;
 
 import java.util.ArrayList;
+import src.models.Direction;
+import src.models.Position;
+import src.models.Snake;
 
 public abstract class SnakeState {
     

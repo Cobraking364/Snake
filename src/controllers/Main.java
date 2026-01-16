@@ -1,10 +1,12 @@
-package src;
+package src.controllers;
 
 import java.util.List;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import src.models.Settings;
+import src.models.Sounds;
 
 public class Main extends Application {
     private int windowWidth = 600;

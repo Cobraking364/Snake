@@ -1,11 +1,13 @@
-package src;
+package src.models.snakeState;
+
+import src.models.Snake;
 
 public class RainbowState extends SnakeState{
 
     private final double MAX_DURATION = 16;
     private double currentDuration;
 
-    RainbowState() {
+    public RainbowState() {
         currentDuration = MAX_DURATION;
     }
 

@@ -1,4 +1,4 @@
-package src;
+package src.views;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -14,7 +14,7 @@ public class MainMenuView extends StackPane {
     private Button quitButton;
     private Button settingsButton;
 
-    MainMenuView(int width, int height) {
+    public MainMenuView(int width, int height) {
         startButton = new MenuButton("Start");
         quitButton = new MenuButton("Quit");
         settingsButton = new MenuButton("Settings");

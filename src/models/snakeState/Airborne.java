@@ -1,8 +1,11 @@
-package src;
+package src.models.snakeState;
+
+import src.models.Direction;
+import src.models.Snake;
 
 public class Airborne extends SnakeState{
     private int jumpLength;
-    Airborne(int jumpLength){
+    public Airborne(int jumpLength){
         this.jumpLength = jumpLength;
     }
 

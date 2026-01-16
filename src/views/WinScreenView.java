@@ -1,4 +1,4 @@
-package src;
+package src.views;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import src.models.Settings;
 
 public class WinScreenView extends StackPane {
     private Button quitButton;

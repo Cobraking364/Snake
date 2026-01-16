@@ -1,6 +1,6 @@
-package src;
+package src.models;
 
-enum Sounds {
+public enum Sounds {
     EAT("pickupFruit.wav"),
     COLLISION("collision.wav"),
     JUMP("jump.wav"),

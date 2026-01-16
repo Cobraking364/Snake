@@ -1,6 +1,6 @@
-package src;
+package src.models;
 
-enum Direction{
+public enum Direction{
     UP(0),
     LEFT(1),
     DOWN(2),

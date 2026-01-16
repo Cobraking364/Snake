@@ -1,6 +1,9 @@
-package src;
+package src.models;
 
 import java.util.*;
+
+import src.models.snakeState.DeadState;
+import src.models.snakeState.SnakeState;
 
 public class Snake implements ISpaceOccupier{
     private LinkedList<Position> body = new LinkedList<Position>();
@@ -114,10 +117,11 @@ public class Snake implements ISpaceOccupier{
     }
 
     public void die(){
-        changeState(new DeadState());
+        System.out.println(("DIED!"));
+        currentState.die(this);
     }
 
     public boolean getLivingStatus(){
-        return currentState.getClass().getName() != "src.DeadState";
+        return !(currentState instanceof DeadState);
     }
 }

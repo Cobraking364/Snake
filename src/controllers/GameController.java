@@ -1,19 +1,30 @@
-package src;
+package src.controllers;
 
 import java.util.LinkedList;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import src.models.Board;
+import src.models.Direction;
+import src.models.Fruit;
+import src.models.InputBuffer;
+import src.models.KeyControls;
+import src.models.Position;
+import src.models.Settings;
+import src.models.SnakeColor;
+import src.models.Sounds;
+import src.models.powerups.SnakePowerup;
+import src.views.GameOverView;
+import src.views.GameView;
+import src.views.MultiplayerWinScreenView;
+import src.views.WinScreenView;
 
 public class GameController extends Controller {
 
     private GameView view;
-    private Scene scene;
     private Board board;
-    private Settings settings;
     private InputBuffer[] inputBuffers;
     private GameLoop gameLoop;
 
@@ -21,7 +32,6 @@ public class GameController extends Controller {
             SoundManager soundManager) {
         super(settings, sceneManager, soundManager);
         this.view = view;
-        this.scene = scene;
         this.board = board;
         inputBuffers = new InputBuffer[settings.getPlayerCount()];
         for (int i = 0; i < inputBuffers.length; i++) {
@@ -77,21 +87,18 @@ public class GameController extends Controller {
             }
         };
 
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                KeyCode code = event.getCode();
-                for (int i = 0; i < getSettings().getPlayerCount(); i++) {
-                    if (getSettings().getKeyControls()[i].containsKey(code)) {
-                        inputBuffers[i].addInput(code);
-                    }
-
+        scene.setOnKeyPressed((KeyEvent event) -> {
+            KeyCode code = event.getCode();
+            for (int i = 0; i < getSettings().getPlayerCount(); i++) {
+                if (getSettings().getKeyControls()[i].containsKey(code)) {
+                    inputBuffers[i].addInput(code);
                 }
-                if (code == KeyCode.ESCAPE) {
-                    gameLoop.stop();
-                    getSceneManager().changeToPauseMenu((int) view.getWidth(), (int) view.getHeight(), getSettings(),
-                            board, getSoundManager());
-                }
+                
+            }
+            if (code == KeyCode.ESCAPE) {
+                gameLoop.stop();
+                getSceneManager().changeToPauseMenu((int) view.getWidth(), (int) view.getHeight(), getSettings(),
+                        board, getSoundManager());
             }
         });
         gameLoop.start();

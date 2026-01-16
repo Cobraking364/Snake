@@ -1,4 +1,4 @@
-package src;
+package src.views;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import src.models.Settings;
 
 public class SettingsView extends StackPane{
     private final int BUTTON_SPACING = 25;

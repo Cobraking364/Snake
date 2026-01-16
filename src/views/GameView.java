@@ -1,4 +1,4 @@
-package src;
+package src.views;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -12,6 +12,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import src.models.Position;
+import src.models.SnakeColor;
 
 public class GameView extends StackPane {
     private Canvas canvas;

@@ -1,4 +1,4 @@
-package src;
+package src.views;
 
 import javafx.scene.control.Button;
 

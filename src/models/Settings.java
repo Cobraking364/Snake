@@ -1,4 +1,4 @@
-package src;
+package src.models;
 
 import javafx.scene.input.KeyCode;
 
@@ -23,7 +23,7 @@ public class Settings {
             new KeyControls(KeyCode.G, KeyCode.V, KeyCode.B, KeyCode.N, KeyCode.F),
     };
 
-    Settings(int sizeX, int sizeY) {
+    public Settings(int sizeX, int sizeY) {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
         this.soundVolume = DEFAULT_SOUND_VOLUME;

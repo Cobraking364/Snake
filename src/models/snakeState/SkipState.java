@@ -1,14 +1,17 @@
-package src;
+package src.models.snakeState;
 
 import java.util.ArrayList;
+import src.models.Direction;
+import src.models.Position;
+import src.models.Snake;
 
 public class SkipState extends SnakeState{
 
     
-    private final double MAX_DURATION = 12;
+    private final double MAX_DURATION = 8;
     private double currentDuration;
 
-    SkipState() {
+    public SkipState() {
         currentDuration = MAX_DURATION;
     }
     

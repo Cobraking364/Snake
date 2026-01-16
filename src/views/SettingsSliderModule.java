@@ -1,4 +1,4 @@
-package src;
+package src.views;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.geometry.Pos;

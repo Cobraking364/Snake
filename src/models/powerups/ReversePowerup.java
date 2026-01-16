@@ -1,10 +1,13 @@
-package src;
+package src.models.powerups;
 
 import java.util.Collections;
+import src.models.Direction;
+import src.models.Position;
+import src.models.Snake;
 
 public class ReversePowerup extends SnakePowerup{
 
-    ReversePowerup(Position position) {
+    public ReversePowerup(Position position) {
         super(position);
     }
 

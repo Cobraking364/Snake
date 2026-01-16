@@ -1,4 +1,8 @@
-package src;
+package src.models.snakeState;
+
+import src.models.Direction;
+import src.models.Position;
+import src.models.Snake;
 
 public class DeadState extends SnakeState {
     @Override

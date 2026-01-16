@@ -1,6 +1,12 @@
-package src;
+package src.models;
 
 import java.util.*;
+
+import src.models.powerups.RainbowPowerup;
+import src.models.powerups.ReversePowerup;
+import src.models.powerups.SkipPowerUp;
+import src.models.powerups.SnakePowerup;
+import src.models.snakeState.Grounded;
 
 public class Board {
 
@@ -25,7 +31,7 @@ public class Board {
     private int winnerIndex;
     private int score;
 
-    Board(int x, int y, int amountOfFruits, int amountOfSnakes) {
+    public Board(int x, int y, int amountOfFruits, int amountOfSnakes) {
         isGameOver = false;
         isGameWon = false;
         sizeX = x;
