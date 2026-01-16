@@ -11,7 +11,7 @@ Clicking jump makes it possible to jump over the body of snakes to avoid collidi
 - Yellow snake: G, V, B, N, F
 
 # PowerUps
-PowerUps have a chance to spawn after a fruit is eaten. Eating a powerUp grants one of three random effect of varying benefit. 
+PowerUps have a chance to spawn after a fruit is eaten. Eating a powerUp grants one of three random effects of varying benefit. 
 
 # Settings
 - Snakespeed: Variable that decides how fast the snake moves. Higher Snakespeed makes the snake move more times a second.
