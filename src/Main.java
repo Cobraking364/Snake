@@ -59,6 +59,9 @@ public class Main extends Application {
         stage.setResizable(true);
         stage.setTitle("Snake");
         stage.show();
+
+
         soundManager.playSound(Sounds.BOOTUP, settings.getSoundVolume());
     }
+
 }

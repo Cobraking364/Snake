@@ -1,15 +1,16 @@
 package src;
 
-import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer; 
 
 public class SoundManager {
-    private AudioClip bootup = loadSound(Sounds.BOOTUP);
-    private AudioClip click = loadSound(Sounds.CLICK);
-    private AudioClip collision = loadSound(Sounds.COLLISION);
-    private AudioClip eat = loadSound(Sounds.EAT);
-    private AudioClip jump = loadSound(Sounds.JUMP);
-    private AudioClip start = loadSound(Sounds.START);
-    private AudioClip powerup = loadSound(Sounds.POWERUP);
+    private MediaPlayer bootup = loadSound(Sounds.BOOTUP);
+    private MediaPlayer click = loadSound(Sounds.CLICK);
+    private MediaPlayer collision = loadSound(Sounds.COLLISION);
+    private MediaPlayer eat = loadSound(Sounds.EAT);
+    private MediaPlayer jump = loadSound(Sounds.JUMP);
+    private MediaPlayer start = loadSound(Sounds.START);
+    private MediaPlayer powerup = loadSound(Sounds.POWERUP);
 
     public SoundManager() {
         bootup = loadSound(Sounds.BOOTUP);
@@ -21,24 +22,25 @@ public class SoundManager {
         powerup = loadSound(Sounds.POWERUP);
     }
 
-    private AudioClip loadSound(Sounds sound) {
-        AudioClip clip = new AudioClip(
+    private MediaPlayer loadSound(Sounds sound) {
+        Media media = new Media(
                 SoundManager.class.getResource(sound.getSound()).toExternalForm());
-        return clip;
+        return new MediaPlayer(media);
     }
 
     public void playSound(Sounds audioFile, int intVolume) {
-        System.out.println(audioFile);
         double volume = Math.clamp((intVolume / 100.0), 0, 1);
-        switch (audioFile) {
-            case BOOTUP -> bootup.play(volume);
-            case CLICK -> click.play(volume);
-            case COLLISION -> collision.play(volume);
-            case EAT -> eat.play(volume);
-            case JUMP -> jump.play(volume);
-            case START -> start.play(volume);
-            default -> {
-            }
-        }
+        MediaPlayer mediaPlayer = switch (audioFile) {
+            case BOOTUP -> bootup;
+            case CLICK -> click;
+            case COLLISION -> collision;
+            case EAT -> eat;
+            case JUMP -> jump;
+            case START -> start;
+            default -> new MediaPlayer(null);
+        };
+        mediaPlayer.stop();
+        mediaPlayer.setVolume(volume);
+        mediaPlayer.play();
     }
 }
