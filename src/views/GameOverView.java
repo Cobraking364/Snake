@@ -42,7 +42,7 @@ public class GameOverView extends StackPane {
         boardLabel.setId("highscore-label");
 
         HighscoreModule highscoreBox = new HighscoreModule("Highscore", highscore);
-        HighscoreModule yourScoreBox = new HighscoreModule("Your Score", yourScore);
+        HighscoreModule yourScoreBox = new HighscoreModule("Your score", yourScore);
         gameOverLabel.setId("title-label");
         
         buttonContainer = new VBox(BUTTON_SPACING);

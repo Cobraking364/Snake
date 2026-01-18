@@ -24,7 +24,7 @@ public class MultiplayerWinScreenView extends StackPane {
         
         quitButton = new MenuButton("Quit");
         mainMenuButton = new MenuButton("Main menu");
-        playAgainButton = new MenuButton("Play Again");
+        playAgainButton = new MenuButton("Play again");
         Label winScreenLabel = new Label(wintext);
 
         winScreenLabel.setId("wintitle-label");

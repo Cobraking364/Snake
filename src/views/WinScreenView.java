@@ -25,8 +25,8 @@ public class WinScreenView extends StackPane {
         selelctedImage.setImage(pokal);
         
         quitButton = new MenuButton("Quit");
-        mainMenuButton = new MenuButton("Restart");
-        playAgainButton = new MenuButton("Play Again");
+        mainMenuButton = new MenuButton("Main menu");
+        playAgainButton = new MenuButton("Restart");
         Label winScreenLabel = new Label("You Win!");
         Rectangle blackBackground = new Rectangle();
         blackBackground.setFill(Color.BLACK);
@@ -40,7 +40,7 @@ public class WinScreenView extends StackPane {
         boardLabel.setId("highscore-label");
 
         HighscoreModule highscoreBox = new HighscoreModule("Highscore", highscore);
-        HighscoreModule yourScoreBox = new HighscoreModule("Your Score", yourScore);
+        HighscoreModule yourScoreBox = new HighscoreModule("Your score", yourScore);
 
         winScreenLabel.setId("wintitle-label");
         buttonContainer = new VBox(BUTTON_SPACING);

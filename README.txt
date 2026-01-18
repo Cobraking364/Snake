@@ -8,17 +8,18 @@ Example command to run the game with a board size of 20x10
     java -jar Snake.jar 20 10
 
 # Controls
-Clicking jump makes it possible to jump over the body of snakes to avoid colliding, but also avoiding fruits. 
+Clicking jump makes it possible to jump over the body of snakes to avoid colliding, but you will also jump over fruit and powerups. 
 Up, Left, Down, Right, Jump
 - Blue snake: UP LEFT DOWN RIGHT, MINUS
 - Violet snake: W A S D, Q
 - Orange snake: I, J, K, L, U
 - Yellow snake: G, V, B, N, F
+ESC: to pause the game
 
 # Purple powerups
-PowerUps have a chance to spawn after a fruit is eaten. Eating a powerUp grants one of three random temporary effects of varying benefit. 
+Powerups have a chance to spawn after a fruit is eaten. Eating a powerup grants one of three random temporary effects of varying benefit. 
 
 # Settings
-- Snakespeed: Variable that decides how many spaces the snakes moves per second.
+- Snakespeed: Variable that decides how often the game loop is called. Higher Snakespeed will result in the snakes moving faster.
 - Playercount: When more than 1 player is selected, the goal of the game changes from eating the most fruit to surviving the longest. Multiplayer is for playing with other people.
 
