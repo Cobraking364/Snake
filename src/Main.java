@@ -2,7 +2,6 @@ package src;
 
 import java.util.List;
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 
@@ -41,11 +40,7 @@ public class Main extends Application {
 
         board = new Board(sizeX, sizeY);
         SceneManager sceneManager = new SceneManager(stage);
-        GameView gameView = new GameView(CANVAS_WIDTH, CANVAS_HEIGHT, sizeX, sizeY);
-        Scene gameViewScene = new Scene(gameView);
-        GameController gameController = new GameController(gameView, gameViewScene, board, sceneManager);
-        
-        sceneManager.changeScene(gameViewScene);
+        sceneManager.changeToGame(CANVAS_WIDTH, CANVAS_HEIGHT, sizeX, sizeY);
         stage.setResizable(false);
         stage.setTitle("Snake");
         stage.show();
