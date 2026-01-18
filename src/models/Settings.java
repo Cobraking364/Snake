@@ -33,7 +33,7 @@ public class Settings {
         this.keyControls = DEFAULT_KEY_CONTROLS;
     }
     
-    Settings() {
+    public Settings() {
         this.sizeX = DEFAULT_SIZE_X;
         this.sizeY = DEFAULT_SIZE_Y;
         this.soundVolume = DEFAULT_SOUND_VOLUME;

@@ -21,9 +21,9 @@ public class ReversePowerup extends SnakePowerup{
         
         Direction newDirection;
         if (snakeHead.getX() != firstBody.getX()) {
-            newDirection = (snakeHead.getX() - firstBody.getX()) < 1 ? Direction.RIGHT : Direction.LEFT;
+            newDirection = (snakeHead.getX() - firstBody.getX()) > 0 ? Direction.RIGHT : Direction.LEFT;
         } else {
-            newDirection = (snakeHead.getY() - firstBody.getY()) < 1 ? Direction.DOWN : Direction.UP;
+            newDirection = (snakeHead.getY() - firstBody.getY()) > 0 ? Direction.DOWN : Direction.UP;
         }
         snake.setDirection(newDirection);
         snake.setPreviousDirection(newDirection);
