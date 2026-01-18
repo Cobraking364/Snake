@@ -200,6 +200,8 @@ public class Board {
             default ->
                 new ReversePowerup(spawnPosition);
         };
+
+        powerup = new ReversePowerup(spawnPosition);
         occupiedSpace.addOccupiedSpace(powerup.getOccupiedSpace());
         getPowerups().add(powerup);
     }
