@@ -16,12 +16,11 @@ import javafx.util.Duration;
 import src.models.Settings;
 
 public class GameOverView extends StackPane {
-    private final int BUTTON_SPACING = 25;
+    private final int BUTTON_SPACING = 16;
     private VBox buttonContainer;
     private Button restartButton;
     private Button quitButton;
     private Button mainMenuButton;
-    private final int BOX_SPACING = 25;
 
     public GameOverView(int yourScore, int highScore, Settings settings) {
         Rectangle blackBackground = new Rectangle();
@@ -40,9 +39,10 @@ public class GameOverView extends StackPane {
         String x = ""+settings.getSizeX();
         String y = ""+settings.getSizeY();
         Label boardLabel = new Label(x + " x " + y);
+        boardLabel.setId("highscore-label");
 
-        HighScoreModule highScoreBox = new HighScoreModule("HighScore", highScore, BOX_SPACING);
-        HighScoreModule yourScoreBox = new HighScoreModule("Your Score", yourScore, BOX_SPACING);
+        HighScoreModule highScoreBox = new HighScoreModule("HighScore", highScore);
+        HighScoreModule yourScoreBox = new HighScoreModule("Your Score", yourScore);
         gameOverLabel.setId("title-label");
         
         buttonContainer = new VBox(BUTTON_SPACING);

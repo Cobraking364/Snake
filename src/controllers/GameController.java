@@ -148,13 +148,14 @@ public class GameController extends Controller {
         } else if (board.getIsGameMultiplayer()) {
             handleMultiplayerGameOver();
         } else {
-
+            handleSinglePlayerWin();
         }
     }
 
     private void handleSingeplayerGameOver() {
-        HighscoreHandler.checkHighscore(board.getSizeX(), board.getSizeY(), board.getScore());
-        int highScore = HighscoreHandler.getHighscore(board.getSizeX(), board.getSizeY());
+        HighscoreHandler highscoreHandler = new HighscoreHandler();
+        highscoreHandler.checkHighscore(board.getSizeX(), board.getSizeY(), board.getScore());
+        int highScore = highscoreHandler.getHighscore(board.getSizeX(), board.getSizeY());
 
         GameOverView gameOverView = new GameOverView(board.getScore(), highScore, getSettings());
         GameOverController gameOverController = new GameOverController(gameOverView, getSettings(),
@@ -178,8 +179,9 @@ public class GameController extends Controller {
     }
 
     private void handleSinglePlayerWin() {
-        HighscoreHandler.checkHighscore(board.getSizeX(), board.getSizeY(), board.getScore());
-        int highScore = HighscoreHandler.getHighscore(board.getSizeX(), board.getSizeY());
+        HighscoreHandler highscoreHandler = new HighscoreHandler();
+        highscoreHandler.checkHighscore(board.getSizeX(), board.getSizeY(), board.getScore());
+        int highScore = highscoreHandler.getHighscore(board.getSizeX(), board.getSizeY());
         WinScreenView winScreenView = new WinScreenView(board.getScore(), highScore, getSettings());
         WinScreenController winScreenController = new WinScreenController(winScreenView, getSettings(),
                 getSceneManager(), getSoundManager());

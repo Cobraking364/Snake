@@ -3,4 +3,4 @@ sizeY=5
 soundVolume=100
 snakeSpeed=20
 fruitCount=6
-playerCount=4
+playerCount=1

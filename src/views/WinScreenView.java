@@ -7,6 +7,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import src.models.Settings;
 
 public class WinScreenView extends StackPane {
@@ -14,7 +16,7 @@ public class WinScreenView extends StackPane {
     private Button mainMenuButton;
     private Button playAgainButton;
     private VBox buttonContainer;
-    private final int BUTTON_SPACING = 25;
+    private final int BUTTON_SPACING = 16;
 
     public WinScreenView(int yourScore,int highScore, Settings settings){
 
@@ -23,15 +25,22 @@ public class WinScreenView extends StackPane {
         selelctedImage.setImage(pokal);
         
         quitButton = new MenuButton("Quit");
-        mainMenuButton = new MenuButton("Main menu");
+        mainMenuButton = new MenuButton("Restart");
         playAgainButton = new MenuButton("Play Again");
         Label winScreenLabel = new Label("You Win!");
+        Rectangle blackBackground = new Rectangle();
+        blackBackground.setFill(Color.BLACK);
+        blackBackground.setOpacity(0.5);
+        blackBackground.heightProperty().bind(heightProperty());
+        blackBackground.widthProperty().bind(widthProperty());
+        getChildren().add(blackBackground);
         String x = ""+settings.getSizeX();
         String y = ""+settings.getSizeY();
-        Label boardLabel = new Label(x + " X " + y);
+        Label boardLabel = new Label(x + " x " + y);
+        boardLabel.setId("highscore-label");
 
-        HighScoreModule highScoreBox = new HighScoreModule("HighScore", 0, highScore);
-        HighScoreModule yourScoreBox = new HighScoreModule("Your Score", 0, yourScore);
+        HighScoreModule highScoreBox = new HighScoreModule("HighScore", highScore);
+        HighScoreModule yourScoreBox = new HighScoreModule("Your Score", yourScore);
 
         winScreenLabel.setId("wintitle-label");
         buttonContainer = new VBox(BUTTON_SPACING);

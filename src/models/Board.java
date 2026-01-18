@@ -46,7 +46,7 @@ public class Board {
             snakes.add(snake);
         } else {
             for (int i = 0; i < amountOfSnakes; i++) {
-                Snake tempSnake = new Snake(new Position(5 * i, y), new Grounded());
+                Snake tempSnake = new Snake(new Position(4 * i, y), new Grounded());
                 occupiedSpace.addOccupiedSpace(tempSnake.getOccupiedSpace());
                 snakes.add(tempSnake);
             }

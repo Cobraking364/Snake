@@ -6,9 +6,10 @@ import javafx.scene.layout.HBox;
 
 public class HighScoreModule extends HBox {
     
+    
 
-    HighScoreModule(String name, int current, double spacing) {
-        super(spacing);
+    HighScoreModule(String name, int current) {
+        super(24); // Sets spacing
         Label nameLabel = new Label(name);
         Label valueLabel = new Label(current + "");     
         HBox valueContainer = new HBox();

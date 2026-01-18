@@ -17,13 +17,13 @@
 #wintitle-label {
     -fx-font-size: 48;
     -fx-text-fill: #ffd700;
-    -fx-effect: dropshadow(one-pass-box, #675119, 0, 0, 0, 8);
+    -fx-effect: dropshadow(one-pass-box, #675119, 0, 0, 0, 6);
 }
 
 #gameover-label {
     -fx-font-size: 48;
     -fx-text-fill: #810000;
-    -fx-effect: dropshadow(one-pass-box, #120000, 0, 0, 0, 8);
+    -fx-effect: dropshadow(one-pass-box, #120000, 0, 0, 0, 6);
 }
 
 #score-label {

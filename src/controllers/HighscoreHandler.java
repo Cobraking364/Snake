@@ -7,11 +7,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+
 //duno if works in jar
 public class HighscoreHandler {
 
-    private static Map<String,String> map;
-    static void checkHighscore(int x, int y, int score) {
+    private Map<String, String> map;
+
+    void checkHighscore(int x, int y, int score) {
 
         String boardSize = x + ":" + y;
         map = loadMapFromFile();
@@ -20,12 +22,11 @@ public class HighscoreHandler {
 
         if (oldHighscore < score) {
             map.put(boardSize, score + "");
+            writeMapToFile(map);
         }
-
-        writeMapToFile(map);
     }
 
-    public static Map<String, String> loadMapFromFile() {
+    public Map<String, String> loadMapFromFile() {
         Map<String, String> highscoreMap = new HashMap<>();
         File highscoreFile = new File(getFileName());
         if (!highscoreFile.exists()) {
@@ -45,7 +46,7 @@ public class HighscoreHandler {
         return highscoreMap;
     }
 
-    public static void writeMapToFile(Map<String, String> map) {
+    public void writeMapToFile(Map<String, String> map) {
         try (PrintWriter writer = new PrintWriter(getFileName())) {
             String mapData = "";
             for (Map.Entry<String, String> entry : map.entrySet()) {
@@ -60,7 +61,8 @@ public class HighscoreHandler {
     public static String getFileName() {
         return "highscore.txt"; // Not "/highscore.txt"
     }
-    public static int getHighscore(int x, int y){
+
+    public int getHighscore(int x, int y) {
         String boardSize = x + ":" + y;
         return Integer.parseInt(map.getOrDefault(boardSize, "0"));
     }

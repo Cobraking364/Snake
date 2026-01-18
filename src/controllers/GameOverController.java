@@ -3,7 +3,6 @@ package src.controllers;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import src.controllers.Controller;
 import src.models.Settings;
 import src.models.Sounds;
 import src.views.GameOverView;
@@ -33,7 +32,7 @@ public class GameOverController extends Controller {
         view.getMainMenuButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                soundManager.playSound(Sounds.CLICK, getSettings().getSoundVolume());
                 getSceneManager().changeToMainMenu((int) view.getWidth(), (int) view.getHeight(), getSettings(), getSoundManager());
 
             }
