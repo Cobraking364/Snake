@@ -18,7 +18,7 @@ public class WinScreenView extends StackPane {
     private VBox buttonContainer;
     private final int BUTTON_SPACING = 16;
 
-    public WinScreenView(int yourScore,int highScore, Settings settings){
+    public WinScreenView(int yourScore,int highscore, Settings settings){
 
         Image pokal = new Image(getClass().getResource("/resources/Pokal1.png").toExternalForm(),200,200,false,false);
         ImageView selelctedImage = new ImageView();
@@ -39,13 +39,13 @@ public class WinScreenView extends StackPane {
         Label boardLabel = new Label(x + " x " + y);
         boardLabel.setId("highscore-label");
 
-        HighScoreModule highScoreBox = new HighScoreModule("HighScore", highScore);
-        HighScoreModule yourScoreBox = new HighScoreModule("Your Score", yourScore);
+        HighscoreModule highscoreBox = new HighscoreModule("Highscore", highscore);
+        HighscoreModule yourScoreBox = new HighscoreModule("Your Score", yourScore);
 
         winScreenLabel.setId("wintitle-label");
         buttonContainer = new VBox(BUTTON_SPACING);
         buttonContainer.setAlignment(Pos.CENTER);
-        buttonContainer.getChildren().addAll(selelctedImage,winScreenLabel,boardLabel,highScoreBox,yourScoreBox, playAgainButton, mainMenuButton, quitButton);
+        buttonContainer.getChildren().addAll(selelctedImage,winScreenLabel,boardLabel,highscoreBox,yourScoreBox, playAgainButton, mainMenuButton, quitButton);
         
 
         getChildren().add(buttonContainer);

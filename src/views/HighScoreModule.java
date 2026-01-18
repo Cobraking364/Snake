@@ -4,11 +4,11 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
-public class HighScoreModule extends HBox {
+public class HighscoreModule extends HBox {
     
     
 
-    HighScoreModule(String name, int current) {
+    HighscoreModule(String name, int current) {
         super(24); // Sets spacing
         Label nameLabel = new Label(name);
         Label valueLabel = new Label(current + "");     
