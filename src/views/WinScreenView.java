@@ -39,7 +39,6 @@ public class WinScreenView extends StackPane {
         Label boardLabel = new Label(x + " x " + y);
         boardLabel.setId("highscore-label");
 
-        //Force git to accept
         HighScoreModule highscoreBox = new HighScoreModule("Highscore", highscore);
         HighScoreModule yourScoreBox = new HighScoreModule("Your score", yourScore);
 

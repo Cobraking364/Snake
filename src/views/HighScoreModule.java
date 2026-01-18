@@ -4,8 +4,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
-//Force git to accept
-
 public class HighScoreModule extends HBox {
     
     HighScoreModule(String name, int current) {
