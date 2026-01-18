@@ -82,6 +82,9 @@ public class GameController extends Controller {
                         view.updateScore(board.getScore());
                     }
                 }
+                if (board.getHasPowerUped()) {
+                    soundManager.playSound(Sounds.POWERUP, getSettings().getSoundVolume());
+                }
                 draw();
 
             }
@@ -155,9 +158,9 @@ public class GameController extends Controller {
     private void handleSingeplayerGameOver() {
         HighscoreHandler highscoreHandler = new HighscoreHandler();
         highscoreHandler.checkHighscore(board.getSizeX(), board.getSizeY(), board.getScore());
-        int highScore = highscoreHandler.getHighscore(board.getSizeX(), board.getSizeY());
+        int highscore = highscoreHandler.getHighscore(board.getSizeX(), board.getSizeY());
 
-        GameOverView gameOverView = new GameOverView(board.getScore(), highScore, getSettings());
+        GameOverView gameOverView = new GameOverView(board.getScore(), highscore, getSettings());
         GameOverController gameOverController = new GameOverController(gameOverView, getSettings(),
                 getSceneManager(), getSoundManager());
         view.getChildren().add(gameOverView);
@@ -181,8 +184,8 @@ public class GameController extends Controller {
     private void handleSinglePlayerWin() {
         HighscoreHandler highscoreHandler = new HighscoreHandler();
         highscoreHandler.checkHighscore(board.getSizeX(), board.getSizeY(), board.getScore());
-        int highScore = highscoreHandler.getHighscore(board.getSizeX(), board.getSizeY());
-        WinScreenView winScreenView = new WinScreenView(board.getScore(), highScore, getSettings());
+        int highscore = highscoreHandler.getHighscore(board.getSizeX(), board.getSizeY());
+        WinScreenView winScreenView = new WinScreenView(board.getScore(), highscore, getSettings());
         WinScreenController winScreenController = new WinScreenController(winScreenView, getSettings(),
                 getSceneManager(), getSoundManager());
         view.getChildren().add(winScreenView);
