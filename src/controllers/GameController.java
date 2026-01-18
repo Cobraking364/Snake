@@ -168,12 +168,12 @@ public class GameController extends Controller {
 
     private void handleMultiplayerGameOver() {
         String winText = switch (board.getWinnerIndex()) {
-            case 0 -> SnakeColor.BLUE + " WON";
-            case 1 -> SnakeColor.VIOLET + " WON";
-            case 2 -> SnakeColor.ORANGE + " WON";
-            case 3 -> SnakeColor.YELLOW + " WON";
-            default -> "No one won";
-        };
+            case 0 -> "" + SnakeColor.BLUE;
+            case 1 -> "" + SnakeColor.VIOLET;
+            case 2 -> "" + SnakeColor.ORANGE;
+            case 3 -> "" + SnakeColor.YELLOW;
+            default -> "NO ONE";
+        } + " WON";
         MultiplayerWinScreenView multiplayerWinScreenView = new MultiplayerWinScreenView(winText);
         MultiplayerWinScreenController multiplayerWinScreenController = new MultiplayerWinScreenController(
                 multiplayerWinScreenView, getSettings(),
