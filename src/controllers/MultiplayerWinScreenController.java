@@ -3,7 +3,6 @@ package src.controllers;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import src.controllers.Controller;
 import src.models.Settings;
 import src.models.Sounds;
 import src.views.MultiplayerWinScreenView;

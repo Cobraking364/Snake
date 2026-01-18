@@ -2,6 +2,7 @@ package src.controllers;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 import src.models.Sounds; 
 
 public class SoundManager {
@@ -41,7 +42,7 @@ public class SoundManager {
             case POWERUP -> powerup;
             default -> new MediaPlayer(null);
         };
-        mediaPlayer.stop();
+        mediaPlayer.seek(Duration.ZERO);
         mediaPlayer.setVolume(volume);
         mediaPlayer.play();
     }

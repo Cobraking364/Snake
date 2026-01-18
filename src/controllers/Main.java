@@ -58,6 +58,8 @@ public class Main extends Application {
         sceneManager.changeToMainMenu(windowWidth, windowHeight, settings, soundManager);
         Image icon = new Image(getClass().getResource("/resources/Snake.png").toExternalForm());
         stage.getIcons().add(icon);
+        stage.setMinWidth(windowWidth);
+        stage.setMinHeight(windowHeight);
         stage.setResizable(true);
         stage.setTitle("Snake");
         stage.show();

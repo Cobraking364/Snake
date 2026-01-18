@@ -5,10 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import src.models.Sounds;
 import src.views.WinScreenView;
-import src.controllers.SoundManager;
 import src.models.Settings;
-import src.controllers.SceneManager;
-import src.controllers.Controller;
 
 public class WinScreenController extends Controller{
     private WinScreenView view;

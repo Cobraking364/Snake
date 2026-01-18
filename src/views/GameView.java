@@ -34,7 +34,6 @@ public class GameView extends StackPane {
         updateTileSize();
         getStylesheets().add(getClass().getResource("/resources/menu.css").toExternalForm());
         Rectangle blackBackground = new Rectangle();
-        blackBackground.setFill(Color.BLACK);
         blackBackground.heightProperty().bind(heightProperty());
         blackBackground.widthProperty().bind(widthProperty());
         scoreLabel = new Label("");
