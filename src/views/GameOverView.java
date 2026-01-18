@@ -40,9 +40,10 @@ public class GameOverView extends StackPane {
         String y = ""+settings.getSizeY();
         Label boardLabel = new Label(x + " x " + y);
         boardLabel.setId("highscore-label");
+        //Force git to accept
 
-        HighscoreModule highscoreBox = new HighscoreModule("Highscore", highscore);
-        HighscoreModule yourScoreBox = new HighscoreModule("Your score", yourScore);
+        HighScoreModule highscoreBox = new HighScoreModule("Highscore", highscore);
+        HighScoreModule yourScoreBox = new HighScoreModule("Your score", yourScore);
         gameOverLabel.setId("title-label");
         
         buttonContainer = new VBox(BUTTON_SPACING);

@@ -39,8 +39,9 @@ public class WinScreenView extends StackPane {
         Label boardLabel = new Label(x + " x " + y);
         boardLabel.setId("highscore-label");
 
-        HighscoreModule highscoreBox = new HighscoreModule("Highscore", highscore);
-        HighscoreModule yourScoreBox = new HighscoreModule("Your score", yourScore);
+        //Force git to accept
+        HighScoreModule highscoreBox = new HighScoreModule("Highscore", highscore);
+        HighScoreModule yourScoreBox = new HighScoreModule("Your score", yourScore);
 
         winScreenLabel.setId("wintitle-label");
         buttonContainer = new VBox(BUTTON_SPACING);
