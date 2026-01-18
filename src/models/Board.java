@@ -15,6 +15,7 @@ public class Board {
     private Snake snake;
     private Fruit fruit;
     private boolean hasEaten;
+    private boolean hasPoweredUp;
     private boolean isAlive;
     private boolean hasCollided;
     private ArrayList<Fruit> fruits;
@@ -69,6 +70,7 @@ public class Board {
         }
 
         hasEaten = false;
+        hasPoweredUp = false;
         hasCollided = false;
 
         if (getAliveCount() == 0 && !isGameMultiplayer) {
@@ -146,6 +148,7 @@ public class Board {
                     powerup.use(snake);
                     occupiedSpace.removeOccupiedSpaces(powerup.getOccupiedSpace());
                     iterator.remove();
+                    hasPoweredUp = true;
                 }
             }
 
@@ -291,6 +294,10 @@ public class Board {
 
     public boolean getHasEaten() {
         return hasEaten;
+    }
+
+    public boolean getHasPowerUped() {
+        return hasPoweredUp;
     }
 
     public boolean getHasSnakeJumped() {

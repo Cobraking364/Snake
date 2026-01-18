@@ -38,6 +38,7 @@ public class SoundManager {
             case EAT -> eat;
             case JUMP -> jump;
             case START -> start;
+            case POWERUP -> powerup;
             default -> new MediaPlayer(null);
         };
         mediaPlayer.stop();
