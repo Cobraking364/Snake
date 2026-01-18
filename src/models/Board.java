@@ -119,7 +119,7 @@ public class Board {
                 snake.die();
             }
             
-            // Fruit collision
+            // Fruit collision -1 indicates no collision
             int indexOfEaten = -1;
             for (int i = 0; i < getFruits().size(); i++) {
                 boolean isEatingFruit = snake.canEatFruit() && getFruits().get(i).getPosition().equals(nextPosition);

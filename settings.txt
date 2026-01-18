@@ -1,5 +1,5 @@
-sizeX=5
-sizeY=5
+sizeX=20
+sizeY=20
 soundVolume=100
 snakeSpeed=20
 fruitCount=6
